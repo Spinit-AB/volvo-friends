@@ -5,10 +5,15 @@
  */
 
 import { visionTool } from "@sanity/vision";
-import { defineConfig, isKeyedObject } from "sanity";
+import {
+  defineConfig,
+  isKeyedObject,
+  defineLocaleResourceBundle,
+} from "sanity";
 import { structureTool } from "sanity/structure";
 import { documentInternationalization } from "@sanity/document-internationalization";
 import { languageFilter } from "@sanity/language-filter";
+import { svSELocale } from "@sanity/locale-sv-se";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
@@ -17,7 +22,28 @@ import { schema } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 import { i18n } from "./languages";
 
+const myCustomOverrides = defineLocaleResourceBundle({
+  // make sure the `locale` language code corresponds to the one you want to override
+  locale: "sv-SE",
+  namespace: "structure",
+  resources: {
+    "document-inspector.menu-item.title": "Volvo Friends",
+    "document-inspector.dialog.title": "Volvo Friends <DocumentTitle/>",
+  },
+});
+
 export default defineConfig({
+  locales: [
+    {
+      name: "sv-SE",
+      title: "Svenska",
+    },
+    {
+      name: "en",
+      title: "English",
+    },
+  ],
+  defaultLocale: "sv-SE",
   basePath: "/studio",
   projectId,
   dataset,
@@ -41,6 +67,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    svSELocale(),
     structureTool({ structure }),
     visionTool({ defaultApiVersion: apiVersion }),
     documentInternationalization({
@@ -78,4 +105,7 @@ export default defineConfig({
       },
     }),
   ],
+  i18n: {
+    bundles: [myCustomOverrides],
+  },
 });

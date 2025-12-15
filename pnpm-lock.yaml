@@ -17,6 +17,9 @@ importers:
       '@sanity/language-filter':
         specifier: ^4.0.5
         version: 4.0.5(@emotion/is-prop-valid@1.2.2)(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react-is@19.2.3)(react@19.2.1)(sanity@4.21.1(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.14(@types/react@19.2.7))(@types/node@20.19.27)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.6.1)(postcss@8.5.6)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)(yaml@2.8.2))(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))
+      '@sanity/locale-sv-se':
+        specifier: ^1.2.28
+        version: 1.2.28(sanity@4.21.1(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.14(@types/react@19.2.7))(@types/node@20.19.27)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.6.1)(postcss@8.5.6)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)(yaml@2.8.2))
       '@sanity/ui':
         specifier: ^3.1.11
         version: 3.1.11(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.1(react@19.2.1))(react-is@19.2.3)(react@19.2.1)(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))
@@ -2033,6 +2036,11 @@ packages:
       react: ^18 || ^19
       sanity: ^3.36.4 || ^4.0.0-0
       styled-components: ^6.1
+
+  '@sanity/locale-sv-se@1.2.28':
+    resolution: {integrity: sha512-d+v5PGMR7DgLmsvzVx8R5rh9WAgZeP320a+rSir4S7exRW8OcJE6NzgBuurctZGztK+mgH7V5yb8Nb2GPeRQjA==}
+    peerDependencies:
+      sanity: ^3.22.0 || ^4.0.0-0 || ^5.0.0-0
 
   '@sanity/logos@2.2.2':
     resolution: {integrity: sha512-KIWFL7nYEOINXIzaTF9aVhd481hFF/ak+SRnpgksYuJXlo2hbY/UoEJBz6KhsEP5dfO/NwqG82QrkwzLvd6izA==}
@@ -8261,6 +8269,10 @@ snapshots:
       - debug
       - react-dom
       - react-is
+
+  '@sanity/locale-sv-se@1.2.28(sanity@4.21.1(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.14(@types/react@19.2.7))(@types/node@20.19.27)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.6.1)(postcss@8.5.6)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)(yaml@2.8.2))':
+    dependencies:
+      sanity: 4.21.1(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.14(@types/react@19.2.7))(@types/node@20.19.27)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.6.1)(postcss@8.5.6)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(styled-components@6.1.19(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(typescript@5.9.3)(yaml@2.8.2)
 
   '@sanity/logos@2.2.2(react@19.2.1)':
     dependencies:
