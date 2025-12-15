@@ -9,9 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@sanity/document-internationalization": "^4.1.0",
+    "@sanity/image-url": "1",
+    "@sanity/language-filter": "^4.0.5",
+    "@sanity/ui": "^3.1.11",
+    "@sanity/vision": "4",
     "next": "16.0.10",
+    "next-sanity": "11",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "sanity": "4",
+    "styled-components": "6"
   },
   "devDependencies": {
     "@types/node": "^20",

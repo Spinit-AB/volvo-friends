@@ -1,0 +1,9 @@
+{
+  "blogPost.title": "Blogginlägg",
+  "blogPost.availableLanguages": "Tillgängliga språk",
+  "blogPost.heroImage": "Hero-bild",
+  "blogPost.heroImage.alt": "Alternativ text",
+  "blogPost.heroImage.altDescription": "Viktigt för SEO och tillgänglighet.",
+  "blogPost.preamble": "Ingress",
+  "blogPost.body": "Brödtext"
+}
