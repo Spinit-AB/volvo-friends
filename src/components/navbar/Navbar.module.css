@@ -1,0 +1,7 @@
+.root {
+  background-color: var(--clr-neutral-100);
+  color: var(--clr-neutral-800);
+  min-height: 3rem;
+  top: 0;
+  position: sticky;
+}

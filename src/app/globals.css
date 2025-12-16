@@ -1,42 +1,166 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* === VOLVO BRAND FONT FACES === */
+
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-SemiLight.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-SemiLightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Volvo Novum 3.1";
+  src: url("/fonts/VolvoNovum3-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Volvo Broad Spread";
+  src: url("/fonts/VolvoBroadSpread.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Volvo Broad Spread Outline";
+  src: url("/fonts/VolvoBroadSpreadOutline-Large.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Font variables */
+  --font-family-body: "Volvo Novum 3.1", Arial, Helvetica, sans-serif;
+  --font-family-display: "Volvo Broad Spread", Arial, Helvetica, sans-serif;
+  --font-family-display-outline: "Volvo Broad Spread Outline", Arial, Helvetica,
+    sans-serif;
+
+  /* === BASE COLORS === */
+  --clr-base-red-900: #622128;
+  --clr-base-red-700: #9e2a2b;
+  --clr-base-red-300: #dda69d;
+  --clr-base-red-100: #f0ddd7;
+
+  --clr-base-green-900: #22372b;
+  --clr-base-green-700: #476d3b;
+  --clr-base-green-300: #a3b2a4;
+  --clr-base-green-100: #e0e7d9;
+
+  --clr-base-blue-900: #202a44;
+  --clr-base-blue-700: #7089ac;
+  --clr-base-blue-300: #7089ac;
+  --clr-base-blue-100: #ced9e5;
+
+  --clr-base-teal-900: #0e343e;
+  --clr-base-teal-700: #27535f;
+  --clr-base-teal-300: #cee1e5;
+  --clr-base-teal-100: #d3e9e6;
+
+  --clr-base-orange-900: #694524;
+  --clr-base-orange-700: #a85f02;
+  --clr-base-orange-300: #d9b48b;
+  --clr-base-orange-100: #f0dfc6;
+
+  /* === ACCENT COLORS === */
+  --clr-accent-red-dark: #9e2a3f;
+  --clr-accent-red-light: #ff82a3;
+  --clr-accent-green-dark: #366432;
+  --clr-accent-green-light: #b7c86b;
+  --clr-accent-blue-dark: #0c2b7e;
+  --clr-accent-blue-light: #3a95ba;
+  --clr-accent-teal-dark: #127362;
+  --clr-accent-teal-light: #6fc8b8;
+  --clr-accent-orange-dark: #91561b;
+  --clr-accent-orange-light: #f6c28a;
+
+  /* === NEUTRAL COLORS === */
+  --clr-neutral-900: #000000;
+  --clr-neutral-800: #141414;
+  --clr-neutral-700: #53565a;
+  --clr-neutral-600: #888b8d;
+  --clr-neutral-500: #a7aba9;
+  --clr-neutral-300: #e1dfdd;
+  --clr-neutral-100: #f6f7f8;
+  --clr-neutral-500: #a7aba9;
+  --clr-neutral-300: #e1dfdd;
+  --clr-neutral-100: #f6f7f8;
+
+  color-scheme: light dark;
+}
+
+/* === MINIMAL MODERN CSS RESET === */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  font-family: var(--font-family-body);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

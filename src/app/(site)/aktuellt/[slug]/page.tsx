@@ -1,8 +1,8 @@
-import { fetchPostBySlug } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
 import { PortableTextWrapper } from "@/components/PortableTextWrapper";
 import { t } from "@/locales/translate";
+import { urlFor } from "@/sanity/lib/image";
+import { fetchPostBySlug } from "@/sanity/lib/queries";
+import Image from "next/image";
 
 const Post = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
