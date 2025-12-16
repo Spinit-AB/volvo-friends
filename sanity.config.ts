@@ -14,6 +14,7 @@ import { structureTool } from "sanity/structure";
 import { documentInternationalization } from "@sanity/document-internationalization";
 import { languageFilter } from "@sanity/language-filter";
 import { svSELocale } from "@sanity/locale-sv-se";
+import { presentationTool } from "sanity/presentation";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
@@ -103,6 +104,16 @@ export default defineConfig({
 
         return true;
       },
+    }),
+    presentationTool({
+      previewUrl: {
+        initial: "http://localhost:3000", //TODO
+        previewMode: {
+          enable: "/api/draft-mode/enable",
+          disable: "/api/draft-mode/disable",
+        },
+      },
+      allowOrigins: ["http://localhost:*"],
     }),
   ],
   i18n: {
