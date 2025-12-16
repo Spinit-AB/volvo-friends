@@ -33,9 +33,7 @@ export async function sanityFetch<QueryResponse>({
   tags?: string[];
 }) {
   const isDraftMode = (await draftMode()).isEnabled;
-  console.log("GROQ Query:", query);
-  console.log("Params:", params);
-  console.log("Draft mode: ", isDraftMode);
+
   if (isDraftMode && !token) {
     throw new Error("Missing environment variable SANITY_API_READ_TOKEN");
   }
@@ -64,7 +62,8 @@ export async function sanityFetch<QueryResponse>({
 }
 
 // GROQ query to fetch all posts (fields match schema)
-export const postsQuery = groq`*[_type == "post"] | order(_createdAt desc) {
+
+export const postsQuery = groq`*[_type == "post" && language == $language] | order(_createdAt desc) {
   _id,
   title,
   slug,
@@ -75,8 +74,12 @@ export const postsQuery = groq`*[_type == "post"] | order(_createdAt desc) {
   language
 }`;
 
-export async function fetchPosts() {
-  return await sanityFetch<TPost[]>({ query: postsQuery });
+export async function fetchPosts(language?: string) {
+  const lang = language || "sv";
+  return await sanityFetch<TPost[]>({
+    query: postsQuery,
+    params: { language: lang },
+  });
 }
 
 // Fetch a single post by slug

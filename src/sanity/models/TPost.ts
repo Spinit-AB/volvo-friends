@@ -1,13 +1,13 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { TSanityImageWithAlt } from "./SanityImageWithAlt";
 import { TypedObject } from "sanity";
 
 export type TPost = {
   _id: string;
   title: string;
   slug: { current: string };
-  heroImage: SanityImageSource;
+  heroImage: TSanityImageWithAlt;
   summary: string;
   body: TypedObject[];
-  gallery?: SanityImageSource[];
+  gallery?: TSanityImageWithAlt[];
   language?: string;
 };
