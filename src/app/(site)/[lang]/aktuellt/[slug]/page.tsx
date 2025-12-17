@@ -43,8 +43,13 @@ const PostArticle = ({
         />
       )}
       <h1 className="text-display-lg">{post.title}</h1>
-      <p>{post.summary}</p>
+      <p
+      //TODO: Should we even show summary on this page?
+      >
+        {post.summary}
+      </p>
       {post.body && <PortableTextWrapper value={post.body} />}
+      {post.gallery?.length}
     </article>
   );
 };

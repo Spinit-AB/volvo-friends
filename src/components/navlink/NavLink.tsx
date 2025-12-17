@@ -8,6 +8,7 @@ interface NavLinkProps extends React.ComponentProps<typeof Link> {
   activeClassName?: string;
   className?: string;
   matchSubpath?: boolean;
+  size?: "lg" | "base" | "sm";
 }
 
 const NavLink: React.FC<NavLinkProps> = ({
@@ -15,6 +16,7 @@ const NavLink: React.FC<NavLinkProps> = ({
   className = "",
   activeClassName = "",
   matchSubpath = false,
+  size = "base",
   children,
   ...props
 }) => {
@@ -44,7 +46,7 @@ const NavLink: React.FC<NavLinkProps> = ({
     <Link
       href={href}
       className={
-        `text-base-bold ${styles.root} ${className}` +
+        `text-${size}-bold ${styles.root} ${className}` +
         (isActive ? `${styles.active} ${activeClassName ?? ""}` : "")
       }
       {...props}

@@ -27,7 +27,7 @@ export const Navbar = ({ params }: { params: Params }) => {
       <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen}>
         <ul>
           <li>
-            <NavLink href={to("/")} onClick={handleNavLinkClick}>
+            <NavLink href={to("/")} onClick={handleNavLinkClick} size="lg">
               {t("home.page_title")}
             </NavLink>
           </li>
@@ -36,6 +36,7 @@ export const Navbar = ({ params }: { params: Params }) => {
               href={to("aktuellt")}
               onClick={handleNavLinkClick}
               matchSubpath
+              size="lg"
             >
               {t("post.page_title")}
             </NavLink>

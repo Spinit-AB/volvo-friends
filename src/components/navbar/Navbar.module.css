@@ -45,6 +45,7 @@
   position: absolute;
   z-index: 1;
   inset-inline-end: var(--gutter);
+  cursor: pointer;
 
   display: inline-flex;
   align-items: center;
