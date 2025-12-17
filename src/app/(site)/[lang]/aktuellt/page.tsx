@@ -47,7 +47,7 @@ const LoadedPosts = ({
           <p className="text-base">{post.summary}</p>
         </article>
       ))}
-      {posts.length === 0 ? <p>{t("posts.no_posts_found")}</p> : null}
+      {posts.length === 0 ? <p>{t("post.no_posts_found")}</p> : null}
     </div>
   );
 };

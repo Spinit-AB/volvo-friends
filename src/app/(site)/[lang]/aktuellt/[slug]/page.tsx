@@ -4,6 +4,9 @@ import { fetchPostBySlug } from "@/sanity/lib/queries";
 import { TPost } from "@/sanity/models/TPost";
 import { useT } from "@/src/utils/useT";
 import Image from "next/image";
+import React from "react";
+import Gallery from "./Gallery";
+import { useLang } from "@/utils/useLang";
 
 const Post = async ({
   params,
@@ -26,6 +29,8 @@ const PostArticle = ({
   post: TPost | null;
 }) => {
   const t = useT(awaitedParams);
+  const lang = useLang(awaitedParams);
+
   if (!post) {
     return <div>{t("post.not_found")}</div>;
   }
@@ -49,7 +54,10 @@ const PostArticle = ({
         {post.summary}
       </p>
       {post.body && <PortableTextWrapper value={post.body} />}
-      {post.gallery?.length}
+
+      {post.gallery && post.gallery.length > 0 && (
+        <Gallery images={post.gallery} postTitle={post.title} lang={lang} />
+      )}
     </article>
   );
 };
