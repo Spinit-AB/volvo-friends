@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sort-translations": "node scripts/sort-translations.mjs"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^4.1.0",

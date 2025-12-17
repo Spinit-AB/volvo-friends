@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { Params } from "next/dist/server/request/params";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,11 +22,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  ...props
 }: Readonly<{
   children: React.ReactNode;
+  params: Params;
 }>) {
+  const params = await props.params;
+  const lang = params.lang ?? "sv";
   return (
-    <html lang="en">
+    <html lang={lang as string}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         {(await draftMode()).isEnabled && <VisualEditing />}

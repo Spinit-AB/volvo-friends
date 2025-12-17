@@ -1,0 +1,14 @@
+.root {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.active {
+  color: var(
+    --clr-active,
+    light-dark(var(--clr-accent-blue-dark), var(--clr-accent-blue-light))
+  );
+}

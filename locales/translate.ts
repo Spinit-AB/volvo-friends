@@ -7,6 +7,8 @@ const translations: Record<string, TranslationDict> = { sv, en };
 
 export type Locale = keyof typeof translations;
 
-export function t(key: string, locale: Locale = "sv"): string {
-  return translations[locale][key] || translations["sv"][key] || key;
+export function t(key: string, locale: string = "sv"): string {
+  const availableLocales = Object.keys(translations);
+  const selectedLocale = availableLocales.includes(locale) ? locale : "sv";
+  return translations[selectedLocale][key] || translations["sv"][key] || key;
 }

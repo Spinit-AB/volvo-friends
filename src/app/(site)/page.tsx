@@ -1,22 +1,6 @@
-import { t } from "@/locales/translate";
-import Link from "next/link";
-import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <div className={styles.intro}>
-          <h1 style={{ fontFamily: "var(--font-family-display)" }}>
-            To get started, edit the page.tsx file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <Link href={`/aktuellt/`}>{t("post.page_title")}</Link>
-          </p>
-        </div>
-        <div className={styles.ctas}></div>
-      </main>
-    </div>
-  );
+export default function Page() {
+  // Always redirect to Swedish if no lang is provided
+  redirect("/sv");
 }

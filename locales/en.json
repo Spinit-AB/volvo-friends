@@ -1,4 +1,6 @@
 {
+  "home.page_title": "Home",
+  "post.no_posts_found": "No posts could be found.",
   "post.not_found": "Post could not be found.",
   "post.page_title": "Current"
 }

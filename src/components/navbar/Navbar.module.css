@@ -1,7 +1,197 @@
 .root {
-  background-color: var(--clr-neutral-100);
-  color: var(--clr-neutral-800);
+  padding-inline: var(--gutter);
+  padding-block: 0.5rem;
+  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  color: light-dark(var(--clr-neutral-800), var(--clr-neutral-200));
+
   min-height: 3rem;
   top: 0;
   position: sticky;
+  border-bottom: 2px solid var(--clr-base-green-100);
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & ul {
+    display: contents;
+    list-style: none;
+  }
+
+  & li {
+    display: contents;
+  }
+}
+
+.logo {
+  color: inherit;
+  text-decoration: none;
+  margin-inline-end: auto;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.navlink {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.burger {
+  --pl: calc(1em + 0.5ch);
+  position: absolute;
+  z-index: 1;
+  inset-inline-end: var(--gutter);
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.5em 0.125em;
+  border: transparent;
+  background: transparent;
+
+  padding-inline-start: 1em;
+
+  & > span {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+}
+
+.burgerIcon {
+  display: inline-block;
+  height: 0.15em;
+  width: 1em;
+  background: currentColor;
+  position: absolute;
+
+  translate: calc(var(--pl) * -1) 0;
+
+  transition: all 600ms ease;
+
+  &::before,
+  &::after {
+    transition: inherit;
+    height: inherit;
+    width: 1em;
+    position: absolute;
+    background: inherit;
+    content: "";
+  }
+
+  &::before {
+    top: -0.3em;
+    left: 0;
+  }
+
+  &::after {
+    bottom: -0.3em;
+    left: 0;
+    transform-origin: center;
+  }
+}
+
+[aria-expanded="true"] > .burgerIcon {
+  transform: translateY(0.33em);
+  translate: 0 -0.33em;
+  rotate: 45deg;
+
+  &::before {
+    translate: 0 0.33em;
+    rotate: -90deg;
+  }
+
+  &::after {
+    scale: 0 1;
+    rotate: -45deg;
+    translate: 0.33em 0;
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  inset-block: 0;
+  width: min(100dvw, 25rem);
+  padding-block-start: 2em;
+  inset-inline-end: 0;
+  border-inline-start: 2px solid var(--clr-base-green-100);
+
+  & ul {
+    margin-block-start: 4em;
+    height: 100%;
+    gap: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
+  animation: appear 600ms forwards;
+
+  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+}
+
+@keyframes appear {
+  from {
+    translate: 100% 0;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+.mobileMenu[hidden] {
+  animation: disappear 600ms forwards;
+}
+
+@keyframes disappear {
+  from {
+    translate: 0 0;
+    display: block;
+    opacity: 1;
+  }
+  to {
+    translate: 100% 0;
+    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    display: block;
+  }
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  background-color: hsl(0 0 0 / 0.1);
+  inset: 0;
+  z-index: -1;
+  animation: fadeIn 600ms forwards;
+}
+
+.backdrop[hidden] {
+  animation: fadeOut 600ms forwards;
 }
