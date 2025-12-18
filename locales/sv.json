@@ -3,5 +3,6 @@
   "post.no_posts_found": "Inga inlägg hittades",
   "post.not_found": "Inlägget hittades inte.",
   "post.page_title": "Aktuellt",
-  "gallery.thumbnail_tooltip": "Klicka för att förstora bilden"
+  "gallery.thumbnail_tooltip": "Klicka för att förstora bilden",
+  "common.breadcrumbs": "Brödsmulor"
 }

@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
+import Link from "./Link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import styles from "./NavLink.module.css";
+import styles from "./Link.module.css";
 
 interface NavLinkProps extends React.ComponentProps<typeof Link> {
   activeClassName?: string;
@@ -45,8 +45,9 @@ const NavLink: React.FC<NavLinkProps> = ({
   return (
     <Link
       href={href}
+      size={size}
       className={
-        `text-${size}-bold ${styles.root} ${className}` +
+        `${className}` +
         (isActive ? `${styles.active} ${activeClassName ?? ""}` : "")
       }
       {...props}

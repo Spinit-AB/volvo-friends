@@ -1,4 +1,6 @@
 .root {
+  --animation-speed: 600ms;
+  z-index: 1;
   padding-inline: var(--gutter);
   padding-block: 0.5rem;
   background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
@@ -68,10 +70,8 @@
   width: 1em;
   background: currentColor;
   position: absolute;
-
   translate: calc(var(--pl) * -1) 0;
-
-  transition: all 600ms ease;
+  transition: all var(--animation-speed, 600ms) ease;
 
   &::before,
   &::after {
@@ -130,7 +130,7 @@
     align-items: center;
   }
 
-  animation: appear 600ms forwards;
+  animation: appear var(--animation-speed, 600ms) forwards;
 
   background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
 }
@@ -147,7 +147,7 @@
 }
 
 .mobileMenu[hidden] {
-  animation: disappear 600ms forwards;
+  animation: disappear var(--animation-speed, 600ms) forwards;
 }
 
 @keyframes disappear {
@@ -190,9 +190,9 @@
   background-color: hsl(0 0 0 / 0.1);
   inset: 0;
   z-index: -1;
-  animation: fadeIn 600ms forwards;
+  animation: fadeIn var(--animation-speed, 600ms) forwards;
 }
 
 .backdrop[hidden] {
-  animation: fadeOut 600ms forwards;
+  animation: fadeOut var(--animation-speed, 600ms) forwards;
 }

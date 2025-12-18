@@ -1,0 +1,22 @@
+.root {
+  ol {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 0.5rem;
+  }
+
+  li {
+    display: contents;
+  }
+}
+
+.currentPage {
+  display: inline-block;
+  max-width: 20ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -9,6 +9,7 @@ import { TPost } from "@/sanity/models/TPost";
 import { useT } from "@/locales/utils/useT";
 import { getLang, useLang } from "@/locales/utils/useLang";
 import Image from "next/image";
+import styles from "./page.module.css";
 
 const Post = async (props: {
   params: Promise<{ slug: string; lang?: string | string[] }>;
@@ -53,29 +54,37 @@ export const PostArticle = ({
   }
 
   return (
-    <article className="page-container text-base">
-      <Breadcrumbs params={params} />
-      {post.heroImage && (
-        <Image
-          src={urlFor(post.heroImage).width(800).height(400).url()}
-          alt={post.heroImage.alt || post.title}
-          width={800}
-          height={400}
-          style={{ width: "100%", height: "auto", objectFit: "cover" }}
-          priority
-        />
-      )}
-      <h1 className="text-display-lg">{post.title}</h1>
-      <p
-      //TODO: Should we even show summary on this page?
-      >
-        {post.summary}
-      </p>
-      {post.body && <PortableTextWrapper value={post.body} />}
+    <>
+      <Breadcrumbs
+        params={params}
+        labelOverrides={[{ override: post.title, position: -1 }]}
+        className={`page-container ${styles.breadcrumbs}`}
+        olClassName="full-width"
+      />
+      <article className={`page-container text-base ${styles.root}`}>
+        {post.heroImage && (
+          <Image
+            src={urlFor(post.heroImage).width(800).height(400).url()}
+            alt={post.heroImage.alt || post.title}
+            width={800}
+            height={400}
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
+            priority
+            className="breakout"
+          />
+        )}
+        <h1 className="text-display-lg">{post.title}</h1>
+        <p
+        //TODO: Should we even show summary on this page?
+        >
+          {post.summary}
+        </p>
+        {post.body && <PortableTextWrapper value={post.body} />}
 
-      {post.gallery && post.gallery.length > 0 && (
-        <Gallery images={post.gallery} postTitle={post.title} lang={lang} />
-      )}
-    </article>
+        {post.gallery && post.gallery.length > 0 && (
+          <Gallery images={post.gallery} postTitle={post.title} lang={lang} />
+        )}
+      </article>
+    </>
   );
 };

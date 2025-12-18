@@ -81,9 +81,9 @@ function getArticleColour(index: number) {
   if (index !== 2) {
     ending = "-nobg";
   }
-  if (i === 0) return styles["green" + ending];
-  if (i === 1) return styles["orange" + ending];
-  if (i === 2) return styles["red" + ending];
+  if (i === 0) return "green" + ending;
+  if (i === 1) return "orange" + ending;
+  if (i === 2) return "red" + ending;
 
   return "";
 }
