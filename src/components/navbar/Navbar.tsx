@@ -1,20 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { useLinkWithLang } from "@/src/utils/useLinkWithLang";
-import { useT } from "@/src/utils/useT";
-import { Params } from "next/dist/server/request/params";
+import { getPostsPageSlug } from "@/locales/pageSlugUtils";
+import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
+import { useT } from "@/locales/utils/useT";
 import Link from "next/link";
+import { useState } from "react";
 import NavLink from "../navlink/NavLink";
 import { BurgerWrapper } from "./BurgerWrapper";
 import styles from "./Navbar.module.css";
 
-export const Navbar = ({ params }: { params: Params }) => {
+export const Navbar = ({
+  params,
+}: {
+  params: { lang?: string | string[] };
+}) => {
   const t = useT(params);
   const to = useLinkWithLang(params);
   const [menuOpen, setMenuOpen] = useState(false);
   const handleNavLinkClick = () => setMenuOpen(false);
 
+  const lang =
+    params.lang && Array.isArray(params.lang)
+      ? params.lang[0]
+      : params.lang || "sv";
+  const postsPageSlug = getPostsPageSlug(lang);
   return (
     <nav className={styles.root}>
       <Link
@@ -33,7 +42,7 @@ export const Navbar = ({ params }: { params: Params }) => {
           </li>
           <li>
             <NavLink
-              href={to("aktuellt")}
+              href={to(postsPageSlug)}
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"

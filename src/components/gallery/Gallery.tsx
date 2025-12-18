@@ -2,21 +2,18 @@
 
 import { urlFor } from "@/sanity/lib/image";
 import { TSanityImageWithAlt } from "@/sanity/models/SanityImageWithAlt";
-import dynamic from "next/dynamic";
+
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./gallery.module.css";
-import { useT } from "@/utils/useT";
+import { useT } from "@/locales/utils/useT";
+import GalleryModal from "./GalleryModal";
 
 interface GalleryProps {
   images: TSanityImageWithAlt[];
   postTitle: string;
   lang: string;
 }
-
-const GalleryModal = dynamic(() => import("@/components/GalleryModal"), {
-  ssr: false,
-});
 
 const Gallery: React.FC<GalleryProps> = ({ images, postTitle, lang }) => {
   const [modalOpen, setModalOpen] = useState(false);

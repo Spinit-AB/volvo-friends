@@ -117,6 +117,7 @@
   --clr-neutral-100: #ffffff;
 
   color-scheme: light;
+  /* color-scheme: light dark; */
 }
 
 /* === MINIMAL MODERN CSS RESET === */
@@ -338,7 +339,45 @@ body {
 
 /* === LAYOUT === */
 .page-container {
-  padding: var(--gutter);
-  margin-inline: auto;
-  max-width: 1200px;
+  --padding-inline: var(--gutter);
+  --content-max-width: 70ch;
+  --breakout-max-width: 1200px;
+
+  --breakout-size: calc(
+    ((var(--breakout-max-width) - var(--content-max-width)) / 2)
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--padding-inline), 1fr)
+    [gutter-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      var(--content-max-width),
+      100% - var(--padding-inline) * 2
+    )
+    [content-end] minmax(0, var(--breakout-size))
+    [gutter-end] minmax(var(--padding-inline), 1fr)
+    [full-end];
+
+  & > * {
+    grid-column: content;
+  }
+
+  & > .breakout {
+    grid-column: gutter;
+  }
+
+  & > .full-width {
+    grid-column: full;
+  }
+}
+
+/* === GENERAL STYLING === */
+a {
+  text-decoration: none;
+}
+
+a:focus-visible,
+a:hover {
+  text-decoration: underline;
 }

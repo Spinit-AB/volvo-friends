@@ -1,5 +1,5 @@
 // src/locales/useT.ts
-import { t } from "@/locales/translate";
+import { t } from "../translate";
 import { useLang } from "./useLang";
 
 export function useT(params: { lang?: string | string[] }) {
