@@ -14,7 +14,6 @@
 }
 
 .currentPage {
-  display: inline-block;
   max-width: 20ch;
   overflow: hidden;
   text-overflow: ellipsis;

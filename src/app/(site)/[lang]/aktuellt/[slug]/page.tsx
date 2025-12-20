@@ -76,6 +76,7 @@ export const PostArticle = ({
         <h1 className="text-display-lg">{post.title}</h1>
         <p
         //TODO: Should we even show summary on this page?
+        //TODO: Show the date the post was created
         >
           {post.summary}
         </p>
@@ -84,6 +85,9 @@ export const PostArticle = ({
         {post.gallery && post.gallery.length > 0 && (
           <Gallery images={post.gallery} postTitle={post.title} lang={lang} />
         )}
+
+        <p>{post.event ? "Event present" : "no event"}</p>
+        <p>{post.color}</p>
       </article>
     </>
   );

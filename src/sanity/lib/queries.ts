@@ -1,6 +1,6 @@
 "server-only";
 
-import { TPost } from "../models/TPost";
+import { TPost, TPostPreview } from "../models/TPost";
 import { draftMode } from "next/headers";
 import { type QueryOptions, type QueryParams } from "next-sanity";
 import { ClientConfig, createClient, groq } from "next-sanity";
@@ -65,18 +65,21 @@ export async function sanityFetch<QueryResponse>({
 
 export const postsQuery = groq`*[_type == "post" && language == $language] | order(_createdAt desc) {
   _id,
+  _createdAt,
+  _updatedAt,
   title,
   slug,
   heroImage,
   summary,
-  body,
-  gallery,
-  language
+  language,
+  event,
+  prioritized,
+  color
 }`;
 
 export async function fetchPosts(language?: string) {
   const lang = language || "sv";
-  return await sanityFetch<TPost[]>({
+  return await sanityFetch<TPostPreview[]>({
     query: postsQuery,
     params: { language: lang },
   });
@@ -85,13 +88,18 @@ export async function fetchPosts(language?: string) {
 // Fetch a single post by slug
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0] {
   _id,
+  _createdAt,
+  _updatedAt,
   title,
   slug,
   heroImage,
   summary,
   body,
   gallery,
-  language
+  language,
+  event,
+  prioritized,
+  color
 }`;
 
 export async function fetchPostBySlug(slug: string) {

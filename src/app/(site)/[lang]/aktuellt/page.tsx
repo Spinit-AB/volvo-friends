@@ -7,8 +7,10 @@ import { getLang } from "@/locales/utils/useLang";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { useT } from "@/locales/utils/useT";
 import Image from "next/image";
-import Link from "next/link";
+import LinkNextJs from "next/link";
 import styles from "./page.module.css";
+import { PortableText } from "next-sanity";
+import Link from "@/components/link/Link";
 
 const Posts = async (props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -27,6 +29,12 @@ const Posts = async (props: {
 };
 
 export default Posts;
+
+/*
+TODO: 
+Vad ska vi göra med kommande evenemang? Hur ska de prioritera dem?  
+Behöver de se annorlunda ut i studion? 
+*/
 
 const LoadedPosts = ({
   params,
@@ -56,14 +64,17 @@ const LoadedPosts = ({
             height={400}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
             priority
-            className="breakout"
+            // className="breakout"
           />
-          <h2 className="text-display-sm">
-            <Link href={to(`/${postsPageSlug}/${post.slug.current}`)}>
-              {post.title}
-            </Link>
-          </h2>
-          <p className="text-base">{post.summary}</p>
+          <div style={{ background: "white" }}>
+            <h2 className="text-display-sm">
+              <LinkNextJs href={to(`/${postsPageSlug}/${post.slug.current}`)}>
+                {post.title}
+              </LinkNextJs>
+            </h2>
+
+            <p>{post.summary}</p>
+          </div>
           {i !== posts.length - 1 ? (
             <hr className={`full-width ${styles.break}`} />
           ) : null}
@@ -78,7 +89,7 @@ function getArticleColour(index: number) {
   const i = index % 4;
   let ending = "";
 
-  if (index !== 2) {
+  if (index !== 1) {
     ending = "-nobg";
   }
   if (i === 0) return "green" + ending;

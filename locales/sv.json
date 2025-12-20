@@ -4,5 +4,8 @@
   "post.not_found": "Inlägget hittades inte.",
   "post.page_title": "Aktuellt",
   "gallery.thumbnail_tooltip": "Klicka för att förstora bilden",
-  "common.breadcrumbs": "Brödsmulor"
+  "common.breadcrumbs": "Brödsmulor",
+  "common.read_more": "Läs mer",
+  "common.read_more_about": "Lär mer om {linkText}",
+  "common.keep_reading_about": "Fortsätt läsa om {linkText}"
 }

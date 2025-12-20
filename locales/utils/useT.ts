@@ -4,5 +4,6 @@ import { useLang } from "./useLang";
 
 export function useT(params: { lang?: string | string[] }) {
   const lang = useLang(params);
-  return (key: string) => t(key, lang);
+  return (key: string, values?: Record<string, string | number>) =>
+    t(key, lang, values);
 }
