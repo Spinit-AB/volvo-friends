@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar/Navbar";
 import "../../globals.css";
+import { Footer } from "@/components/footer/Footer";
 
 export default async function SiteLayout({
   children,
@@ -13,7 +14,7 @@ export default async function SiteLayout({
     <>
       <Navbar params={params} />
       <main>{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

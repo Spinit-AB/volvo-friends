@@ -1,0 +1,106 @@
+.article {
+  background: var(
+    --clr-bg,
+    light-dark(var(--clr-neutral-100), var(--clr-neutral-900))
+  );
+
+  & > .imgContainer {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  & h3 {
+    color: var(
+      --clr-cta,
+      light-dark(var(--clr-accent-blue-dark), var(--clr-accent-blue-light))
+    );
+    padding-block-start: 0.5em;
+    margin: 0;
+  }
+
+  & > .articleTextWrapper {
+    background-color: light-dark(
+      var(--clr-neutral-100),
+      var(--clr-neutral-900)
+    );
+
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    & > * {
+      grid-column: content;
+    }
+  }
+
+  & a {
+    color: inherit;
+  }
+}
+
+.break {
+  width: 100%;
+  height: 1rem;
+  background-color: var(
+    --clr-brd,
+    light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300))
+  );
+  border: none;
+  margin: 0;
+}
+
+.skeletonLoader {
+  --animation-time: 3s;
+  display: grid;
+
+  & > .imgContainer {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+}
+
+.skeletonImage,
+.skeletonHeader,
+.skeletonText,
+.skeletonTextShort {
+  background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading var(--animation-time) infinite linear;
+}
+
+.skeletonImage {
+  width: 100%;
+  aspect-ratio: 800 / 400;
+}
+
+.skeletonHeader {
+  width: 80%;
+  height: 3rem;
+  margin-block-start: 0.5em;
+}
+
+.skeletonText {
+  width: 100%;
+  height: 1.2em;
+}
+
+.skeletonTextShort {
+  width: 40%;
+  height: 1.2em;
+  margin-bottom: 1rem;
+}
+
+.skeletonParagraphWrapper {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+
+  & > .skeletonText:last-child {
+    width: 90%;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

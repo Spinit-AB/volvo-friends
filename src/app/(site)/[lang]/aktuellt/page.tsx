@@ -1,3 +1,4 @@
+import InfinitePostsList from "@/components/infinitePostsList/InfinitePostsList";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
 import { getPostsPageSlug } from "@/locales/pageSlugUtils";
 import { getLang } from "@/locales/utils/useLang";
@@ -5,25 +6,27 @@ import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { TTranslate, useT } from "@/locales/utils/useT";
 import { urlFor } from "@/sanity/lib/image";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
-import { TColor, TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
+import { TColor, TUpcomingEvent } from "@/sanity/models/TPost";
+import { POSTS_PER_FETCH } from "@/utils/constants";
 import Image from "next/image";
 import LinkNextJs from "next/link";
-import styles from "./page.module.css";
 import { useId } from "react";
-
-const PAGE_SIZE = 2;
+import styles from "./page.module.css";
 
 const Posts = async (props: {
   params: { lang?: string | string[]; postsPage?: string };
+  searchParams?: { offset?: string };
 }) => {
   const params = await props.params;
   const lang = getLang(params.lang);
   const canonicalSlug = getPostsPageSlug(lang);
+  const searchParams = await props.searchParams;
+  const offset = Number(searchParams?.offset ?? 0);
 
-  const posts = await fetchPosts({
+  const { posts, total } = await fetchPosts({
     language: lang,
-    limit: PAGE_SIZE,
-    offset: 0,
+    limit: POSTS_PER_FETCH,
+    offset: offset,
   });
 
   const events = await fetchUpcomingEvents({
@@ -31,10 +34,18 @@ const Posts = async (props: {
     now: new Date().toISOString(),
   });
 
+  console.log({ searchParams: props.searchParams });
+
   return (
     <>
       <LocalePageRedirects lang={lang} canonicalSlug={canonicalSlug} />
-      <LoadedPosts params={params} posts={posts ?? []} events={events ?? []} />
+      <HeaderAndLoadedEvents params={params} events={events ?? []} />
+      <InfinitePostsList
+        initialPosts={posts ?? []}
+        total={total}
+        lang={lang}
+        postsPageSlug={canonicalSlug}
+      />
     </>
   );
 };
@@ -47,13 +58,11 @@ Vad ska vi göra med kommande evenemang? Hur ska de prioritera dem?
 Behöver de se annorlunda ut i studion? 
 */
 
-const LoadedPosts = ({
+const HeaderAndLoadedEvents = ({
   params,
-  posts,
   events,
 }: {
   params: { lang?: string | string[] };
-  posts: TPostPreview[];
   events: TUpcomingEvent[];
 }) => {
   const t = useT(params);
@@ -61,7 +70,6 @@ const LoadedPosts = ({
   const lang = getLang(params.lang);
   const postsPageSlug = getPostsPageSlug(lang);
   const eventId = useId();
-  const postId = useId();
 
   const postTo = (slug: string) => to(`/${postsPageSlug}/${slug}`);
   return (
@@ -98,68 +106,18 @@ const LoadedPosts = ({
           </div>
         </div>
       </section>
-      <section aria-labelledby={postId}>
-        <header className="page-container">
-          <h2 className="text-display-sm" id={postId}>
-            {t("post.posts_header")}
-          </h2>
-        </header>
-        {posts.map((post, i) => (
-          <article
-            key={post._id}
-            className={`page-container ${styles.article} ${getBlockColour(
-              i,
-              post.prioritized,
-              post.color
-            )}`}
-          >
-            <div className={styles.imgContainer}>
-              <Image
-                src={urlFor(post.heroImage).width(800).height(400).url()}
-                alt={post.heroImage.alt || post.title}
-                width={800}
-                height={400}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "cover",
-                }}
-                priority
-              />
-            </div>
-            <div className={` ${styles.articleTextWrapper}`}>
-              <h3 className="text-display-sm">
-                <LinkNextJs href={postTo(post.slug.current)}>
-                  {post.title}
-                </LinkNextJs>
-              </h3>
-
-              <p>{post.summary}</p>
-            </div>
-            {i !== posts.length - 1 ? (
-              <hr className={`full-width ${styles.break}`} />
-            ) : null}
-          </article>
-        ))}
-        {posts.length === 0 ? <p>{t("post.no_posts_found")}</p> : null}
-      </section>
     </>
   );
 };
 
-function getBlockColour(
-  index: number,
-  isPrio?: boolean,
-  colorOverrider?: TColor
-) {
+function getBlockColour(index: number, colorOverrider?: TColor) {
   const i = index % 4;
-  const ending = isPrio ? "" : "-nobg";
 
-  if (colorOverrider) return colorOverrider + ending;
+  if (colorOverrider) return colorOverrider;
 
-  if (i === 0) return "green" + ending;
-  if (i === 1) return "orange" + ending;
-  if (i === 2) return "red" + ending;
+  if (i === 0) return "green";
+  if (i === 1) return "orange";
+  if (i === 2) return "red";
 
   return "";
 }
@@ -178,11 +136,7 @@ const EventCard = ({
   const img = event.heroImage;
   return (
     <article
-      className={`${styles.eventCard} ${getBlockColour(
-        index,
-        event.prioritized,
-        event.color
-      )}`}
+      className={`${styles.eventCard} ${getBlockColour(index, event.color)}`}
     >
       <Image
         src={urlFor(img).width(300).height(300).url()}

@@ -106,24 +106,30 @@ export async function fetchUpcomingEvents({
 
 // GROQ query to fetch all posts (fields match schema)
 export const postsQuery = groq`
-  *[
-    _type == "post"
-    && language == $language
-  ]
-    | order(coalesce(prioritized, false) desc, _createdAt desc)
-    [$offset...($offset + $limit)] {
-      _id,
-      _createdAt,
-      _updatedAt,
-      title,
-      slug,
-      heroImage,
-      summary,
-      language,
-      event,
-      prioritized,
-      color
-    }
+  {
+    "posts": *[
+      _type == "post"
+      && language == $language
+    ]
+      | order(coalesce(prioritized, false) desc, _createdAt desc)
+      [$offset...($offset + $limit)] {
+        _id,
+        _createdAt,
+        _updatedAt,
+        title,
+        slug,
+        heroImage,
+        summary,
+        language,
+        event,
+        prioritized,
+        color
+      },
+    "total": count(*[
+      _type == "post"
+      && language == $language
+    ])
+  }
 `;
 
 export async function fetchPosts({
@@ -135,7 +141,10 @@ export async function fetchPosts({
   limit?: number;
   offset?: number;
 } = {}) {
-  return await sanityFetch<TPostPreview[]>({
+  return await sanityFetch<{
+    posts: TPostPreview[];
+    total: number;
+  }>({
     query: postsQuery,
     params: {
       language,
