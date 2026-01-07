@@ -65,7 +65,7 @@ export const PostArticle = ({
         {post.heroImage && (
           <Image
             src={urlFor(post.heroImage).width(800).height(400).url()}
-            alt={post.heroImage.alt || post.title}
+            alt={post.heroImage.alt}
             width={800}
             height={400}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}

@@ -1,6 +1,20 @@
 import { TSanityImageWithAlt } from "./SanityImageWithAlt";
 import { TypedObject } from "sanity";
 
+export type TColor = "blue" | "teal" | "green" | "orange" | "red";
+
+export type TUpcomingEvent = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  heroImage: TSanityImageWithAlt;
+  prioritized?: boolean;
+  color?: TColor;
+  date: string;
+  time: string;
+  place: string;
+};
+
 export type TPost = {
   _id: string;
   _createdAt: string;
@@ -19,7 +33,7 @@ export type TPost = {
     description?: string;
   };
   prioritized?: boolean;
-  color?: string;
+  color?: TColor;
 };
 
-export type TPostPreview = Omit<TPost, 'body' | 'gallery'>;
+export type TPostPreview = Omit<TPost, "body" | "gallery">;

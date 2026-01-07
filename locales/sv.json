@@ -7,5 +7,11 @@
   "common.breadcrumbs": "Brödsmulor",
   "common.read_more": "Läs mer",
   "common.read_more_about": "Lär mer om {linkText}",
-  "common.keep_reading_about": "Fortsätt läsa om {linkText}"
+  "common.keep_reading_about": "Fortsätt läsa om {linkText}",
+  "post.no_events_found": "Inga evenemang hittades",
+  "post.upcoming_events": "Kommande evenemang",
+  "common.time": "Tid",
+  "common.place": "Plats",
+  "common.date": "Datum",
+  "post.posts_header": "Nyheter, evenemang och inlägg"
 }

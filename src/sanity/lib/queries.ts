@@ -1,10 +1,15 @@
 "server-only";
 
-import { TPost, TPostPreview } from "../models/TPost";
+import {
+  ClientConfig,
+  createClient,
+  groq,
+  type QueryOptions,
+  type QueryParams,
+} from "next-sanity";
 import { draftMode } from "next/headers";
-import { type QueryOptions, type QueryParams } from "next-sanity";
-import { ClientConfig, createClient, groq } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
+import { TPost, TPostPreview, TUpcomingEvent } from "../models/TPost";
 
 const token = process.env.SANITY_API_READ_TOKEN;
 
@@ -61,27 +66,82 @@ export async function sanityFetch<QueryResponse>({
   });
 }
 
+// GROQ query for upcoming events
+export const upcomingEventsQuery = groq`
+  *[
+    _type == "post"
+    && isEvent == true
+    && defined(event.date)
+    && event.date >= $now
+    && language == $language
+  ]
+    | order(event.date asc, event.time asc) {
+      _id,
+      title,
+      slug,
+      heroImage,
+      prioritized,
+      color,
+      "date": event.date,
+      "time": event.time,
+      "place": event.place,
+    }
+`;
+
+export async function fetchUpcomingEvents({
+  language = "sv",
+  now,
+}: {
+  language?: string;
+  now: string;
+}) {
+  return await sanityFetch<TUpcomingEvent[]>({
+    query: upcomingEventsQuery,
+    params: {
+      language,
+      now,
+    },
+  });
+}
+
 // GROQ query to fetch all posts (fields match schema)
+export const postsQuery = groq`
+  *[
+    _type == "post"
+    && language == $language
+  ]
+    | order(coalesce(prioritized, false) desc, _createdAt desc)
+    [$offset...($offset + $limit)] {
+      _id,
+      _createdAt,
+      _updatedAt,
+      title,
+      slug,
+      heroImage,
+      summary,
+      language,
+      event,
+      prioritized,
+      color
+    }
+`;
 
-export const postsQuery = groq`*[_type == "post" && language == $language] | order(_createdAt desc) {
-  _id,
-  _createdAt,
-  _updatedAt,
-  title,
-  slug,
-  heroImage,
-  summary,
-  language,
-  event,
-  prioritized,
-  color
-}`;
-
-export async function fetchPosts(language?: string) {
-  const lang = language || "sv";
+export async function fetchPosts({
+  language = "sv",
+  limit = 20,
+  offset = 0,
+}: {
+  language?: string;
+  limit?: number;
+  offset?: number;
+} = {}) {
   return await sanityFetch<TPostPreview[]>({
     query: postsQuery,
-    params: { language: lang },
+    params: {
+      language,
+      limit,
+      offset,
+    },
   });
 }
 
