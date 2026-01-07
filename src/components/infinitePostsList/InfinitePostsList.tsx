@@ -44,7 +44,7 @@ export default function InfinitePostsList({
         return [...prev, ...filtered];
       });
     } catch (e) {
-      // Optionally handle error
+      console.error(e);
     } finally {
       setLoading(false);
     }
@@ -61,12 +61,13 @@ export default function InfinitePostsList({
       },
       { threshold: 1 }
     );
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    const node = observerRef.current;
+    if (node) {
+      observer.observe(node);
     }
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (node) {
+        observer.unobserve(node);
       }
       observer.disconnect();
     };
