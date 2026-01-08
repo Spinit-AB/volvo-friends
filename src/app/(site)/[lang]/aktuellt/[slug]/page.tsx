@@ -55,6 +55,7 @@ export const PostArticle = ({
 
   return (
     <>
+      {post.color ? <div className={`footer-theme-${post.color}`} /> : null}
       <Breadcrumbs
         params={params}
         labelOverrides={[{ override: post.title, position: -1 }]}

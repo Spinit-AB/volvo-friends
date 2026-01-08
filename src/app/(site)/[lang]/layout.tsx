@@ -14,7 +14,7 @@ export default async function SiteLayout({
     <>
       <Navbar params={params} />
       <main>{children}</main>
-      <Footer />
+      <Footer params={params} />
     </>
   );
 }

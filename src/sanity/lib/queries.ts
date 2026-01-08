@@ -9,6 +9,7 @@ import {
 } from "next-sanity";
 import { draftMode } from "next/headers";
 import { apiVersion, dataset, projectId } from "../env";
+import { TFooter } from "../models/TFooter";
 import { TPost, TPostPreview, TUpcomingEvent } from "../models/TPost";
 
 const token = process.env.SANITY_API_READ_TOKEN;
@@ -175,5 +176,28 @@ export async function fetchPostBySlug(slug: string) {
   return await sanityFetch<TPost | null>({
     query: postBySlugQuery,
     params: { slug },
+  });
+}
+
+const footerQuery = `*[_type == "footer"][0]{
+  documents[]{
+    _key,
+    asset->{_id, url},
+    title,
+    _type
+  },
+  address,
+  links[]{
+    _key,
+    title,
+    url,
+    _type
+  }
+}`;
+
+export async function fetchFooter() {
+  return await sanityFetch<TFooter | null>({
+    query: footerQuery,
+    revalidate: 60,
   });
 }

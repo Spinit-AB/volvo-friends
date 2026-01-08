@@ -7,6 +7,7 @@ import LinkNextJs from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import styles from "./InfinitePostsList.module.css";
 import { t } from "@/locales/translate";
+import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 
 export default function InfinitePostsList({
   initialPosts,
@@ -19,6 +20,7 @@ export default function InfinitePostsList({
   lang: string;
   postsPageSlug: string;
 }) {
+  const to = useLinkWithLang({ lang });
   const [posts, setPosts] = useState<TPostPreview[]>(initialPosts);
   const [loading, setLoading] = useState(false);
   const postsId = useId();
@@ -103,7 +105,7 @@ export default function InfinitePostsList({
           </div>
           <div className={styles.articleTextWrapper}>
             <h3 className="text-display-sm">
-              <LinkNextJs href={`/${postsPageSlug}/${post.slug.current}`}>
+              <LinkNextJs href={to(`${postsPageSlug}/${post.slug.current}`)}>
                 {post.title}
               </LinkNextJs>
             </h3>

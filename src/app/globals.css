@@ -451,3 +451,34 @@ a:hover {
   );
   --clr-brd: light-dark(var(--clr-base-blue-700), var(--clr-base-blue-300));
 }
+
+/* === FOOTER THEMES === */
+main:has(.footer-theme-teal) + footer {
+  --clr-footer-bg: var(--clr-base-teal-900);
+  --clr-footer-link: var(--clr-accent-green-light);
+  --clr-footer-detail: var(--clr-base-green-700);
+}
+
+main:has(.footer-theme-blue) + footer {
+  --clr-footer-bg: var(--clr-base-blue-900);
+  --clr-footer-link: var(--clr-accent-teal-light);
+  --clr-footer-detail: var(--clr-accent-teal-dark);
+}
+
+main:has(.footer-theme-red) + footer {
+  --clr-footer-bg: var(--clr-base-red-900);
+  --clr-footer-link: var(--clr-accent-orange-light);
+  --clr-footer-detail: var(--clr-base-orange-700);
+}
+
+main:has(.footer-theme-green) + footer {
+  --clr-footer-bg: var(--clr-base-green-900);
+  --clr-footer-link: var(--clr-accent-green-light);
+  --clr-footer-detail: var(--clr-base-green-700);
+}
+
+main:has(.footer-theme-orange) + footer {
+  --clr-footer-bg: var(--clr-base-orange-900);
+  --clr-footer-link: var(--clr-accent-orange-light);
+  --clr-footer-detail: var(--clr-base-orange-300);
+}
