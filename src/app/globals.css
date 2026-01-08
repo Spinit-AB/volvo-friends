@@ -453,31 +453,31 @@ a:hover {
 }
 
 /* === FOOTER THEMES === */
-main:has(.footer-theme-teal) + footer {
+main:has(.footer-theme-teal:first-child) + footer {
   --clr-footer-bg: var(--clr-base-teal-900);
   --clr-footer-link: var(--clr-accent-green-light);
   --clr-footer-detail: var(--clr-base-green-700);
 }
 
-main:has(.footer-theme-blue) + footer {
+main:has(.footer-theme-blue:first-child) + footer {
   --clr-footer-bg: var(--clr-base-blue-900);
   --clr-footer-link: var(--clr-accent-teal-light);
   --clr-footer-detail: var(--clr-accent-teal-dark);
 }
 
-main:has(.footer-theme-red) + footer {
+main:has(.footer-theme-red:first-child) + footer {
   --clr-footer-bg: var(--clr-base-red-900);
   --clr-footer-link: var(--clr-accent-orange-light);
   --clr-footer-detail: var(--clr-base-orange-700);
 }
 
-main:has(.footer-theme-green) + footer {
+main:has(.footer-theme-green:first-child) + footer {
   --clr-footer-bg: var(--clr-base-green-900);
   --clr-footer-link: var(--clr-accent-green-light);
   --clr-footer-detail: var(--clr-base-green-700);
 }
 
-main:has(.footer-theme-orange) + footer {
+main:has(.footer-theme-orange:first-child) + footer {
   --clr-footer-bg: var(--clr-base-orange-900);
   --clr-footer-link: var(--clr-accent-orange-light);
   --clr-footer-detail: var(--clr-base-orange-300);

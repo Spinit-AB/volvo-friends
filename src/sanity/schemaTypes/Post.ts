@@ -24,15 +24,7 @@ export default defineType({
           .required()
           .error("En slug krävs för att skapa en sida på webbplatsen"),
     }),
-    // Event toggle (checkbox)
-    defineField({
-      name: "isEvent",
-      type: "boolean",
-      title: "Gör detta inlägg till ett evenemang",
-      description:
-        "Markera om detta inlägg handlar om ett evenemang. Då kan du lägga till datum, tid och plats.",
-      initialValue: false,
-    }),
+
     // Prioriterat inlägg (checkbox)
     defineField({
       name: "prioritized",
@@ -62,78 +54,112 @@ export default defineType({
           .max(200)
           .error("Sammanfattning krävs och får vara max 200 tecken."),
     }),
-
-    // Event block (collapsible, only if isEvent is true)
+    // Event toggle (checkbox)
     defineField({
-      name: "event",
-      type: "object",
-      title: "Evenemangsinfo",
-      description: "Fyll i information om evenemanget.",
-      hidden: ({ parent }) => !parent?.isEvent,
-      fields: [
-        defineField({
-          name: "date",
-          type: "date",
-          title: "Datum",
-          description: "Datum för evenemanget",
-          validation: (Rule) =>
-            Rule.custom((value, context) => {
-              const parent = context.parent as
-                | Record<string, unknown>
-                | undefined;
-              if (!parent?.isEvent) return true;
-              if (!value) {
-                return "Datum måste anges för evenemang.";
-              }
-              return true;
-            }),
+      name: "isEvent",
+      type: "boolean",
+      title: "Gör detta inlägg till ett evenemang",
+      description:
+        "Markera om detta inlägg handlar om ett evenemang. Då kan du lägga till datum, tid och plats.",
+      initialValue: false,
+    }),
+    defineField({
+      name: "date",
+      type: "date",
+      title: "Datum",
+      description: "Datum för evenemanget",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) {
+            return "Datum måste anges för evenemang.";
+          }
+          return true;
         }),
-        defineField({
-          name: "time",
-          type: "string",
-          title: "Tid",
-          description: "Tid för evenemanget",
-          validation: (Rule) =>
-            Rule.custom((value, context) => {
-              const parent = context.parent as
-                | Record<string, unknown>
-                | undefined;
-              if (!parent?.isEvent) return true;
-              if (!value) {
-                return "Tid måste anges för evenemang.";
-              }
-              return true;
-            }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    defineField({
+      name: "startTime",
+      type: "string",
+      title: "Starttid",
+      description: "Starttid för evenemanget (HH:mm)",
+      placeholder: "18:00",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) {
+            return "Starttid måste anges för evenemang.";
+          }
+          if (!/^([01]\d|2[0-3])[:.\s]?([0-5]\d)$/.test(value)) {
+            return "Starttiden måste anges i formatet HH:mm, t.ex. 18:00.";
+          }
+          return true;
         }),
-        defineField({
-          name: "place",
-          type: "string",
-          title: "Plats",
-          description: "Plats för evenemanget",
-          validation: (Rule) =>
-            Rule.custom((value, context) => {
-              const parent = context.parent as
-                | Record<string, unknown>
-                | undefined;
-              if (!parent?.isEvent) return true;
-              if (!value) {
-                return "Plats måste anges för evenemang.";
-              }
-              return true;
-            }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    defineField({
+      name: "endTime",
+      type: "string",
+      title: "Sluttid (valfritt)",
+      description: "Sluttid för evenemanget (HH:mm, valfritt)",
+      placeholder: "20:00",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) return true;
+          if (!/^([01]\d|2[0-3])[:.\s]?([0-5]\d)$/.test(value)) {
+            return "Sluttiden måste anges i formatet HH:mm, t.ex. 20:00.";
+          }
+          return true;
         }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    defineField({
+      name: "place",
+      type: "string",
+      title: "Plats",
+      description: "Plats för evenemanget",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) {
+            return "Plats måste anges för evenemang.";
+          }
+          return true;
+        }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    defineField({
+      name: "eventInfo",
+      type: "array",
+      title: "Extra information om evenemanget",
+      description:
+        "Lägg till egna rader för att visa mer information om evenemanget.",
+      of: [
         defineField({
-          name: "description",
-          type: "string",
-          title: "Kort beskrivning",
-          description:
-            "En kort beskrivning av evenemanget (valfritt, max 300 tecken)",
-          validation: (Rule) =>
-            Rule.max(300).warning(
-              "Max 300 tecken. Skriv mer i brödtexten om det behövs."
-            ),
+          name: "infoItem",
+          type: "object",
+          fields: [
+            defineField({
+              name: "key",
+              type: "string",
+              title: "Rubrik (t.ex. Entré, Fika, Talare)",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "value",
+              type: "string",
+              title: "Beskrivning",
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
         }),
       ],
+      hidden: ({ document }) => !document?.isEvent,
     }),
     defineField({
       name: "body",

@@ -48,3 +48,12 @@
     position: absolute;
   }
 }
+
+.eventTable {
+  margin-block-end: 1rem;
+
+  & th {
+    width: fit-content;
+    text-align: start;
+  }
+}

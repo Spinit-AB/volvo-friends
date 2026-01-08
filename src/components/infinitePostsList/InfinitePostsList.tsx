@@ -8,6 +8,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import styles from "./InfinitePostsList.module.css";
 import { t } from "@/locales/translate";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
+import { formatDate } from "@/utils/functions";
 
 export default function InfinitePostsList({
   initialPosts,
@@ -81,7 +82,7 @@ export default function InfinitePostsList({
     <section aria-labelledby={postsId}>
       <header className="page-container">
         <h2 className="text-display-sm" id={postsId}>
-          {t("post.posts_header", lang)}
+          {t("post.posts_header")}
         </h2>
       </header>
       {posts.map((post, i) => (
@@ -110,8 +111,8 @@ export default function InfinitePostsList({
               </LinkNextJs>
             </h3>
             <p>{post.summary}</p>
-            <p>
-              {t("common.created_at", lang)} {post._createdAt.split("T")[0]}
+            <p className="text-base-italic">
+              {t("common.created_at")}: {formatDate(lang, post._createdAt)}
             </p>
           </div>
           <hr className={`full-width ${styles.break}`} />
@@ -138,7 +139,9 @@ export default function InfinitePostsList({
         </div>
       ) : (
         <div className="page-container">
-          <p>{t("posts.no_more_posts_to_load", lang)}</p>
+          <p className={`text-base-italic ${styles.noMorePosts}`}>
+            {t("posts.no_more_posts_to_load")}
+          </p>
         </div>
       )}
     </section>

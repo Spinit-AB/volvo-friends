@@ -11,7 +11,8 @@ export type TUpcomingEvent = {
   prioritized?: boolean;
   color?: TColor;
   date: string;
-  time: string;
+  startTime: string;
+  endTime?: string;
   place: string;
 };
 
@@ -26,14 +27,21 @@ export type TPost = {
   body: TypedObject[];
   gallery?: TSanityImageWithAlt[];
   language?: string;
-  event?: {
-    date?: string;
-    time?: string;
-    place?: string;
-    description?: string;
-  };
+  event?: TEvent;
   prioritized?: boolean;
   color?: TColor;
 };
 
 export type TPostPreview = Omit<TPost, "body" | "gallery">;
+
+export type TEvent = {
+  date: string;
+  startTime: string;
+  endTime?: string;
+  place: string;
+  eventInfo?: Array<{
+    key: string;
+    value: string;
+    _key: string;
+  }>;
+};

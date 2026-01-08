@@ -72,20 +72,21 @@ export const upcomingEventsQuery = groq`
   *[
     _type == "post"
     && isEvent == true
-    && defined(event.date)
-    && event.date >= $now
+    && defined(date)
+    && date >= $now
     && language == $language
   ]
-    | order(event.date asc, event.time asc) {
+    | order(date asc, startTime asc) {
       _id,
       title,
       slug,
       heroImage,
       prioritized,
       color,
-      "date": event.date,
-      "time": event.time,
-      "place": event.place,
+      date,
+      startTime,
+      endTime,
+      place,
     }
 `;
 
@@ -122,7 +123,13 @@ export const postsQuery = groq`
         heroImage,
         summary,
         language,
-        event,
+        "event":  {
+          "date": date,
+          "startTime": startTime,
+          "endTime": endTime,
+          "place": place,
+          "eventInfo": eventInfo
+        },
         prioritized,
         color
       },
@@ -167,7 +174,13 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   body,
   gallery,
   language,
-  event,
+  "event": {
+    "date": date,
+    "startTime": startTime,
+    "endTime": endTime,
+    "place": place,
+    "eventInfo": eventInfo
+  },
   prioritized,
   color
 }`;

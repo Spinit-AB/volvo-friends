@@ -73,13 +73,13 @@
 @media screen and (width > 70ch) {
   .eventsContainer {
     overflow-x: auto;
-  }
 
-  .eventsInnerGrid {
-    min-width: max-content;
-    margin-inline: auto;
-    grid-auto-flow: column;
-    grid-auto-columns: 420px;
+    .eventsInnerGrid {
+      min-width: max-content;
+      margin-inline: auto;
+      grid-auto-flow: column;
+      grid-auto-columns: 420px;
+    }
   }
 }
 

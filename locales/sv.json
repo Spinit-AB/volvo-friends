@@ -13,6 +13,7 @@
   "common.time": "Tid",
   "common.place": "Plats",
   "common.date": "Datum",
+  "common.description": "Beskrivning",
   "post.posts_header": "Nyheter, evenemang och inlägg",
   "loading_posts": "Laddar inlägg",
   "posts.no_more_posts_to_load": "Alla inlägg har laddats in.",

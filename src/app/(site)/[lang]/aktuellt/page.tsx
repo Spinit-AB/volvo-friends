@@ -12,6 +12,8 @@ import Image from "next/image";
 import LinkNextJs from "next/link";
 import { useId } from "react";
 import styles from "./page.module.css";
+import { useFormattedTime } from "@/locales/utils/useFormattedTime";
+import { formatDate } from "@/utils/functions";
 
 const Posts = async (props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -98,6 +100,7 @@ const HeaderAndLoadedEvents = ({
                   event={event}
                   t={t}
                   to={postTo}
+                  lang={lang}
                 />
               ))
             ) : (
@@ -127,13 +130,16 @@ const EventCard = ({
   t,
   index,
   to,
+  lang,
 }: {
   event: TUpcomingEvent;
   t: TTranslate;
   index: number;
   to: (path: string) => string;
+  lang: string;
 }) => {
   const img = event.heroImage;
+  const formatTime = useFormattedTime(lang);
   return (
     <article
       className={`${styles.eventCard} ${getBlockColour(index, event.color)}`}
@@ -152,11 +158,11 @@ const EventCard = ({
       <table>
         <tr>
           <th>{t("common.date")}</th>
-          <td>{event.date}</td>
+          <td>{formatDate(lang, event.date)}</td>
         </tr>
         <tr>
           <th>{t("common.time")}</th>
-          <td>{event.time}</td>
+          <td>{formatTime(event.startTime, event.endTime)}</td>
         </tr>
         <tr>
           <th>{t("common.place")}</th>
