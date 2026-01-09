@@ -133,6 +133,41 @@ export default defineType({
         }),
       hidden: ({ document }) => !document?.isEvent,
     }),
+    // Optional sign up email link for events
+    defineField({
+      name: "signUpEmail",
+      type: "string",
+      title: "Anmälnings-e-post (valfritt)",
+      description: "E-postadress för anmälan till evenemanget (valfritt)",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) return true;
+          // Simple email validation
+          if (!/^\S+@\S+\.\S+$/.test(value)) {
+            return "E-postadressen måste vara giltig.";
+          }
+          return true;
+        }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    // Optional last sign up date for events
+    defineField({
+      name: "signUpDeadline",
+      type: "date",
+      title: "Sista anmälningsdag (valfritt)",
+      description: "Sista datum för anmälan till evenemanget (valfritt)",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context.document as Record<string, unknown>;
+          if (!doc?.isEvent) return true;
+          if (!value) return true;
+          // Optionally, could check that deadline is before event date, but not required here
+          return true;
+        }),
+      hidden: ({ document }) => !document?.isEvent,
+    }),
     defineField({
       name: "eventInfo",
       type: "array",

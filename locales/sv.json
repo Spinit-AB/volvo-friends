@@ -20,5 +20,7 @@
   "common.created_at": "Skapades",
   "footer.documents": "Dokument",
   "footer.address": "Adress",
-  "footer.links": "Länkar"
+  "footer.links": "Länkar",
+  "post.sign_up_email": "Anmälan",
+  "post.sign_up_deadline": "Anmälan senast datum"
 }

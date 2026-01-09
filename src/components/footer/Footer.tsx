@@ -28,9 +28,24 @@ const FetchedFooter = ({
         <section className={styles.col}>
           <h3 className="text-cardheader-sm">{t("footer.documents")}</h3>
           <ul>
-            {footer?.documents?.map((doc) => (
-              <li key={doc._key}>{doc.title}</li>
-            ))}
+            {footer?.documents?.map((doc) => {
+              const fileUrl = doc.asset?.url;
+              if (!fileUrl) return null;
+              return (
+                <li key={doc._key}>
+                  {fileUrl && (
+                    <a
+                      href={fileUrl}
+                      download
+                      className="text-base-bold"
+                      style={{ marginLeft: 8 }}
+                    >
+                      {doc.title}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
         <section className={styles.col}>

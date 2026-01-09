@@ -16,7 +16,7 @@ export const Grill = ({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g clip-path="url(#clip0_344_210)">
+      <g clipPath="url(#clip0_344_210)">
         <path
           d="M6.88916 4.95801C6.88916 3.85344 5.99373 2.95801 4.88916 2.95801C3.78459 2.95801 2.88916 3.85344 2.88916 4.95801V16.958C2.88916 18.0626 3.78459 18.958 4.88916 18.958C5.99373 18.958 6.88916 18.0626 6.88916 16.958V4.95801Z"
           fill="currentColor"
@@ -28,13 +28,13 @@ export const Grill = ({
         <path
           d="M163.119 10L70.1191 10C66.8054 10 64.1191 12.6863 64.1191 16V24C64.1191 31.732 70.3872 38 78.1191 38L155.119 38C162.851 38 169.119 31.732 169.119 24V16C169.119 12.6863 166.433 10 163.119 10Z"
           stroke="currentColor"
-          stroke-width="4"
+          strokeWidth="4"
         />
         <path
           d="M155 11L78 36.5"
           stroke="currentColor"
-          stroke-width="4"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeLinecap="round"
         />
         <rect
           x="111"

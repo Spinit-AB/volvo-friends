@@ -128,6 +128,8 @@ export const postsQuery = groq`
           "startTime": startTime,
           "endTime": endTime,
           "place": place,
+          "signUpEmail": signUpEmail,
+          "signUpDeadline": signUpDeadline,
           "eventInfo": eventInfo
         },
         prioritized,
@@ -179,6 +181,8 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
     "startTime": startTime,
     "endTime": endTime,
     "place": place,
+    "signUpEmail": signUpEmail,
+    "signUpDeadline": signUpDeadline,
     "eventInfo": eventInfo
   },
   prioritized,

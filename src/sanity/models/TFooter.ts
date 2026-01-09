@@ -2,8 +2,10 @@ export type TFooter = {
   documents: Array<{
     _key?: string;
     asset: {
-      _ref: string;
-      _type: "reference";
+      _ref?: string;
+      _type?: "reference";
+      _id?: string;
+      url?: string;
     };
     title?: string;
     _type: "file";

@@ -110,24 +110,42 @@ const EventSection = ({
   const formatTime = useFormattedTime(lang);
   return (
     <table className={styles.eventTable}>
-      <tr>
-        <th>{t("common.date")}</th>
-        <td>{formatDate(lang, event.date ?? "")}</td>
-      </tr>
-      <tr>
-        <th>{t("common.time")}</th>
-        <td> {formatTime(event.startTime, event.endTime)}</td>
-      </tr>
-      <tr>
-        <th>{t("common.place")}</th>
-        <td>{event.place}</td>
-      </tr>
-      {event.eventInfo?.map((row) => (
-        <tr key={row._key}>
-          <th>{row.key}</th>
-          <td>{row.value}</td>
+      <tbody>
+        <tr>
+          <th>{t("common.date")}</th>
+          <td>{formatDate(lang, event.date ?? "")}</td>
         </tr>
-      ))}
+        <tr>
+          <th>{t("common.time")}</th>
+          <td> {formatTime(event.startTime, event.endTime)}</td>
+        </tr>
+        <tr>
+          <th>{t("common.place")}</th>
+          <td>{event.place}</td>
+        </tr>
+        {event.signUpEmail && (
+          <tr>
+            <th>{t("post.sign_up_email")}</th>
+            <td>
+              <a type="email" href={`@mailto:${event.signUpEmail}`}>
+                {event.signUpEmail}
+              </a>
+            </td>
+          </tr>
+        )}
+        {event.signUpEmail && (
+          <tr>
+            <th>{t("post.sign_up_deadline")}</th>
+            <td>{event.signUpDeadline}</td>
+          </tr>
+        )}
+        {event.eventInfo?.map((row) => (
+          <tr key={row._key}>
+            <th>{row.key}</th>
+            <td>{row.value}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };

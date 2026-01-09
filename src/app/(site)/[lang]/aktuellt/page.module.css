@@ -81,6 +81,24 @@
       grid-auto-columns: 420px;
     }
   }
+
+  .eventCard {
+    display: grid;
+    grid-template-areas:
+      "img title title"
+      "img dtitle date"
+      "img ttile time"
+      "img ptitle place";
+    grid-template-columns: auto auto 1fr;
+    gap: 0 1ch;
+    align-items: end;
+
+    & table,
+    & tbody,
+    & tr {
+      display: contents;
+    }
+  }
 }
 
 .eventCard {
@@ -93,21 +111,6 @@
       --clr-brd,
       light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300))
     );
-
-  display: grid;
-  grid-template-areas:
-    "img title title"
-    "img dtitle date"
-    "img ttile time"
-    "img ptitle place";
-  grid-template-columns: auto auto 1fr;
-  gap: 0 1ch;
-  align-items: end;
-
-  & table,
-  & tr {
-    display: contents;
-  }
 
   & th {
     text-align: start;

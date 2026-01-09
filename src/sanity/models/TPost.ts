@@ -39,6 +39,8 @@ export type TEvent = {
   startTime: string;
   endTime?: string;
   place: string;
+  signUpEmail?: string;
+  signUpDeadline?: string;
   eventInfo?: Array<{
     key: string;
     value: string;

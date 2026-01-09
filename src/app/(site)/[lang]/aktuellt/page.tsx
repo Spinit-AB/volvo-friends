@@ -156,18 +156,20 @@ const EventCard = ({
         <LinkNextJs href={to(event.slug.current)}>{event.title}</LinkNextJs>
       </h3>
       <table>
-        <tr>
-          <th>{t("common.date")}</th>
-          <td>{formatDate(lang, event.date)}</td>
-        </tr>
-        <tr>
-          <th>{t("common.time")}</th>
-          <td>{formatTime(event.startTime, event.endTime)}</td>
-        </tr>
-        <tr>
-          <th>{t("common.place")}</th>
-          <td>{event.place}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>{t("common.date")}</th>
+            <td>{formatDate(lang, event.date)}</td>
+          </tr>
+          <tr>
+            <th>{t("common.time")}</th>
+            <td>{formatTime(event.startTime, event.endTime)}</td>
+          </tr>
+          <tr>
+            <th>{t("common.place")}</th>
+            <td>{event.place}</td>
+          </tr>
+        </tbody>
       </table>
     </article>
   );
