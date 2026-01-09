@@ -81,7 +81,7 @@
   --clr-base-green-100: #e0e7d9;
 
   --clr-base-blue-900: #202a44;
-  --clr-base-blue-700: #7089ac;
+  --clr-base-blue-700: #1b365d;
   --clr-base-blue-300: #7089ac;
   --clr-base-blue-100: #ced9e5;
 
@@ -145,6 +145,7 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+  font-style: italic;
 }
 
 input,

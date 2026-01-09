@@ -21,10 +21,12 @@ const FetchedFooter = ({
 }) => {
   const t = useT(params);
   return (
-    <footer className={styles.root}>
-      <h2 className="text-display-sm ">Volvo Friends</h2>
-      <hr />
-      <div className={styles.grid}>
+    <footer className={`page-container ${styles.root}`}>
+      <div className="full-width">
+        <h2 className="text-display-sm ">Volvo Friends</h2>
+        <hr />
+      </div>
+      <div className={`breakout ${styles.grid}`}>
         <section className={styles.col}>
           <h3 className="text-cardheader-sm">{t("footer.documents")}</h3>
           <ul>

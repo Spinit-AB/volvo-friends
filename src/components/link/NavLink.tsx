@@ -51,6 +51,7 @@ const NavLink: React.FC<NavLinkProps> = ({
         (isActive ? `${styles.active} ${activeClassName ?? ""}` : "")
       }
       {...props}
+      aria-current={isActive ? "page" : undefined}
     >
       {children}
     </Link>

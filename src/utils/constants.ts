@@ -1,3 +1,3 @@
 // Shared constants for the project
 
-export const POSTS_PER_FETCH = 2;
+export const POSTS_PER_FETCH = 10;

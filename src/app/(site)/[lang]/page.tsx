@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import { useT } from "@/locales/utils/useT";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
-import Link from "@/components/link/Link";
+import { Hero } from "@/components/hero/Hero";
 
 export default function Home({
   params,
@@ -12,14 +12,19 @@ export default function Home({
   const to = useLinkWithLang(params);
 
   return (
-    <div className={`page-container ${styles.intro}`}>
-      <h1 style={{ fontFamily: "var(--font-family-display)" }}>
-        Den här sidan är under konstruktion
-      </h1>
-      <p>
-        För att kika runt börja med att gå till{" "}
-        <Link href={to("aktuellt")}>{t("post.page_title")}</Link>
-      </p>
-    </div>
+    <>
+      <Hero
+        title={t("landing.title")}
+        subtitle={t("landing.subtitle")}
+        image={{ src: "", alt: "Temp alt to just show the image" }}
+        callToAction={[
+          {
+            to: to("aktuellt"),
+            text: t("post.page_title"),
+          },
+        ]}
+        color={"blue"}
+      />
+    </>
   );
 }

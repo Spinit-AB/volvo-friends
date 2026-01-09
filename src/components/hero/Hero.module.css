@@ -1,0 +1,94 @@
+.root {
+  background: var(--clr-hero-bg, var(--clr-base-blue-700));
+  color: var(--clr-neutral-100);
+  isolation: isolate;
+  position: relative;
+  min-height: 40dvh;
+  display: grid;
+  align-content: center;
+}
+
+.foreground {
+  position: relative;
+  padding: var(--gutter);
+  z-index: 2;
+
+  & hgroup {
+    width: fit-content;
+    border-block-end: 4px solid
+      var(--clr-hero-break, var(--clr-accent-blue-light));
+  }
+
+  & ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  a {
+    color: pink;
+  }
+}
+
+.imgWrapper {
+  background: var(--clr-neutral-600);
+  position: relative;
+  max-width: 100dvw;
+}
+
+@media screen and (width > 84rem) {
+  .imgWrapper {
+    position: absolute;
+    height: 100%;
+    max-width: calc(100dvw - 40rem);
+
+    inset-block-start: 0;
+    inset-inline-start: 40rem;
+
+    &::before,
+    &::after {
+      --left-offset: 20rem;
+      --right-offset: 20rem;
+      --border-width: 3rem;
+      --right-end: 1200px;
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      z-index: 1;
+    }
+
+    &::before {
+      background-color: var(--clr-hero-img-border, var(--clr-base-blue-300));
+      clip-path: polygon(
+        calc(var(--left-offset) + var(--border-width)) 0%,
+        var(--border-width) 100%,
+        calc(var(--right-end) - var(--right-offset) - var(--border-width)) 100%,
+        calc(var(--right-end) - var(--border-width)) 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        0 0
+      );
+    }
+
+    &::after {
+      background-color: var(--clr-hero-bg, var(--clr-base-blue-700));
+      clip-path: polygon(
+        var(--left-offset) 0%,
+        0 100%,
+        calc(100% - var(--right-offset)) 100%,
+        calc(var(--right-end) - var(--right-offset)) 100%,
+        var(--right-end) 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        0 0
+      );
+    }
+
+    & img {
+      text-align: center;
+    }
+  }
+}
