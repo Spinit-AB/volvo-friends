@@ -1,7 +1,8 @@
-import { TColor } from "@/sanity/models/TPost";
-import LinkNextJS from "next/link";
+import { TColor } from "@/utils/types";
+import { LinkButton } from "../button/LinkButton";
 import styles from "./Hero.module.css";
 import { HeroImageDesktop, HeroImageMobile, THeroImage } from "./HeroImage";
+import { TButton } from "../button/Button";
 
 export const Hero = ({
   title,
@@ -12,7 +13,7 @@ export const Hero = ({
 }: {
   title: string;
   subtitle: string;
-  callToAction?: { text: string; to: string }[];
+  callToAction?: ({ text: string; href: string } & TButton)[];
   image: THeroImage;
   color: TColor;
 }) => {
@@ -28,8 +29,8 @@ export const Hero = ({
         {callToAction && callToAction.length ? (
           <ul>
             {callToAction.map((cta) => (
-              <li key={cta.to}>
-                <LinkNextJS href={cta.to}>{cta.text}</LinkNextJS>
+              <li key={cta.href}>
+                <LinkButton {...cta}>{cta.text}</LinkButton>
               </li>
             ))}
           </ul>

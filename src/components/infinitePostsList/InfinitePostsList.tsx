@@ -1,14 +1,15 @@
 "use client";
+import { t } from "@/locales/translate";
+import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { urlFor } from "@/sanity/lib/image";
-import { TColor, TPostPreview } from "@/sanity/models/TPost";
+import { TPostPreview } from "@/sanity/models/TPost";
 import { POSTS_PER_FETCH } from "@/utils/constants";
+import { formatDate } from "@/utils/functions";
+import { TColor } from "@/utils/types";
 import Image from "next/image";
 import LinkNextJs from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import styles from "./InfinitePostsList.module.css";
-import { t } from "@/locales/translate";
-import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
-import { formatDate } from "@/utils/functions";
 
 export default function InfinitePostsList({
   initialPosts,

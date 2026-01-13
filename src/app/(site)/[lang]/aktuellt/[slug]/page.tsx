@@ -12,6 +12,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { formatDate } from "@/utils/functions";
 import { useFormattedTime } from "@/locales/utils/useFormattedTime";
+import { ExternalLink } from "@/components/link/ExternalLink";
 
 const Post = async (props: {
   params: Promise<{ slug: string; lang?: string | string[] }>;
@@ -127,9 +128,9 @@ const EventSection = ({
           <tr>
             <th>{t("post.sign_up_email")}</th>
             <td>
-              <a type="email" href={`@mailto:${event.signUpEmail}`}>
+              <ExternalLink type="email" href={`@mailto:${event.signUpEmail}`}>
                 {event.signUpEmail}
-              </a>
+              </ExternalLink>
             </td>
           </tr>
         )}

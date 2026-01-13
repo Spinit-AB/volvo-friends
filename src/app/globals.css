@@ -377,16 +377,6 @@ body {
   }
 }
 
-/* === GENERAL STYLING === */
-a {
-  text-decoration: none;
-}
-
-a:focus-visible,
-a:hover {
-  text-decoration: underline;
-}
-
 /* === COLOURING BLOCKS === */
 
 .red {

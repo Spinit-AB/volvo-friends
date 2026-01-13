@@ -4,14 +4,14 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import styles from "./Link.module.css";
 
-interface NavLinkProps extends React.ComponentProps<typeof Link> {
+type NavLinkProps = {
   activeClassName?: string;
   className?: string;
   matchSubpath?: boolean;
   size?: "lg" | "base" | "sm";
-}
+};
 
-const NavLink: React.FC<NavLinkProps> = ({
+const NavLink: React.FC<NavLinkProps & React.ComponentProps<typeof Link>> = ({
   href,
   className = "",
   activeClassName = "",

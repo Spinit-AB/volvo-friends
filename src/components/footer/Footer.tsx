@@ -4,6 +4,7 @@ import { fetchFooter } from "@/sanity/lib/queries";
 import { useT } from "@/locales/utils/useT";
 import { TFooter } from "@/sanity/models/TFooter";
 import { Grill } from "../graphics/Grill";
+import { ExternalLink } from "../link/ExternalLink";
 
 export const Footer = async (props: {
   params: { lang?: string | string[] };
@@ -36,14 +37,14 @@ const FetchedFooter = ({
               return (
                 <li key={doc._key}>
                   {fileUrl && (
-                    <a
+                    <ExternalLink
                       href={fileUrl}
                       download
                       className="text-base-bold"
                       style={{ marginLeft: 8 }}
                     >
                       {doc.title}
-                    </a>
+                    </ExternalLink>
                   )}
                 </li>
               );
@@ -68,9 +69,13 @@ const FetchedFooter = ({
           <ul>
             {footer?.links?.map((link) => (
               <li key={link._key}>
-                <a href={link.url} className="text-base-bold">
+                <ExternalLink
+                  href={link.url}
+                  className="text-base-bold"
+                  target="_blank"
+                >
                   {link.title}
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>

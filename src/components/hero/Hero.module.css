@@ -6,6 +6,12 @@
   min-height: 40dvh;
   display: grid;
   align-content: center;
+  overflow: hidden;
+
+  & img {
+    vertical-align: middle;
+    text-align: center;
+  }
 }
 
 .foreground {
@@ -20,13 +26,17 @@
   }
 
   & ul {
-    padding: 0;
+    padding: 1rem 0;
+
     margin: 0;
     list-style: none;
-  }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 
-  a {
-    color: pink;
+    @media (width < 460px) {
+      background: "pink";
+    }
   }
 }
 

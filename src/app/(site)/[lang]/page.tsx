@@ -13,14 +13,30 @@ export default function Home({
 
   return (
     <>
+      <div className="footer-theme-orange" />
       <Hero
         title={t("landing.title")}
         subtitle={t("landing.subtitle")}
         image={{ src: "", alt: "Temp alt to just show the image" }}
         callToAction={[
           {
-            to: to("aktuellt"),
+            href: to("aktuellt"),
             text: t("post.page_title"),
+            forcePalette: "light",
+            color: "teal",
+          },
+          {
+            href: params.lang === "sv" ? to("aktuellt") : to("current"),
+            text: t("post.page_title"),
+            variant: "outlined",
+            color: "white",
+          },
+          {
+            href: to("aktuellt"),
+            text: t("post.page_title"),
+            variant: "ghost",
+            color: "teal",
+            forcePalette: "light",
           },
         ]}
         color={"blue"}

@@ -31,7 +31,7 @@ export function HeroImageDesktop({ src, alt }: THeroImage) {
     return (
       <div className={styles.imgWrapper}>
         <Image
-          style={{ color: "currentColor" }}
+          style={{ color: "currentColor", lineHeight: "600px" }}
           src={src}
           alt={alt}
           width={1600}

@@ -1,0 +1,183 @@
+@property --clr-btn-brder {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+
+@property --clr-btn-bg {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+
+@property --clr-btn-fg {
+  syntax: "<color>";
+  initial-value: currentColor;
+  inherits: false;
+}
+
+.root {
+  --animation-length: 200ms;
+  padding: 0.5em 2em;
+
+  border: 2px solid var(--clr-btn-brder);
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-weight: bold;
+
+  display: inline-block;
+  text-decoration: none;
+
+  transition: background-color var(--animation-length),
+    border-color var(--animation-length), color var(--animation-length);
+}
+
+.filled {
+  background-color: var(--clr-btn-bg);
+  --clr-btn-brder: var(--clr-btn-bg);
+  color: var(--clr-btn-fg);
+
+  transition: background-color var(--animation-length),
+    border-color var(--animation-length);
+
+  &:hover {
+    background-color: color-mix(
+      in hsl,
+      var(--clr-btn-bg) 80%,
+      var(--clr-neutral-900) 20%
+    );
+    --clr-btn-brder: color-mix(
+      in hsl,
+      var(--clr-btn-bg) 80%,
+      var(--clr-neutral-900) 20%
+    );
+  }
+}
+
+.outlined {
+  color: var(--clr-btn-bg);
+  --clr-btn-brder: var(--clr-btn-bg);
+
+  transition: background-color var(--animation-length);
+
+  background-color: transparent;
+
+  &:hover {
+    background-color: hsl(from var(--clr-btn-bg) H S L / 0.1);
+  }
+}
+
+.ghost {
+  --clr-ghost: light-dark(var(--clr-neutral-900), var(--clr-neutral-100));
+  color: var(--clr-btn-bg);
+
+  transition: background-color var(--animation-length),
+    border-color var(--animation-length);
+
+  &:hover {
+    background-color: hsl(from var(--clr-btn-bg) H S L / 0.1);
+  }
+}
+
+.blue {
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  --clr-btn-bg: light-dark(
+    var(--clr-accent-blue-dark),
+    var(--clr-accent-blue-light)
+  );
+
+  &.dark {
+    --clr-btn-bg: var(--clr-accent-blue-dark);
+    --clr-btn-fg: var(--clr-neutral-100);
+    --clr-ghost-text: var(--clr-neutral-900);
+  }
+  &.light {
+    --clr-btn-bg: var(--clr-accent-blue-light);
+    --clr-btn-fg: var(--clr-neutral-900);
+    --clr-ghost-text: var(--clr-neutral-100);
+  }
+}
+
+.green {
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+
+  &.dark {
+    --clr-btn-bg: var(--clr-accent-green-dark);
+    --clr-btn-fg: var(--clr-neutral-100);
+  }
+  &.light {
+    --clr-btn-bg: var(--clr-accent-green-light);
+    --clr-btn-fg: var(--clr-neutral-900);
+  }
+}
+
+.teal {
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  --clr-btn-bg: light-dark(
+    var(--clr-accent-teal-dark),
+    var(--clr-accent-teal-light)
+  );
+
+  &.dark {
+    --clr-btn-bg: var(--clr-accent-teal-dark);
+    --clr-btn-fg: var(--clr-neutral-100);
+  }
+  &.light {
+    --clr-btn-bg: var(--clr-accent-teal-light);
+    --clr-btn-fg: var(--clr-neutral-900);
+  }
+}
+
+.orange {
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  --clr-btn-bg: light-dark(
+    var(--clr-accent-orange-dark),
+    var(--clr-accent-orange-light)
+  );
+  &.dark {
+    --clr-btn-bg: var(--clr-accent-orange-dark);
+    --clr-btn-fg: var(--clr-neutral-100);
+  }
+  &.light {
+    --clr-btn-bg: var(--clr-accent-orange-light);
+    --clr-btn-fg: var(--clr-neutral-900);
+  }
+}
+
+.red {
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  --clr-btn-bg: light-dark(
+    var(--clr-accent-red-dark),
+    var(--clr-accent-red-light)
+  );
+  &.dark {
+    --clr-btn-bg: var(--clr-accent-red-dark);
+    --clr-btn-fg: var(--clr-neutral-100);
+  }
+  &.light {
+    --clr-btn-bg: var(--clr-accent-red-light);
+    --clr-btn-fg: var(--clr-neutral-900);
+  }
+}
+
+.white {
+  --clr-btn-bg: var(--clr-neutral-100);
+  --clr-btn-fg: var(--clr-neutral-900);
+}
+
+.black {
+  --clr-btn-bg: var(--clr-neutral-900);
+  --clr-btn-fg: var(--clr-neutral-100);
+}
+
+.base {
+  font-size: 1.25rem;
+}
+
+.large {
+  font-size: 1.5rem;
+}
+
+.small {
+  font-size: 1rem;
+}

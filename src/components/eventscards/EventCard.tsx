@@ -1,8 +1,9 @@
 import { useFormattedTime } from "@/locales/utils/useFormattedTime";
 import { TTranslate } from "@/locales/utils/useT";
 import { urlFor } from "@/sanity/lib/image";
-import { TColor, TUpcomingEvent } from "@/sanity/models/TPost";
+import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { formatDate } from "@/utils/functions";
+import { TColor } from "@/utils/types";
 import Image from "next/image";
 import LinkNextJs from "next/link";
 import styles from "./EventCards.module.css";

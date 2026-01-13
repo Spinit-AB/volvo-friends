@@ -1,14 +1,14 @@
 "use client";
-import NextJsLink from "next/link";
+import LinkNextJs from "next/link";
 import React from "react";
 import styles from "./Link.module.css";
 
-interface LinkProps extends React.ComponentProps<typeof NextJsLink> {
+export type LinkProps = {
   className?: string;
   size?: "lg" | "base" | "sm";
-}
+};
 
-const Link: React.FC<LinkProps> = ({
+const Link: React.FC<React.ComponentProps<typeof LinkNextJs> & LinkProps> = ({
   href,
   className = "",
   size = "base",
@@ -16,13 +16,13 @@ const Link: React.FC<LinkProps> = ({
   ...props
 }) => {
   return (
-    <NextJsLink
+    <LinkNextJs
       href={href}
       className={`text-${size}-bold ${styles.root} ${className}`}
       {...props}
     >
       {children}
-    </NextJsLink>
+    </LinkNextJs>
   );
 };
 

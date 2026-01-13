@@ -1,7 +1,6 @@
+import { TColor } from "@/utils/types";
 import { TSanityImageWithAlt } from "./SanityImageWithAlt";
 import { TypedObject } from "sanity";
-
-export type TColor = "blue" | "teal" | "green" | "orange" | "red";
 
 export type TUpcomingEvent = {
   _id: string;
