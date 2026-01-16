@@ -1,0 +1,88 @@
+.cardContainer {
+  display: grid;
+
+  gap: 2rem;
+  justify-content: center;
+}
+
+@media screen and (width > 36rem) {
+  .card {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto 1fr;
+    & > img {
+      grid-row: span 2;
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (width > 64rem) {
+  .cardContainer {
+    grid-template-columns: repeat(3, 1fr);
+    margin-inline: auto;
+  }
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: subgrid;
+    gap: 0;
+    grid-row: span 3;
+
+    & > img {
+      grid-row: auto;
+    }
+  }
+}
+
+.card {
+  display: grid;
+  border-block-end: 1rem solid var(--clr-brder);
+  position: relative;
+
+  & > h3 {
+    margin-block: 0;
+    padding: 0.5rem 1rem 0;
+    color: var(--clr-link);
+  }
+
+  & > p {
+    margin-block: 0;
+    padding: 0 1rem 0.5rem;
+    color: var(--clr-neutral-800);
+  }
+
+  & a::after {
+    inset: 0;
+    content: "";
+    position: absolute;
+  }
+}
+
+.blue {
+  background-color: var(--clr-base-blue-100);
+  --clr-link: var(--clr-accent-blue-dark);
+  --clr-brder: var(--clr-base-blue-900);
+}
+
+.teal {
+  background-color: var(--clr-base-teal-100);
+  --clr-link: var(--clr-accent-teal-dark);
+  --clr-brder: var(--clr-base-teal-900);
+}
+
+.green {
+  background-color: var(--clr-base-green-100);
+  --clr-link: var(--clr-accent-green-dark);
+  --clr-brder: var(--clr-base-green-900);
+}
+
+.orange {
+  background-color: var(--clr-base-orange-100);
+  --clr-link: var(--clr-accent-orange-dark);
+  --clr-brder: var(--clr-base-orange-900);
+}
+
+.red {
+  background-color: var(--clr-base-red-100);
+  --clr-link: var(--clr-accent-red-dark);
+  --clr-brder: var(--clr-base-red-900);
+}

@@ -7,8 +7,8 @@ import { POSTS_PER_FETCH } from "@/utils/constants";
 import { formatDate } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import Image from "next/image";
-import LinkNextJs from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { HeaderLink } from "../link/HeaderLink";
 import styles from "./InfinitePostsList.module.css";
 
 export default function InfinitePostsList({
@@ -95,7 +95,7 @@ export default function InfinitePostsList({
             post.color
           )}`}
         >
-          <div className={styles.imgContainer}>
+          <div className={styles.linkClickWrapper}>
             <Image
               src={urlFor(post.heroImage).width(800).height(400).url()}
               alt={post.heroImage?.alt || post.title}
@@ -104,17 +104,19 @@ export default function InfinitePostsList({
               style={{ width: "100%", height: "auto", objectFit: "cover" }}
               priority={i === 0}
             />
-          </div>
-          <div className={styles.articleTextWrapper}>
-            <h3 className="text-display-sm">
-              <LinkNextJs href={to(`${postsPageSlug}/${post.slug.current}`)}>
+            <div className={styles.articleTextWrapper}>
+              <HeaderLink
+                className="text-display-sm"
+                href={to(`${postsPageSlug}/${post.slug.current}`)}
+                component={"h3"}
+              >
                 {post.title}
-              </LinkNextJs>
-            </h3>
-            <p>{post.summary}</p>
-            <p className="text-base-italic">
-              {t("common.created_at")}: {formatDate(lang, post._createdAt)}
-            </p>
+              </HeaderLink>
+              <p>{post.summary}</p>
+              <p className="text-base-italic">
+                {t("common.created_at")}: {formatDate(lang, post._createdAt)}
+              </p>
+            </div>
           </div>
           <hr className={`full-width ${styles.break}`} />
         </article>

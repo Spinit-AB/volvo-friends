@@ -123,7 +123,8 @@
 /* === MINIMAL MODERN CSS RESET === */
 html {
   box-sizing: border-box;
-  /* font-size: 1.125rem; //TODO: Increase text sizes */
+  /* //TODO: Increase text sizes */
+  /* font-size: 1.125rem; */
 }
 
 *,
@@ -347,21 +348,27 @@ body {
   --padding-inline: var(--gutter);
   --content-max-width: 70ch;
   --breakout-max-width: 1200px;
+  --breakout-lg-max-width: 1600px;
 
   --breakout-size: calc(
     ((var(--breakout-max-width) - var(--content-max-width)) / 2)
+  );
+  --breakout-lg-size: calc(
+    (var(--breakout-lg-max-width) - var(--breakout-max-width)) / 2
   );
 
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--padding-inline), 1fr)
+    [gutter-lg-start] minmax(0, var(--breakout-lg-size))
     [gutter-start] minmax(0, var(--breakout-size))
     [content-start] min(
       var(--content-max-width),
       100% - var(--padding-inline) * 2
     )
     [content-end] minmax(0, var(--breakout-size))
-    [gutter-end] minmax(var(--padding-inline), 1fr)
+    [gutter-end] minmax(0, var(--breakout-lg-size))
+    [gutter-lg-end] minmax(var(--padding-inline), 1fr)
     [full-end];
 
   & > * {
@@ -370,6 +377,10 @@ body {
 
   & > .breakout {
     grid-column: gutter;
+  }
+
+  & > .breakout-lg {
+    grid-column: gutter-lg;
   }
 
   & > .full-width {
@@ -445,22 +456,14 @@ body {
 }
 
 /* === FOOTER THEMES === */
-main:has(.footer-theme-teal:first-child) + footer {
-  --clr-footer-bg: var(--clr-base-teal-900);
-  --clr-footer-link: var(--clr-accent-green-light);
-  --clr-footer-detail: var(--clr-base-green-700);
-}
 
 main:has(.footer-theme-blue:first-child) + footer {
   --clr-footer-bg: var(--clr-base-blue-900);
   --clr-footer-link: var(--clr-accent-teal-light);
   --clr-footer-detail: var(--clr-accent-teal-dark);
 }
-
-main:has(.footer-theme-red:first-child) + footer {
-  --clr-footer-bg: var(--clr-base-red-900);
-  --clr-footer-link: var(--clr-accent-orange-light);
-  --clr-footer-detail: var(--clr-base-orange-700);
+html:has(.footer-theme-blue:first-child) {
+  background-color: var(--clr-base-blue-900);
 }
 
 main:has(.footer-theme-green:first-child) + footer {
@@ -468,9 +471,33 @@ main:has(.footer-theme-green:first-child) + footer {
   --clr-footer-link: var(--clr-accent-green-light);
   --clr-footer-detail: var(--clr-base-green-700);
 }
+html:has(.footer-theme-green:first-child) {
+  background-color: var(--clr-base-green-900);
+}
+
+main:has(.footer-theme-teal:first-child) + footer {
+  --clr-footer-bg: var(--clr-base-teal-900);
+  --clr-footer-link: var(--clr-accent-green-light);
+  --clr-footer-detail: var(--clr-base-green-700);
+}
+html:has(.footer-theme-teal:first-child) {
+  background-color: var(--clr-base-teal-900);
+}
 
 main:has(.footer-theme-orange:first-child) + footer {
   --clr-footer-bg: var(--clr-base-orange-900);
   --clr-footer-link: var(--clr-accent-orange-light);
   --clr-footer-detail: var(--clr-base-orange-300);
+}
+html:has(.footer-theme-orange:first-child) {
+  background-color: var(--clr-base-orange-900);
+}
+
+main:has(.footer-theme-red:first-child) + footer {
+  --clr-footer-bg: var(--clr-base-red-900);
+  --clr-footer-link: var(--clr-accent-orange-light);
+  --clr-footer-detail: var(--clr-base-orange-700);
+}
+html:has(.footer-theme-red:first-child) {
+  background-color: var(--clr-base-red-900);
 }

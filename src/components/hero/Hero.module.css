@@ -1,23 +1,31 @@
 .root {
   background: var(--clr-hero-bg, var(--clr-base-blue-700));
   color: var(--clr-neutral-100);
-  isolation: isolate;
-  position: relative;
   min-height: 40dvh;
-  display: grid;
-  align-content: center;
+
   overflow: hidden;
 
   & img {
     vertical-align: middle;
     text-align: center;
   }
+
+  & h1 {
+    margin-block: 0;
+  }
+}
+
+.anchor {
+  isolation: isolate;
+  position: relative;
+  display: grid;
+  align-content: center;
 }
 
 .foreground {
   position: relative;
-  padding: var(--gutter);
   z-index: 2;
+  padding-block: 2rem;
 
   & hgroup {
     width: fit-content;
@@ -35,7 +43,11 @@
     gap: 1rem;
 
     @media (width < 460px) {
-      background: "pink";
+      flex-direction: column;
+
+      & > li {
+        display: contents;
+      }
     }
   }
 }
@@ -44,16 +56,34 @@
   background: var(--clr-neutral-600);
   position: relative;
   max-width: 100dvw;
+
+  &.desktop {
+    display: none;
+  }
 }
 
 @media screen and (width > 84rem) {
+  .root {
+    min-height: 40rem;
+  }
+
+  .foreground {
+    padding-block: 6rem;
+  }
+
   .imgWrapper {
+    &.mobile {
+      display: none;
+    }
+
+    &.desktop {
+      display: block;
+    }
     position: absolute;
     height: 100%;
-    max-width: calc(100dvw - 40rem);
 
     inset-block-start: 0;
-    inset-inline-start: 40rem;
+    inset-inline-end: -20rem;
 
     &::before,
     &::after {

@@ -1,6 +1,7 @@
+import { Footer } from "@/components/footer/Footer";
+import Main from "@/components/Main";
 import { Navbar } from "@/components/navbar/Navbar";
 import "../../globals.css";
-import { Footer } from "@/components/footer/Footer";
 
 export default async function SiteLayout({
   children,
@@ -10,10 +11,11 @@ export default async function SiteLayout({
   params: { lang?: string | string[] };
 }) {
   const params = await props.params;
+
   return (
     <>
       <Navbar params={params} />
-      <main>{children}</main>
+      <Main>{children}</Main>
       <Footer params={params} />
     </>
   );

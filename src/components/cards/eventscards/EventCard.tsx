@@ -5,7 +5,7 @@ import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { formatDate } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import Image from "next/image";
-import LinkNextJs from "next/link";
+import { HeaderLink } from "../../link/HeaderLink";
 import styles from "./EventCards.module.css";
 
 export const EventCard = ({
@@ -35,9 +35,10 @@ export const EventCard = ({
         style={{ width: "100%", height: "auto", objectFit: "cover" }}
         loading="lazy"
       />
-      <h3>
-        <LinkNextJs href={to(event.slug.current)}>{event.title}</LinkNextJs>
-      </h3>
+      <HeaderLink component="h3" href={to(event.slug.current)}>
+        {event.title}
+      </HeaderLink>
+
       <table>
         <tbody>
           <tr>

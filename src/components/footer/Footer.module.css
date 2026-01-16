@@ -2,15 +2,19 @@
   min-height: 10rem;
   background-color: var(--clr-footer-bg, var(--clr-base-teal-900));
   color: var(--clr-neutral-100);
-  padding: var(--gutter);
+  padding-block: var(--gutter);
 
   h2 {
-    margin-bottom: 1rem;
+    margin-inline: var(--gutter);
+    padding-block-end: 1rem;
+    margin-block-end: 1rem;
+    border-bottom: 4px solid var(--clr-footer-detail, var(--clr-base-green-700));
   }
 
   hr {
-    border: 2px solid var(--clr-footer-detail, var(--clr-base-green-700));
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+
+    width: calc(100% - 2 * var(--gutter));
   }
 }
 

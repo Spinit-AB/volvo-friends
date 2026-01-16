@@ -8,7 +8,7 @@
   "common.read_more": "Läs mer",
   "common.read_more_about": "Lär mer om {linkText}",
   "common.keep_reading_about": "Fortsätt läsa om {linkText}",
-  "post.no_events_found": "Inga evenemang hittades",
+  "post.no_events_found": "Vi har just nu inga planerade evenemang på gång.",
   "post.upcoming_events": "Kommande evenemang",
   "common.time": "Tid",
   "common.place": "Plats",
@@ -24,5 +24,12 @@
   "post.sign_up_email": "Anmälan",
   "post.sign_up_deadline": "Anmälan senast datum",
   "landing.title": "Volvo Friends",
-  "landing.subtitle": "Stoltheten i att vara Volvoägare eller ha att arbetat med Volvo"
+  "landing.subtitle": "Stoltheten i att vara Volvoägare eller ha att arbetat med Volvo",
+  "contact.title": "Hör av dig till oss",
+  "contact.text": "Kontakta gärna oss här genom vårt kontaktformulär",
+  "contact.subject": "Ämne",
+  "contact.email": "E-post",
+  "contact.message": "Meddelande",
+  "contact.send": "Skicka",
+  "contact.email_help": "Om du bara vill skicka in ett förslag eller ge oss lite feedback behövs ingen e-post, men om du undrar något och vill att vi ska höra av oss behöver vi ett sätt att nå dig. "
 }

@@ -27,6 +27,7 @@
 
   display: inline-block;
   text-decoration: none;
+  text-align: center;
 
   transition: background-color var(--animation-length),
     border-color var(--animation-length), color var(--animation-length);
@@ -68,7 +69,6 @@
 }
 
 .ghost {
-  --clr-ghost: light-dark(var(--clr-neutral-900), var(--clr-neutral-100));
   color: var(--clr-btn-bg);
 
   transition: background-color var(--animation-length),
@@ -89,17 +89,19 @@
   &.dark {
     --clr-btn-bg: var(--clr-accent-blue-dark);
     --clr-btn-fg: var(--clr-neutral-100);
-    --clr-ghost-text: var(--clr-neutral-900);
   }
   &.light {
     --clr-btn-bg: var(--clr-accent-blue-light);
     --clr-btn-fg: var(--clr-neutral-900);
-    --clr-ghost-text: var(--clr-neutral-100);
   }
 }
 
 .green {
   --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  --clr-btn-bg: light-dark(
+    var(--clr-accent-green-dark),
+    var(--clr-accent-green-light)
+  );
 
   &.dark {
     --clr-btn-bg: var(--clr-accent-green-dark);

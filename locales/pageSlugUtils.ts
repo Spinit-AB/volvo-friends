@@ -1,4 +1,13 @@
 // Utility to get the correct posts page slug for a given language
-export function getPostsPageSlug(lang: string) {
-  return lang === "sv" ? "aktuellt" : "current";
+export function getPathsByLang(lang: string) {
+  return lang === "sv" ? paths.sv : paths.en;
 }
+
+const paths = {
+  sv: {
+    current: "aktuellt",
+  },
+  en: {
+    current: "current",
+  },
+};

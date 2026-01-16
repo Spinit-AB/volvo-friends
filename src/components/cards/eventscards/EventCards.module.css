@@ -45,6 +45,7 @@
 }
 
 .eventCard {
+  position: relative;
   background: var(
     --clr-bg,
     light-dark(var(--clr-neutral-100), var(--clr-neutral-900))
@@ -77,6 +78,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 2;
+  }
+  & a::after {
+    position: absolute;
+    content: "";
+    inset: 0;
   }
 
   & > img {

@@ -1,6 +1,6 @@
 "use client";
 
-import { getPostsPageSlug } from "@/locales/pageSlugUtils";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { useT } from "@/locales/utils/useT";
 import Link from "next/link";
@@ -23,9 +23,9 @@ export const Navbar = ({
     params.lang && Array.isArray(params.lang)
       ? params.lang[0]
       : params.lang || "sv";
-  const postsPageSlug = getPostsPageSlug(lang);
+  const postsPageSlug = getPathsByLang(lang).current;
   return (
-    <nav className={styles.root}>
+    <nav className={styles.root} id="site-nav">
       <Link
         lang="en"
         href={to("")}

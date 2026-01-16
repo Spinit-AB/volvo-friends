@@ -107,55 +107,66 @@ export async function fetchUpcomingEvents({
 }
 
 // GROQ query to fetch all posts (fields match schema)
-export const postsQuery = groq`
-  {
-    "posts": *[
-      _type == "post"
-      && language == $language
-    ]
-      | order(coalesce(prioritized, false) desc, _createdAt desc)
-      [$offset...($offset + $limit)] {
-        _id,
-        _createdAt,
-        _updatedAt,
-        title,
-        slug,
-        heroImage,
-        summary,
-        language,
-        "event":  {
-          "date": date,
-          "startTime": startTime,
-          "endTime": endTime,
-          "place": place,
-          "signUpEmail": signUpEmail,
-          "signUpDeadline": signUpDeadline,
-          "eventInfo": eventInfo
+// Helper to build posts query with or without event filtering
+function buildPostsQuery(filterOutEvents: boolean) {
+  const eventFilter = filterOutEvents
+    ? "&& (!defined(isEvent) || isEvent != true)"
+    : "";
+  return groq`
+    {
+      "posts": *[
+        _type == "post"
+        && language == $language
+        ${eventFilter}
+      ]
+        | order(coalesce(prioritized, false) desc, _createdAt desc)
+        [$offset...($offset + $limit)] {
+          _id,
+          _createdAt,
+          _updatedAt,
+          title,
+          slug,
+          heroImage,
+          summary,
+          language,
+          "event":  {
+            "date": date,
+            "startTime": startTime,
+            "endTime": endTime,
+            "place": place,
+            "signUpEmail": signUpEmail,
+            "signUpDeadline": signUpDeadline,
+            "eventInfo": eventInfo
+          },
+          prioritized,
+          color
         },
-        prioritized,
-        color
-      },
-    "total": count(*[
-      _type == "post"
-      && language == $language
-    ])
-  }
-`;
+      "total": count(*[
+        _type == "post"
+        && language == $language
+        ${eventFilter}
+      ])
+    }
+  `;
+}
 
 export async function fetchPosts({
   language = "sv",
   limit = 20,
   offset = 0,
+  filterOutEvents = false,
 }: {
   language?: string;
   limit?: number;
   offset?: number;
+  filterOutEvents?: boolean;
 } = {}) {
+  const query = buildPostsQuery(!!filterOutEvents);
   return await sanityFetch<{
     posts: TPostPreview[];
     total: number;
   }>({
-    query: postsQuery,
+    query,
     params: {
       language,
       limit,

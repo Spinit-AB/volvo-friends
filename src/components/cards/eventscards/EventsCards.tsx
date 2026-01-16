@@ -1,4 +1,4 @@
-import { getPostsPageSlug } from "@/locales/pageSlugUtils";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { getLang } from "@/locales/utils/useLang";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { TTranslate } from "@/locales/utils/useT";
@@ -23,7 +23,7 @@ export const EventsCards = ({
   const lang = getLang(params.lang);
 
   const to = useLinkWithLang(params);
-  const postsPageSlug = getPostsPageSlug(lang);
+  const postsPageSlug = getPathsByLang(lang).current;
   const postTo = (slug: string) => to(`/${postsPageSlug}/${slug}`);
 
   return (
@@ -57,5 +57,52 @@ export const EventsCards = ({
         </div>
       </div>
     </section>
+  );
+};
+
+export const EventsFrontPage = ({
+  t,
+  events,
+  params,
+}: {
+  t: TTranslate;
+  events: TUpcomingEvent[];
+  params: {
+    lang?: string | string[] | undefined;
+  };
+}) => {
+  const lang = getLang(params.lang);
+
+  const to = useLinkWithLang(params);
+  const postsPageSlug = getPathsByLang(lang).current;
+  const postTo = (slug: string) => to(`/${postsPageSlug}/${slug}`);
+
+  if (!events.length) return null;
+
+  return (
+    <div
+      className={
+        events.length > 1
+          ? `breakout-lg ${styles.eventsContainer}`
+          : styles.singleEventContainer
+      }
+    >
+      <div className={styles.eventsInnerGrid}>
+        {events.length ? (
+          events.map((event, i) => (
+            <EventCard
+              index={i}
+              key={event._id}
+              event={event}
+              t={t}
+              to={postTo}
+              lang={lang}
+            />
+          ))
+        ) : (
+          <p>{t("post.no_events_found")}</p>
+        )}
+      </div>
+    </div>
   );
 };

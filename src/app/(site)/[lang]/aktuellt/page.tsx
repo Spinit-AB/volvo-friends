@@ -1,7 +1,7 @@
-import { EventsCards } from "@/components/eventscards/EventsCards";
+import { EventsCards } from "@/components/cards/eventscards/EventsCards";
 import InfinitePostsList from "@/components/infinitePostsList/InfinitePostsList";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
-import { getPostsPageSlug } from "@/locales/pageSlugUtils";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { getLang } from "@/locales/utils/useLang";
 import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
@@ -15,7 +15,7 @@ const Posts = async (props: {
 }) => {
   const params = await props.params;
   const lang = getLang(params.lang);
-  const canonicalSlug = getPostsPageSlug(lang);
+  const canonicalSlug = getPathsByLang(lang).current;
   const searchParams = await props.searchParams;
   const offset = Number(searchParams?.offset ?? 0);
 
