@@ -15,6 +15,11 @@
   }
 }
 
+.heroImage {
+  color: currentColor;
+  object-fit: cover;
+}
+
 .anchor {
   isolation: isolate;
   position: relative;

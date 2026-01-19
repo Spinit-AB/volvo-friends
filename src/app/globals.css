@@ -323,7 +323,6 @@ body {
   font-size: 2rem; /* 32px */
   line-height: 2.5rem; /* 40px */
   letter-spacing: 0.03125rem; /* 0.5px */
-  font-family: var(--font-family-display);
   font-weight: 700;
 }
 
@@ -331,16 +330,28 @@ body {
   font-size: 1.75rem; /* 28px */
   line-height: 2.25rem; /* 36px */
   letter-spacing: 0.03125rem; /* 0.5px */
-  font-family: var(--font-family-display);
+
   font-weight: 700;
 }
 
+.text-cardheader-sm-novum,
 .text-cardheader-sm {
   font-size: 1.5rem; /* 24px */
   line-height: 2rem; /* 32px */
   letter-spacing: 0.03125rem; /* 0.5px */
-  font-family: var(--font-family-display);
   font-weight: 700;
+}
+
+.text-cardheader-lg,
+.text-cardheader-md,
+.text-cardheader-sm {
+  font-family: var(--font-family-display);
+}
+
+.text-cardheader-novum-lg,
+.text-cardheader-novum-md,
+.text-cardheader-novum-sm {
+  font-family: var(--font-family-body);
 }
 
 /* === LAYOUT === */

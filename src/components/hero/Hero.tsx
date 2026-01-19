@@ -23,7 +23,7 @@ export const Hero = ({
     <header className={`page-container ${styles.root} ${styles[color]}`}>
       <div className={`full-width ${styles.imgWrapper} ${styles.mobile}`}>
         <Image
-          style={{ color: "currentColor" }}
+          className={styles.heroImage}
           src={image.src}
           alt={image.alt}
           width={1200}

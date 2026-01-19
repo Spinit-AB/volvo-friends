@@ -45,7 +45,7 @@ export const PostCard = ({
         />
       )}
       <HeaderLink
-        className="text-cardheader-sm"
+        className="text-cardheader-novum-sm"
         href={to(`${postPageSlug}/${post.slug.current}`)}
         component={"h3"}
       >

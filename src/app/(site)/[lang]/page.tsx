@@ -11,6 +11,7 @@ import styles from "./page.module.css";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Truck } from "@/components/graphics/Truck";
+import heroImage from "@/public/images/hero1.png";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -54,7 +55,7 @@ function Home({
       <Hero
         title={t("landing.title")}
         subtitle={t("landing.subtitle")}
-        image={{ src: "", alt: "Temp alt to just show the image" }}
+        image={{ src: heroImage.src, alt: "Temp alt to just show the image" }}
         callToAction={[
           {
             href: to(postPagePath),
