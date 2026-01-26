@@ -8,7 +8,7 @@ export default async function SiteLayout({
   ...props
 }: {
   children: React.ReactNode;
-  params: { lang?: string | string[] };
+  params: Promise<{ lang?: string | string[] }>;
 }) {
   const params = await props.params;
 
