@@ -18,16 +18,6 @@ export const Hero = ({
 }) => {
   return (
     <header className={`page-container ${styles.root} ${styles[color]}`}>
-      {/* <div className={`full-width ${styles.imgWrapper} ${styles.mobile}`}>
-        <Image
-          className={styles.heroImage}
-          src={image.src}
-          alt={image.alt}
-          width={1200}
-          height={400}
-        />
-      </div> */}
-
       <div className={`breakout ${styles.anchor}`}>
         <div className={styles.foreground}>
           <hgroup>
@@ -47,15 +37,6 @@ export const Hero = ({
             </ul>
           ) : null}
         </div>
-        {/* <div className={`${styles.imgWrapper} ${styles.desktop}`}>
-          <Image
-            style={{ color: "currentColor", lineHeight: "600px" }}
-            src={image.src}
-            alt={image.alt}
-            width={1200}
-            height={800}
-          />
-        </div> */}
       </div>
     </header>
   );
