@@ -6,13 +6,27 @@ import {
 } from "./FormElementWrapper";
 import { TColor } from "@/utils/types";
 
+type StringArrayProps = {
+  options?: string[];
+  labelKey?: never;
+  valueKey?: never;
+};
+
+type ObjectArrayProps<T extends Record<string, unknown>> = {
+  options?: T[];
+  labelKey: keyof T;
+  valueKey: keyof T;
+};
+
 export type SelectProps = FormElementWrapperBaseProps & {
   color?: TColor;
   forcePalette?: "light" | "dark";
   label: string;
   helpText?: string;
   validationError?: string;
-  children: React.ReactNode;
+  options: string[] | Array<Record<string, unknown>>;
+  labelKey?: keyof Record<string, unknown>;
+  valueKey?: keyof Record<string, unknown>;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -25,12 +39,34 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       helpText,
       validationError,
       id,
-      children,
+      options,
+      labelKey,
+      valueKey,
       ...props
     },
-    ref
+    ref,
   ) => {
     const genId = useId();
+
+    const renderOptions = () => {
+      if (typeof options[0] === "string") {
+        return (options as string[]).map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ));
+      }
+
+      return (options as Array<Record<string, unknown>>).map((opt) => (
+        <option
+          key={String(opt[valueKey as string])}
+          value={String(opt[valueKey as string])}
+        >
+          {String(opt[labelKey as string])}
+        </option>
+      ));
+    };
+
     return (
       <FormElementWrapper
         label={label}
@@ -48,11 +84,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id={id ?? genId}
           {...props}
         >
-          {children}
+          {renderOptions()}
         </select>
       </FormElementWrapper>
     );
-  }
+  },
 );
 
 Select.displayName = "Select";

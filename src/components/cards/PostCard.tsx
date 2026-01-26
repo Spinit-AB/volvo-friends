@@ -52,7 +52,7 @@ export const PostCard = ({
         {post.title}
       </HeaderLink>
 
-      <p className="text-base-italic"> {post.summary}</p>
+      <p className="text-base"> {post.summary}</p>
     </article>
   );
 };

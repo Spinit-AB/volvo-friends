@@ -23,7 +23,7 @@ export const Navbar = ({
     params.lang && Array.isArray(params.lang)
       ? params.lang[0]
       : params.lang || "sv";
-  const postsPageSlug = getPathsByLang(lang).current;
+  const paths = getPathsByLang(lang);
   return (
     <nav className={styles.root} id="site-nav">
       <Link
@@ -42,12 +42,22 @@ export const Navbar = ({
           </li>
           <li>
             <NavLink
-              href={to(postsPageSlug)}
+              href={to(paths.current)}
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"
             >
               {t("post.page_title")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={to(paths.contact)}
+              onClick={handleNavLinkClick}
+              matchSubpath
+              size="lg"
+            >
+              {t("contact.page_title")}
             </NavLink>
           </li>
         </ul>

@@ -131,3 +131,82 @@
     --clr-form-elem-bg: var(--clr-neutral-100);
   }
 }
+
+/* === Contact From Styles ==*/
+.resizingHeading {
+  font-size: clamp(2.5rem, 1rem + 10dvw, 6rem);
+}
+
+.contact {
+  --distance-to-form: 1rem;
+
+  --content-offset: calc(var(--content-max-width, 70ch) / 2);
+
+  /* These comes from the svg files*/
+  --truck-cabin-width: 265px;
+  --svg-padding-x: 94px;
+  --svg-padding-y: 110px;
+  --truck-wheel-radius: 114px;
+  --truck-full-width: 1272px;
+  --truck-offset: calc(var(--truck-cabin-width) + var(--svg-padding-x));
+
+  isolation: isolate;
+  grid-template-rows: repeat(3, 6.5rem) auto;
+  padding-block-end: calc(var(--truck-wheel-radius) + var(--svg-padding-y));
+  overflow: hidden;
+  position: relative;
+  background-color: light-dark(var(--clr-neutral-300), var(--clr-neutral-900));
+}
+
+.contactHeader {
+  text-align: center;
+  display: grid;
+  grid-template-rows: subgrid;
+  place-items: center;
+  grid-row: 1/4;
+  background-color: light-dark(
+    var(--clr-base-green-300),
+    var(--clr-base-green-100)
+  );
+
+  color: light-dark(var(--clr-base-green-900), var(--clr-base-green-100));
+  & > h2 {
+    grid-row: 2/3;
+  }
+}
+
+.contactForm {
+  grid-row: 3/6;
+  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
+  border: 0.5rem solid var(--clr-brd);
+  padding: 1rem;
+  z-index: 2;
+}
+
+.truck {
+  translate: calc(
+      var(--content-offset) * -1 + var(--truck-full-width) / 2 -
+        var(--truck-offset) - var(--distance-to-form)
+    )
+    var(--distance-to-form);
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+  grid-column: 1 / -1;
+
+  color: light-dark(var(--clr-base-green-300), var(--clr-base-green-900));
+  opacity: 0.5;
+}
+
+@media screen and (width <= 1400px) {
+  .contact {
+    padding-block-end: 4rem;
+  }
+
+  .truck {
+    display: none;
+  }
+}

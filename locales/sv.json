@@ -24,12 +24,21 @@
   "post.sign_up_email": "Anmälan",
   "post.sign_up_deadline": "Anmälan senast datum",
   "landing.title": "Volvo Friends",
-  "landing.subtitle": "Stoltheten i att vara Volvoägare eller ha att arbetat med Volvo",
+  "landing.subtitle": "FÖR OSS VOLVOENTUSIASTER",
+  "landing.subtitle_old": "Stoltheten i att vara Volvoägare eller ha att arbetat med Volvo",
   "contact.title": "Hör av dig till oss",
   "contact.text": "Kontakta gärna oss här genom vårt kontaktformulär",
   "contact.subject": "Ämne",
   "contact.email": "E-post",
   "contact.message": "Meddelande",
   "contact.send": "Skicka",
-  "contact.email_help": "Om du bara vill skicka in ett förslag eller ge oss lite feedback behövs ingen e-post, men om du undrar något och vill att vi ska höra av oss behöver vi ett sätt att nå dig. "
+  "contact.email_help": "Om du bara vill skicka in ett förslag eller ge oss lite feedback behövs ingen e-post, men om du undrar något och vill att vi ska höra av oss behöver vi ett sätt att nå dig. ",
+  "about.title": "Om Volvo Friends",
+  "cardAbout.title": "Vilka är Volvo Friends",
+  "cardAbout.text": "Vi är en förening för Volvoentusiaster och alla som har arbetat med Volvo i någon form. Här delar vi gemenskap och intresse för Volvos historia och framtid.",
+  "cardAbout.link_text": "Om föreningen",
+  "cardMember.title": "Som medlem kan du bidra",
+  "cardMember.text": "Som medlem stöder du vår förening Volvo Friends och World of Volvo och får tillgång till flera förmåner så som inbjudan till våra arrangemang. ",
+  "cardMember.link_text": "Läs mer och bli medlem",
+  "contact.page_title": "Kontakt"
 }

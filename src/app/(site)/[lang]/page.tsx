@@ -1,17 +1,14 @@
 import { PostCards } from "@/components/cards/PostCard";
-import { EventsFrontPage } from "@/components/cards/eventscards/EventsCards";
+import { StaticCard } from "@/components/cards/StaticCard";
 import { Hero } from "@/components/hero/Hero";
 import { HeaderLink } from "@/components/link/HeaderLink";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { getLang, useLang } from "@/locales/utils/useLang";
 import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
 import styles from "./page.module.css";
-import { getPathsByLang } from "@/locales/pageSlugUtils";
-import { ContactForm } from "@/components/forms/ContactForm";
-import { Truck } from "@/components/graphics/Truck";
-import heroImage from "@/public/images/hero1.png";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -55,31 +52,30 @@ function Home({
       <Hero
         title={t("landing.title")}
         subtitle={t("landing.subtitle")}
-        image={{ src: heroImage.src, alt: "Temp alt to just show the image" }}
         callToAction={[
           {
             href: to(postPagePath),
             text: t("post.page_title"),
             forcePalette: "light",
-            color: "teal",
           },
+          // {
+          //   href: to(postPagePath),
+          //   text: "Om oss", //t("post.page_title"),
+          //   variant: "outlined",
+          //   color: "white",
+          //   forcePalette: "light",
+          // },
           {
             href: to(postPagePath),
-            text: t("post.page_title"),
-            variant: "outlined",
-            color: "white",
-            forcePalette: "light",
-          },
-          {
-            href: to(postPagePath),
-            text: t("post.page_title"),
+            text: "Om oss", // t("post.page_title"),
             variant: "ghost",
-            color: "teal",
+
             forcePalette: "light",
           },
         ]}
         color={"blue"}
       />
+
       <section
         className={`page-container ${styles.current}`}
         aria-labelledby="currentSectionTitle"
@@ -92,22 +88,45 @@ function Home({
         >
           {t("post.page_title")}
         </HeaderLink>
-        <EventsFrontPage t={t} events={events} params={params} />
+        {/* <EventsFrontPage t={t} events={events} params={params} /> */}
         <PostCards className="breakout" posts={posts} params={params} />
       </section>
-      <section className={`page-container green ${styles.contact}`}>
-        <header className={`full-width ${styles.contactHeader}`}>
-          <h2 className={`text-display-xl ${styles.resizingHeading}`}>
-            {t("contact.title")}
-          </h2>
-        </header>
-        <ContactForm
-          lang={lang}
-          subjects={["dessa", "borde", "komma", "från", "sanity"]}
-          color={"green"}
-          className={`${styles.contactForm}`}
-        />
-        <Truck className={styles.truck} />
+      <section className={`page-container ${styles.about}`}>
+        <h2 className="text-display-xl">{t("about.title")}</h2>
+        <div className={`breakout-lg ${styles.aboutCards}`}>
+          <StaticCard
+            color="red"
+            image={{
+              src: "/images/hero4.avif",
+              position: "before",
+              alt: "",
+              height: 600,
+              width: 400,
+            }}
+            title={t("cardAbout.title")}
+            text={t("cardAbout.text")}
+            link={{
+              text: t("cardAbout.link_text"),
+              href: "/",
+            }}
+          />
+          <StaticCard
+            color="orange"
+            image={{
+              src: "/images/founders.jpeg",
+              position: "after",
+              alt: "",
+              height: 600,
+              width: 400,
+            }}
+            title={t("cardMember.title")}
+            text={t("cardMember.text")}
+            link={{
+              text: t("cardMember.link_text"),
+              href: "/",
+            }}
+          />
+        </div>
       </section>
     </>
   );

@@ -1,4 +1,4 @@
-import { TColor } from "@/utils/types";
+import { TBaseColor, TColor } from "@/utils/types";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import styles from "./Button.module.css";
 
@@ -7,7 +7,7 @@ export type TButton = {
   size?: "large" | "base" | "small";
 } & (
   | {
-      color?: TColor;
+      color?: TColor | TBaseColor;
       forcePalette?: "light" | "dark";
     }
   | {

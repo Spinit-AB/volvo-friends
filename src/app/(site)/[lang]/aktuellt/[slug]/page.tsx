@@ -76,7 +76,7 @@ export const PostArticle = ({
             height={400}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
             priority
-            className="breakout"
+            className={`breakout ${styles.image}`}
           />
         )}
         <div className={styles.inner}>

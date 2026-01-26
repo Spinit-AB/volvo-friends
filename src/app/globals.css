@@ -66,8 +66,8 @@
   /* Font variables */
   --font-family-body: "Volvo Novum 3.1", Arial, Helvetica, sans-serif;
   --font-family-display: "Volvo Broad Spread", Arial, Helvetica, sans-serif;
-  --font-family-display-outline: "Volvo Broad Spread Outline", Arial, Helvetica,
-    sans-serif;
+  --font-family-display-outline:
+    "Volvo Broad Spread Outline", Arial, Helvetica, sans-serif;
 
   /* === BASE COLORS === */
   --clr-base-red-900: #622128;
@@ -124,7 +124,7 @@
 html {
   box-sizing: border-box;
   /* //TODO: Increase text sizes */
-  /* font-size: 1.125rem; */
+  font-size: 1.125rem;
 }
 
 *,
@@ -167,6 +167,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: var(--clr-bg);
+
+  scroll-timeline: --main-timeline;
 }
 
 @media screen and (width > 600px) {

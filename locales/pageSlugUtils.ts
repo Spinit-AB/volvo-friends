@@ -6,8 +6,10 @@ export function getPathsByLang(lang: string) {
 const paths = {
   sv: {
     current: "aktuellt",
+    contact: "kontakt",
   },
   en: {
     current: "current",
+    contact: "contact",
   },
 };

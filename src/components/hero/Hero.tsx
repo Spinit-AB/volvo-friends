@@ -2,7 +2,6 @@ import { TColor } from "@/utils/types";
 import { LinkButton } from "../button/LinkButton";
 import styles from "./Hero.module.css";
 import { TButton } from "../button/Button";
-import Image from "next/image";
 
 export type THeroImage = { src: string; alt: string; className?: string };
 
@@ -10,18 +9,16 @@ export const Hero = ({
   title,
   subtitle,
   callToAction,
-  image,
   color,
 }: {
   title: string;
   subtitle: string;
   callToAction?: ({ text: string; href: string } & TButton)[];
-  image: THeroImage;
   color: TColor;
 }) => {
   return (
     <header className={`page-container ${styles.root} ${styles[color]}`}>
-      <div className={`full-width ${styles.imgWrapper} ${styles.mobile}`}>
+      {/* <div className={`full-width ${styles.imgWrapper} ${styles.mobile}`}>
         <Image
           className={styles.heroImage}
           src={image.src}
@@ -29,9 +26,9 @@ export const Hero = ({
           width={1200}
           height={400}
         />
-      </div>
+      </div> */}
 
-      <div className={`breakout-lg ${styles.anchor}`}>
+      <div className={`breakout ${styles.anchor}`}>
         <div className={styles.foreground}>
           <hgroup>
             <h1 className="text-display-2xl">{title}</h1>
@@ -42,13 +39,15 @@ export const Hero = ({
             <ul>
               {callToAction.map((cta) => (
                 <li key={cta.href}>
-                  <LinkButton {...cta}>{cta.text}</LinkButton>
+                  <LinkButton {...getButtonProps(cta, color)}>
+                    {cta.text}
+                  </LinkButton>
                 </li>
               ))}
             </ul>
           ) : null}
         </div>
-        <div className={`${styles.imgWrapper} ${styles.desktop}`}>
+        {/* <div className={`${styles.imgWrapper} ${styles.desktop}`}>
           <Image
             style={{ color: "currentColor", lineHeight: "600px" }}
             src={image.src}
@@ -56,8 +55,33 @@ export const Hero = ({
             width={1200}
             height={800}
           />
-        </div>
+        </div> */}
       </div>
     </header>
   );
 };
+
+const getButtonProps = (cta: { href: string } & TButton, heroColor: TColor) => {
+  const { color } = cta;
+  if (color === "black" || color === "white" || color) {
+    return cta;
+  }
+  return { ...cta, color: getHeroBtnColor(heroColor) };
+};
+
+function getHeroBtnColor(heroColor: TColor | undefined): TColor {
+  switch (heroColor) {
+    case "teal":
+      return "red";
+    case "green":
+      return "orange";
+    case "red":
+
+    case "orange":
+      return "red";
+    case "blue":
+      return "red";
+    default:
+      return "teal";
+  }
+}
