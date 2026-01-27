@@ -1,3 +1,4 @@
+"server-only";
 import { validatePreviewUrl } from "@sanity/preview-url-secret";
 import { draftMode } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
 
   const { isValid, redirectTo = "/" } = await validatePreviewUrl(
     clientWithToken,
-    request.url
+    request.url,
   );
 
   if (!isValid) {
