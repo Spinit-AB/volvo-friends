@@ -107,7 +107,7 @@ export default defineConfig({
     }),
     presentationTool({
       previewUrl: {
-        initial: "http://localhost:3000", //TODO
+        initial: "https://volvofriends.netlify.app", //TODO update this once we have the proper domain
         previewMode: {
           enable: "/api/draft-mode/enable",
           disable: "/api/draft-mode/disable",
