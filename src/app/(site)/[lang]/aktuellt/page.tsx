@@ -1,4 +1,5 @@
 import { EventsCards } from "@/components/cards/eventscards/EventsCards";
+import { Header } from "@/components/header/Header";
 import InfinitePostsList from "@/components/infinitePostsList/InfinitePostsList";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
@@ -7,7 +8,6 @@ import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { POSTS_PER_FETCH } from "@/utils/constants";
-import styles from "./page.module.css";
 
 const Posts = async (props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -62,9 +62,7 @@ const HeaderAndLoadedEvents = ({
   const t = useT(params);
   return (
     <>
-      <header className={`page-container ${styles.header}`}>
-        <h1 className="text-display-lg breakout">{t("post.page_title")}</h1>
-      </header>
+      <Header title={t("post.page_title")} color={"teal"} />
       <EventsCards t={t} events={events} params={params} />
     </>
   );
