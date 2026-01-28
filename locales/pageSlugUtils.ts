@@ -7,9 +7,11 @@ const paths = {
   sv: {
     current: "aktuellt",
     contact: "kontakt",
+    about: "om-oss",
   },
   en: {
     current: "current",
     contact: "contact",
+    about: "about",
   },
 };

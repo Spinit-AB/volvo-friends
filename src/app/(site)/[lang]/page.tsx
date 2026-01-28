@@ -9,6 +9,7 @@ import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
 import styles from "./page.module.css";
+import { CalenderEventCardGrid } from "@/components/cards/eventscards/CalenderEventCard";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -45,7 +46,6 @@ function Home({
   const to = useLinkWithLang(params);
   const lang = useLang(params);
   const paths = getPathsByLang(lang);
-  const postPagePath = paths.current;
   return (
     <>
       <div className="footer-theme-teal" />
@@ -54,28 +54,23 @@ function Home({
         subtitle={t("landing.subtitle")}
         callToAction={[
           {
-            href: to(postPagePath),
+            href: to(paths.current),
             text: t("post.page_title"),
             forcePalette: "light",
           },
-          // {
-          //   href: to(postPagePath),
-          //   text: "Om oss", //t("post.page_title"),
-          //   variant: "outlined",
-          //   color: "white",
-          //   forcePalette: "light",
-          // },
           {
-            href: to(postPagePath),
-            text: "Om oss", // t("post.page_title"),
+            href: to(paths.about),
+            text: t("about.title_short"),
             variant: "ghost",
-
             forcePalette: "light",
           },
         ]}
         color={"blue"}
       />
-
+      <section className={`page-container ${styles.calenderSection}`}>
+        <h2 className="text-display-lg">{t("post.upcoming_events")}</h2>
+        <CalenderEventCardGrid events={events} t={t} lang={lang} to={to} />
+      </section>
       <section
         className={`page-container ${styles.current}`}
         aria-labelledby="currentSectionTitle"
@@ -84,11 +79,10 @@ function Home({
           component="h2"
           className="text-display-lg"
           headingProps={{ id: "currentSectionTitle", className: "breakout" }}
-          href={to(postPagePath)}
+          href={to(paths.current)}
         >
           {t("post.page_title")}
         </HeaderLink>
-        {/* <EventsFrontPage t={t} events={events} params={params} /> */}
         <PostCards className="breakout" posts={posts} params={params} />
       </section>
       <section className={`page-container ${styles.about}`}>

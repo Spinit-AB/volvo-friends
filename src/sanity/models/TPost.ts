@@ -13,6 +13,13 @@ export type TUpcomingEvent = {
   startTime: string;
   endTime?: string;
   place: string;
+  signUpEmail?: string;
+  signUpDeadline?: string;
+  eventInfo?: Array<{
+    key: string;
+    value: string;
+    _key: string;
+  }>;
 };
 
 export type TPost = {

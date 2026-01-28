@@ -1,7 +1,5 @@
 import { Header } from "@/components/header/Header";
-import { getLang } from "@/locales/utils/useLang";
 import { useT } from "@/locales/utils/useT";
-import React from "react";
 
 const AboutPage = async (props: { params: { lang?: string | string[] } }) => {
   const params = await props.params;
@@ -19,14 +17,32 @@ export const AwaitedAbout = ({
   const t = useT(params);
   return (
     <>
+      <div className="footer-theme-blue" />
       <Header title={t("about.title")} color={"blue"} />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus
-        cum, fugit reprehenderit optio est ducimus aliquid soluta quis ratione
-        recusandae maxime nobis, quasi tenetur voluptatem sint, iure expedita?
-        Perferendis, id.
-      </p>
-      {/* Add your content here */}
+      <div className="page-container">
+        <p>
+          Volvo Friends består av en grupp Volvoentusiaster, Volvoanställda,
+          Volvopensionärer samt många andra fordonsintresserade vilka
+          tillsammans har beslutat att bilda den ideella föreningen Volvo
+          Museums Vänner. Föreningen har nu nytt namn från Volvo Museums Vänner
+          till Volvo Friends. Detta beslut togs vid årsmötet i september 2024.
+        </p>
+        <p>
+          Föreningens syfte är att på olika sätt, och i samarbete med, stödja
+          Volvo World genom att t.ex. stimulera till besök på World of Volvo,
+          biträda vid underhåll och renovering av fordon, hjälpa till vid olika
+          av World of Volvo och Volvo Friends arrangerade evenemang mm.
+        </p>
+        <p>
+          Vi söker ständigt fler medlemmar och bidrag till föreningen; hur just
+          du kan bli medlem eller lämna ett bidrag finner du mer info om på
+          sidan Bli medlem.
+        </p>
+        <p>
+          Medlemsavgiften är SEK 300/år eller SEK 3000 livslångt och betalas in
+          på Bg 222-4087.
+        </p>
+      </div>
     </>
   );
 };
