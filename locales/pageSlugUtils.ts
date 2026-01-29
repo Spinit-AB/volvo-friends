@@ -7,9 +7,13 @@ const paths = {
   sv: {
     current: "aktuellt",
     contact: "kontakt",
+    about: "om-oss",
+    member: "bli-medlem",
   },
   en: {
     current: "current",
     contact: "contact",
+    about: "about",
+    member: "become-a-member",
   },
 };

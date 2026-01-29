@@ -34,11 +34,20 @@
   "contact.send": "Skicka",
   "contact.email_help": "Om du bara vill skicka in ett förslag eller ge oss lite feedback behövs ingen e-post, men om du undrar något och vill att vi ska höra av oss behöver vi ett sätt att nå dig. ",
   "about.title": "Om Volvo Friends",
+  "about.page_title": "Om oss",
   "cardAbout.title": "Vilka är Volvo Friends",
   "cardAbout.text": "Vi är en förening för Volvoentusiaster och alla som har arbetat med Volvo i någon form. Här delar vi gemenskap och intresse för Volvos historia och framtid.",
   "cardAbout.link_text": "Om föreningen",
   "cardMember.title": "Som medlem kan du bidra",
   "cardMember.text": "Som medlem stöder du vår förening Volvo Friends och World of Volvo och får tillgång till flera förmåner så som inbjudan till våra arrangemang. ",
   "cardMember.link_text": "Läs mer och bli medlem",
-  "contact.page_title": "Kontakt"
+  "contact.page_title": "Kontakt",
+  "common.close": "Stäng",
+  "common.menu": "Meny",
+  "common.open": "Öppna",
+  "contact.toast_success_title": "Tack för ditt meddelande!",
+  "contact.toast_success_message": "Vi har tagit emot ditt meddelande och återkommer så snart vi kan.",
+  "contact.toast_error_title": "Något gick fel",
+  "contact.toast_error_message": "Det gick inte att skicka meddelandet. Försök igen eller kontakta oss på annat sätt.",
+  "member.page_title": "Bli medlem"
 }

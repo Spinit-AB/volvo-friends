@@ -1,3 +1,15 @@
+.calenderSection {
+  padding-block-end: 5rem;
+  background-color: light-dark(
+    var(--clr-base-blue-100),
+    var(--clr-base-blue-700)
+  );
+
+  & > h2 {
+    text-align: center;
+  }
+}
+
 .current {
   margin-bottom: 5rem;
   gap: 2rem 0;

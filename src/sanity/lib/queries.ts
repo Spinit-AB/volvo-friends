@@ -87,6 +87,9 @@ export const upcomingEventsQuery = groq`
       startTime,
       endTime,
       place,
+      signUpEmail,
+      signUpDeadline,
+      eventInfo
     }
 `;
 
