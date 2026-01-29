@@ -95,6 +95,9 @@ export const CalendarEventCardGrid = ({
       {events.map((event) => (
         <CalendarEventCard key={event._id} event={event} {...rest} />
       ))}
+      {events.length < 1 ? (
+        <p className="text-base-italic">{rest.t("post.no_events_found")}</p>
+      ) : null}
     </div>
   );
 };
