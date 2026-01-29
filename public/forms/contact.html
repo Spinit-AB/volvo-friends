@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form - Volvo Friends</title>
+  </head>
+  <body>
+    <!-- This static HTML form is required for Netlify Forms to detect and process the form -->
+    <!-- It will not be shown to users; the actual form is in ContactFormClient.tsx -->
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+
+      <!-- Honeypot field for spam protection -->
+      <p style="display: none">
+        <label
+          >Don't fill this out if you're human: <input name="bot-field"
+        /></label>
+      </p>
+
+      <label>
+        Subject:
+        <select name="subject" required>
+          <option value="">Select a subject</option>
+          <option value="general">General Inquiry</option>
+          <option value="membership">Membership</option>
+          <option value="events">Events</option>
+        </select>
+      </label>
+
+      <label>
+        Email:
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        Message:
+        <textarea name="message" required></textarea>
+      </label>
+
+      <button type="submit">Send</button>
+    </form>
+  </body>
+</html>

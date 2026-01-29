@@ -48,12 +48,6 @@ const Posts = async (props: {
 
 export default Posts;
 
-/*
-TODO: 
-Vad ska vi göra med kommande evenemang? Hur ska de prioritera dem?  
-Behöver de se annorlunda ut i studion? 
-*/
-
 const HeaderAndLoadedEvents = ({
   params,
   events,

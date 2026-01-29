@@ -9,7 +9,6 @@ import styles from "./Form.module.css";
 import { Input } from "./Input";
 import { Select } from "./Select";
 import { Textarea } from "./Textarea";
-import { useEffect } from "react";
 
 export function ContactFormClient({
   lang,
@@ -27,31 +26,35 @@ export function ContactFormClient({
 
   // Local submit handler for development
   const handleLocalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const isLocal =
       typeof window !== "undefined" &&
       (window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
     if (isLocal) {
-      e.preventDefault();
-      const form = e.currentTarget.elements;
-      const textarea = form.namedItem("message");
-      const emailInput = form.namedItem("email");
-      const subjectSelect = form.namedItem("subject");
-      const message = textarea && "value" in textarea ? textarea.value : "";
-      const email = emailInput && "value" in emailInput ? emailInput.value : "";
-      const subject =
-        subjectSelect && "value" in subjectSelect ? subjectSelect.value : "";
+      // Local development - use API endpoint
+      const message = formData.get("message");
+      const email = formData.get("email");
+      const subject = formData.get("subject");
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, email, subject }),
       });
+
       if (res.ok) {
         showToast(
           t("contact.toast_success_title"),
           t("contact.toast_success_message"),
           "success",
         );
+        form.reset();
       } else {
         showToast(
           t("contact.toast_error_title"),
@@ -60,27 +63,33 @@ export function ContactFormClient({
         );
       }
     } else {
-      // Set a flag so we can show a toast after Netlify reloads the page
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("contactSubmitted", "1");
+      // Production - submit to static HTML file for Netlify Forms
+      try {
+        await fetch("/forms/contact.html", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(
+            Array.from(formData.entries()) as [string, string][],
+          ).toString(),
+        });
+
+        showToast(
+          t("contact.toast_success_title"),
+          t("contact.toast_success_message"),
+          "success",
+        );
+        form.reset();
+      } catch {
+        showToast(
+          t("contact.toast_error_title"),
+          t("contact.toast_error_message"),
+          "error",
+        );
       }
     }
-    // If not local, let Netlify handle the form
   };
-  // On mount, show toast if Netlify submission flag is set
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("contactSubmitted") === "1"
-    ) {
-      showToast(
-        t("contact.toast_success_title"),
-        t("contact.toast_success_message"),
-        "success",
-      );
-      sessionStorage.removeItem("contactSubmitted");
-    }
-  }, [showToast, t]);
+
+  // Remove the useEffect that was checking sessionStorage
 
   return (
     <section className={`page-container green ${styles.contact}`}>
@@ -92,12 +101,18 @@ export function ContactFormClient({
       <form
         name="contact"
         method="POST"
-        data-netlify="true"
         className={`${styles.root} ${color} ${styles.contactForm}`}
         onSubmit={handleLocalSubmit}
       >
         <p className={`${styles.contactText}`}>{t("contact.text")}</p>
         <input type="hidden" name="form-name" value="contact" />
+        {/* Honeypot field for spam protection - hidden from users */}
+        <p style={{ display: "none" }}>
+          <label>
+            Don&apos;t fill this out if you&apos;re human:{" "}
+            <input name="bot-field" />
+          </label>
+        </p>
 
         <Select
           label={t("contact.subject")}
