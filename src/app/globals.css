@@ -517,3 +517,9 @@ main:has(.footer-theme-red:first-child) + footer {
 html:has(.footer-theme-red:first-child) {
   background-color: var(--clr-base-red-900);
 }
+
+[data-sanity-icon] {
+  /* This fixes a bug where the icons inside sanity studio are tiny */
+  font-size: 1.5rem !important;
+  margin: 0rem !important;
+}
