@@ -1,0 +1,14 @@
+.firstSection {
+  margin-block-start: 4rem;
+}
+
+.lastSection {
+  margin-block-end: 4rem;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.25rem;
+}

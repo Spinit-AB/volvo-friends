@@ -33,7 +33,7 @@ export const Navbar = ({
       >
         Volvo Friends
       </Link>
-      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen}>
+      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t}>
         <ul>
           <li>
             <NavLink href={to("/")} onClick={handleNavLinkClick} size="lg">
@@ -48,6 +48,26 @@ export const Navbar = ({
               size="lg"
             >
               {t("post.page_title")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={to(paths.about)}
+              onClick={handleNavLinkClick}
+              matchSubpath
+              size="lg"
+            >
+              {t("about.page_title")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={to(paths.member)}
+              onClick={handleNavLinkClick}
+              matchSubpath
+              size="lg"
+            >
+              {t("member.page_title")}
             </NavLink>
           </li>
           <li>

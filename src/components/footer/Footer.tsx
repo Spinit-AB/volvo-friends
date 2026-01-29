@@ -51,7 +51,7 @@ const FetchedFooter = ({
         </section>
         <section className={styles.col}>
           <h3 className="text-cardheader-sm">{t("footer.address")}</h3>{" "}
-          <p className="text-base-bold">
+          <address className="text-base">
             {footer?.address?.map((adr, i) => (
               <React.Fragment key={i}>
                 <span className={i === 0 ? "text-base-bold" : "text-base"}>
@@ -60,7 +60,7 @@ const FetchedFooter = ({
                 <br />
               </React.Fragment>
             ))}
-          </p>
+          </address>
         </section>
         <section className={styles.col}>
           <h3 className="text-cardheader-sm">{t("footer.links")}</h3>
