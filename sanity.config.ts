@@ -113,7 +113,7 @@ export default defineConfig({
           disable: "/api/draft-mode/disable",
         },
       },
-      allowOrigins: ["http://localhost:*"],
+      allowOrigins: ["http://localhost:*", "https://volvofriends.netlify.app"],
     }),
   ],
   i18n: {
