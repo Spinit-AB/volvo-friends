@@ -41,5 +41,12 @@
   "cardMember.title": "Som medlem kan du bidra",
   "cardMember.text": "Som medlem stöder du vår förening Volvo Friends och World of Volvo och får tillgång till flera förmåner så som inbjudan till våra arrangemang. ",
   "cardMember.link_text": "Läs mer och bli medlem",
-  "contact.page_title": "Kontakt"
+  "contact.page_title": "Kontakt",
+  "common.close": "Stäng",
+  "common.menu": "Meny",
+  "common.open": "Öppna",
+  "contact.toast_success_title": "Tack för ditt meddelande!",
+  "contact.toast_success_message": "Vi har tagit emot ditt meddelande och återkommer så snart vi kan.",
+  "contact.toast_error_title": "Något gick fel",
+  "contact.toast_error_message": "Det gick inte att skicka meddelandet. Försök igen eller kontakta oss på annat sätt."
 }

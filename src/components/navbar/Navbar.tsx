@@ -33,7 +33,7 @@ export const Navbar = ({
       >
         Volvo Friends
       </Link>
-      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen}>
+      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t}>
         <ul>
           <li>
             <NavLink href={to("/")} onClick={handleNavLinkClick} size="lg">
