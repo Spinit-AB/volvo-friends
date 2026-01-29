@@ -9,7 +9,7 @@ import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
 import styles from "./page.module.css";
-import { CalenderEventCardGrid } from "@/components/cards/eventscards/CalenderEventCard";
+import { CalendarEventCardGrid } from "@/components/cards/eventscards/CalendarEventCard";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -60,7 +60,7 @@ function Home({
           },
           {
             href: to(paths.about),
-            text: t("about.title_short"),
+            text: t("about.page_title"),
             variant: "ghost",
             forcePalette: "light",
           },
@@ -69,7 +69,7 @@ function Home({
       />
       <section className={`page-container ${styles.calenderSection}`}>
         <h2 className="text-display-lg">{t("post.upcoming_events")}</h2>
-        <CalenderEventCardGrid events={events} t={t} lang={lang} to={to} />
+        <CalendarEventCardGrid events={events} t={t} lang={lang} to={to} />
       </section>
       <section
         className={`page-container ${styles.current}`}

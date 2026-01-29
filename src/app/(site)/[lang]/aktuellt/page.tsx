@@ -1,13 +1,15 @@
-import { EventsCards } from "@/components/cards/eventscards/EventsCards";
+import { CalendarEventCardGrid } from "@/components/cards/eventscards/CalendarEventCard";
 import { Header } from "@/components/header/Header";
 import InfinitePostsList from "@/components/infinitePostsList/InfinitePostsList";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
-import { getLang } from "@/locales/utils/useLang";
+import { getLang, useLang } from "@/locales/utils/useLang";
+import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { useT } from "@/locales/utils/useT";
 import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { POSTS_PER_FETCH } from "@/utils/constants";
+import styles from "./current.module.css";
 
 const Posts = async (props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -60,10 +62,21 @@ const HeaderAndLoadedEvents = ({
   events: TUpcomingEvent[];
 }) => {
   const t = useT(params);
+  const lang = useLang(params);
+  const to = useLinkWithLang(params);
   return (
     <>
       <Header title={t("post.page_title")} color={"teal"} />
-      <EventsCards t={t} events={events} params={params} />
+      <section className={`page-container ${styles.calenderSection}`}>
+        <h2 className="text-display-md">{t("post.upcoming_events")}</h2>
+        <CalendarEventCardGrid
+          events={events}
+          t={t}
+          lang={lang}
+          to={to}
+          color="teal"
+        />
+      </section>
     </>
   );
 };

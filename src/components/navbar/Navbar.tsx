@@ -52,6 +52,26 @@ export const Navbar = ({
           </li>
           <li>
             <NavLink
+              href={to(paths.about)}
+              onClick={handleNavLinkClick}
+              matchSubpath
+              size="lg"
+            >
+              {t("about.page_title")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={to(paths.member)}
+              onClick={handleNavLinkClick}
+              matchSubpath
+              size="lg"
+            >
+              {t("member.page_title")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               href={to(paths.contact)}
               onClick={handleNavLinkClick}
               matchSubpath

@@ -1,13 +1,13 @@
 import Clock from "@/components/graphics/Clock";
 import { HeaderLink } from "@/components/link/HeaderLink";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { TTranslate } from "@/locales/utils/useT";
 import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { formatDateObject } from "@/utils/functions";
-import styles from "./CalenderCards.module.css";
-import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { TColor } from "@/utils/types";
+import styles from "./CalendarCards.module.css";
 
-export const CalenderEventCard = ({
+export const CalendarEventCard = ({
   event,
   t,
   to,
@@ -63,7 +63,9 @@ export const CalenderEventCard = ({
         <HeaderLink
           component="h3"
           href={to(`/${postPageSlug.current}/${event.slug.current}`)}
-          className={styles.title}
+          className={[styles.title, color ? styles[color] : ""]
+            .filter(Boolean)
+            .join(" ")}
         >
           {event.title}
         </HeaderLink>
@@ -78,7 +80,7 @@ export const CalenderEventCard = ({
   );
 };
 
-export const CalenderEventCardGrid = ({
+export const CalendarEventCardGrid = ({
   events,
   ...rest
 }: {
@@ -86,11 +88,12 @@ export const CalenderEventCardGrid = ({
   t: TTranslate;
   to: (path: string) => string;
   lang: string;
+  color?: TColor;
 }) => {
   return (
     <div className={`breakout ${styles.grid}`}>
       {events.map((event) => (
-        <CalenderEventCard key={event._id} event={event} {...rest} />
+        <CalendarEventCard key={event._id} event={event} {...rest} />
       ))}
     </div>
   );

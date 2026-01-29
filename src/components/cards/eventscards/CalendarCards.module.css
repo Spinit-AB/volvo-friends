@@ -8,9 +8,28 @@
 }
 
 .header {
-  background: var(--clr-card-bg, var(--clr-base-blue-700));
   color: var(--clr-neutral-100);
   padding: 1.2rem 1.5rem 1rem 1.5rem;
+}
+
+.header.blue {
+  background: var(--clr-card-bg, var(--clr-base-blue-700));
+}
+
+.header.teal {
+  background: var(--clr-card-bg, var(--clr-base-teal-700));
+}
+
+.header.green {
+  background: var(--clr-card-bg, var(--clr-base-green-700));
+}
+
+.header.orange {
+  background: var(--clr-card-bg, var(--clr-base-orange-700));
+}
+
+.header.red {
+  background: var(--clr-card-bg, var(--clr-base-red-700));
 }
 
 .dateRow {
@@ -71,13 +90,31 @@
 }
 
 .title {
-  color: var(--clr-card-header, var(--clr-accent-blue-dark));
-
   &::after {
     inset: 0;
     content: "";
     position: absolute;
   }
+}
+
+.title.blue {
+  color: var(--clr-accent-blue-dark);
+}
+
+.title.teal {
+  color: var(--clr-accent-teal-dark);
+}
+
+.title.green {
+  color: var(--clr-accent-green-dark);
+}
+
+.title.orange {
+  color: var(--clr-accent-orange-dark);
+}
+
+.title.red {
+  color: var(--clr-accent-red-dark);
 }
 
 .statusRow {
