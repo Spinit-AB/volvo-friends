@@ -1,0 +1,11 @@
+# TODO: Update this before production deployment
+# Allow all crawlers to access all content
+User-agent: *
+Allow: /
+
+# Disallow Sanity Studio from being indexed
+Disallow: /studio/
+
+# Sitemap location
+# TODO: Generate and add sitemap.xml
+Sitemap: https://volvofriends.com/sitemap.xml

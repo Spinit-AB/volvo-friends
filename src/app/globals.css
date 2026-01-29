@@ -123,7 +123,6 @@
 /* === MINIMAL MODERN CSS RESET === */
 html {
   box-sizing: border-box;
-  /* //TODO: Increase text sizes */
   font-size: 1.125rem;
 }
 

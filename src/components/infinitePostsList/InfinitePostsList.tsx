@@ -34,12 +34,11 @@ export default function InfinitePostsList({
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/posts?language=${lang}&limit=${POSTS_PER_FETCH}&offset=${posts.length}`
+        `/api/posts?language=${lang}&limit=${POSTS_PER_FETCH}&offset=${posts.length}`,
       );
       const data = await res.json();
       const newPosts: TPostPreview[] = data.posts || [];
-      const newPostLength = posts.length + newPosts.length;
-      console.log(newPostLength, data.total);
+
       // Stop loading when all posts are loaded
 
       setPosts((prev) => {
@@ -63,7 +62,7 @@ export default function InfinitePostsList({
           fetchMore();
         }
       },
-      { threshold: 1 }
+      { threshold: 1 },
     );
     const node = observerRef.current;
     if (node) {
@@ -92,7 +91,7 @@ export default function InfinitePostsList({
           className={`page-container ${styles.article} ${getBlockColour(
             i,
             post.prioritized,
-            post.color
+            post.color,
           )}`}
         >
           <div className={styles.linkClickWrapper}>
@@ -154,7 +153,7 @@ export default function InfinitePostsList({
 function getBlockColour(
   index: number,
   isPrio?: boolean,
-  colorOverrider?: TColor
+  colorOverrider?: TColor,
 ) {
   const i = index % 4;
   const ending = isPrio ? "" : "-nobg";
