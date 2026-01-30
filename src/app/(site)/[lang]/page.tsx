@@ -101,7 +101,7 @@ function Home({
             text={t("cardAbout.text")}
             link={{
               text: t("cardAbout.link_text"),
-              href: "/",
+              href: to(`/${paths.about}`),
             }}
           />
           <StaticCard
@@ -117,7 +117,7 @@ function Home({
             text={t("cardMember.text")}
             link={{
               text: t("cardMember.link_text"),
-              href: "/",
+              href: to(`/${paths.member}`),
             }}
           />
         </div>

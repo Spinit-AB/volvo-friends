@@ -6,6 +6,7 @@ import { TUpcomingEvent } from "@/sanity/models/TPost";
 import { formatDateObject } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import styles from "./CalendarCards.module.css";
+import { urlFor } from "@/sanity/lib/image";
 
 export const CalendarEventCard = ({
   event,
@@ -46,6 +47,9 @@ export const CalendarEventCard = ({
     <article className={styles.root}>
       <header
         className={[styles.header, styles[color]].filter(Boolean).join(" ")}
+        style={{
+          backgroundImage: `url(${urlFor(event.heroImage).width(800).height(300).url()})`,
+        }}
       >
         <time className={styles.dateRow} dateTime={event.date}>
           <span className={`text-display-md ${styles.day}`}>{date.day}</span>
@@ -63,6 +67,7 @@ export const CalendarEventCard = ({
         <HeaderLink
           component="h3"
           href={to(`/${postPageSlug.current}/${event.slug.current}`)}
+          headingProps={{ className: styles.heading }}
           className={[styles.title, color ? styles[color] : ""]
             .filter(Boolean)
             .join(" ")}

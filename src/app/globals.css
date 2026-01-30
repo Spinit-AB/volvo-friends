@@ -117,7 +117,8 @@
   --clr-neutral-100: #ffffff;
 
   color-scheme: light;
-  /* color-scheme: light dark; */
+  /* //TODO: Dark mode */
+  color-scheme: light dark;
 }
 
 /* === MINIMAL MODERN CSS RESET === */

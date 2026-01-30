@@ -2,7 +2,7 @@
   padding-block-end: 5rem;
   background-color: light-dark(
     var(--clr-base-blue-100),
-    var(--clr-base-blue-700)
+    var(--clr-base-blue-900)
   );
 
   & > h2 {
@@ -20,12 +20,12 @@
 }
 
 .about {
-  background: var(--clr-base-green-100);
+  background: light-dark(var(--clr-base-green-100), var(--clr-base-green-700));
   padding: 6rem 0;
 
   & > h2 {
     text-align: center;
-    color: var(--clr-base-green-900);
+    color: light-dark(var(--clr-base-green-900), var(--clr-base-green-100));
   }
 }
 

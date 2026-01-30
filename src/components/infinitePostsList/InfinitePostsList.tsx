@@ -80,8 +80,8 @@ export default function InfinitePostsList({
 
   return (
     <section aria-labelledby={postsId}>
-      <header className="page-container">
-        <h2 className="text-display-sm" id={postsId}>
+      <header className={`page-container ${styles.sectionHeader}`}>
+        <h2 className="text-display-md" id={postsId}>
           {t("post.posts_header")}
         </h2>
       </header>

@@ -1,27 +1,24 @@
 .header.blue {
-  background: light-dark(var(--clr-base-blue-700), var(--clr-base-blue-300));
-  color: light-dark(var(--clr-base-blue-100), var(--clr-neutral-900));
+  background: var(--clr-base-blue-700);
+  color: var(--clr-base-blue-100);
 }
 
 .header.teal {
-  background: light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300));
-  color: light-dark(var(--clr-base-teal-100), var(--clr-neutral-900));
+  background: var(--clr-base-teal-700);
+  color: var(--clr-base-teal-100);
 }
 
 .header.green {
-  background: light-dark(var(--clr-base-green-700), var(--clr-base-green-300));
-  color: light-dark(var(--clr-base-green-100), var(--clr-neutral-900));
+  background: var(--clr-base-green-700);
+  color: var(--clr-base-green-100);
 }
 
 .header.orange {
-  background: light-dark(
-    var(--clr-base-orange-700),
-    var(--clr-base-orange-300)
-  );
-  color: light-dark(var(--clr-base-orange-100), var(--clr-neutral-900));
+  background: var(--clr-base-orange-700);
+  color: var(--clr-base-orange-100);
 }
 
 .header.red {
-  background: light-dark(var(--clr-base-red-700), var(--clr-base-red-300));
-  color: light-dark(var(--clr-base-red-100), var(--clr-neutral-900));
+  background: var(--clr-base-red-700);
+  color: var(--clr-base-red-100);
 }

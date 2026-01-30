@@ -1,7 +1,11 @@
+.sectionHeader {
+  padding-block: 2rem;
+}
+
 .article {
   background: var(
     --clr-bg,
-    light-dark(var(--clr-neutral-100), var(--clr-neutral-900))
+    light-dark(var(--clr-neutral-100), var(--clr-neutral-800))
   );
 
   & h3 {
@@ -20,7 +24,7 @@
 
 .linkClickWrapper {
   margin-inline: calc(var(--gutter) * -1);
-  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
   position: relative;
 
   & a::after {

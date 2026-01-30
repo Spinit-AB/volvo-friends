@@ -2,7 +2,7 @@
   padding-block-end: 5rem;
   background-color: light-dark(
     var(--clr-base-teal-100),
-    var(--clr-base-teal-700)
+    var(--clr-base-teal-900)
   );
 
   & > h2 {

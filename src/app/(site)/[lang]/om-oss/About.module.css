@@ -1,7 +1,21 @@
+.root {
+  background-color: var(
+    --clr-bg,
+    light-dark(var(--clr-neutral-300), var(--clr-neutral-900))
+  );
+
+  & > * {
+    background-color: light-dark(
+      var(--clr-neutral-100),
+      var(--clr-neutral-800)
+    );
+  }
+}
+
 .firstSection {
-  margin-block-start: 4rem;
+  padding-block-start: 4rem;
 }
 
 .lastSection {
-  margin-block-end: 4rem;
+  padding-block-end: 4rem;
 }

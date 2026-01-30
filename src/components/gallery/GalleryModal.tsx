@@ -73,10 +73,10 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
         className="gallery-modal-content"
         style={{
           position: "relative",
-          maxWidth: isMobile ? "100vw" : "90vw",
-          maxHeight: isMobile ? "100vh" : "90vh",
-          width: isMobile ? "100vw" : "auto",
-          height: isMobile ? "100vh" : "auto",
+          maxWidth: isMobile ? "100vw" : "min(90vw, 1200px)",
+          maxHeight: isMobile ? "100vh" : "min(80vh, 900px)",
+          width: isMobile ? "100vw" : "min(90vw, 1200px)",
+          height: isMobile ? "100vh" : "min(80vh, 900px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -131,10 +131,10 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
           width={isMobile ? 800 : 1200}
           height={isMobile ? 800 : 900}
           style={{
-            maxWidth: "90vw",
-            maxHeight: "80vh",
-            width: isMobile ? "100vw" : "auto",
-            height: isMobile ? "100vh" : "auto",
+            maxWidth: isMobile ? "100vw" : "min(90vw, 1200px)",
+            maxHeight: isMobile ? "100vh" : "min(80vh, 900px)",
+            width: isMobile ? "100vw" : "min(90vw, 1200px)",
+            height: isMobile ? "100vh" : "min(80vh, 900px)",
             objectFit: "contain",
             borderRadius: 8,
             boxShadow: "0 2px 16px rgba(0,0,0,0.5)",

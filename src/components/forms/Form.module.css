@@ -166,7 +166,7 @@
   grid-row: 1/4;
   background-color: light-dark(
     var(--clr-base-green-300),
-    var(--clr-base-green-100)
+    var(--clr-base-green-700)
   );
 
   color: light-dark(var(--clr-base-green-900), var(--clr-base-green-100));
@@ -197,7 +197,7 @@
   bottom: 0;
   grid-column: 1 / -1;
 
-  color: light-dark(var(--clr-base-green-300), var(--clr-base-green-900));
+  color: light-dark(var(--clr-base-green-300), var(--clr-base-green-700));
   opacity: 0.5;
 }
 

@@ -57,9 +57,9 @@ export const Truck = ({ className }: { className?: string }) => {
         <path
           d="M957.262 455.8H1023.58"
           stroke="currentColor"
-          stroke-width="16"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="16"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

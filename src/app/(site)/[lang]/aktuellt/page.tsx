@@ -34,6 +34,7 @@ const Posts = async (props: {
 
   return (
     <>
+      <div className="footer-theme-teal" />
       <LocalePageRedirects lang={lang} canonicalSlug={canonicalSlug} />
       <HeaderAndLoadedEvents params={params} events={events ?? []} />
       <InfinitePostsList
