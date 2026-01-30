@@ -7,6 +7,7 @@ import { formatDateObject } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import styles from "./CalendarCards.module.css";
 import { urlFor } from "@/sanity/lib/image";
+import { useId } from "react";
 
 export const CalendarEventCard = ({
   event,
@@ -87,6 +88,7 @@ export const CalendarEventCard = ({
 
 export const CalendarEventCardGrid = ({
   events,
+  color,
   ...rest
 }: {
   events: TUpcomingEvent[];
@@ -95,13 +97,29 @@ export const CalendarEventCardGrid = ({
   lang: string;
   color?: TColor;
 }) => {
+  const noPostsId = useId();
   return (
     <div className={`${events.length > 1 ? "breakout" : ""} ${styles.grid}`}>
       {events.map((event) => (
-        <CalendarEventCard key={event._id} event={event} {...rest} />
+        <CalendarEventCard
+          key={event._id}
+          event={event}
+          color={color}
+          {...rest}
+        />
       ))}
       {events.length < 1 ? (
-        <p className="text-base-italic">{rest.t("post.no_events_found")}</p>
+        <section
+          className={[styles.emptyState, color ? styles[color] : ""]
+            .filter(Boolean)
+            .join(" ")}
+          aria-describedby={noPostsId}
+        >
+          <h3 className="text-cardheader_novum_lg" id={noPostsId}>
+            {rest.t("post.no_events_found")}
+          </h3>
+          <p>{rest.t("post.no_events_description")}</p>
+        </section>
       ) : null}
     </div>
   );

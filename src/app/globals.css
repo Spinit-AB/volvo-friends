@@ -142,6 +142,7 @@ html.lightmode-native {
 html {
   box-sizing: border-box;
   font-size: 1.125rem;
+  scroll-padding-top: 6rem;
 }
 
 *,

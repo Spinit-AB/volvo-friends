@@ -5,11 +5,10 @@ import { useLinkWithLang } from "@/locales/utils/useLinkWithLang";
 import { useT } from "@/locales/utils/useT";
 import Link from "next/link";
 import { useState } from "react";
+import { Lightmode } from "../lightmode/Lightmode";
 import NavLink from "../link/NavLink";
 import { BurgerWrapper } from "./BurgerWrapper";
 import styles from "./Navbar.module.css";
-import { Select } from "../forms/Select";
-import { Lightmode } from "../lightmode/Lightmode";
 
 export const Navbar = ({
   params,

@@ -25,7 +25,6 @@ export default function InfinitePostsList({
   const to = useLinkWithLang({ lang });
   const [posts, setPosts] = useState<TPostPreview[]>(initialPosts);
   const [loading, setLoading] = useState(false);
-  const postsId = useId();
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -79,9 +78,9 @@ export default function InfinitePostsList({
   const showSkeleton = posts.length < total || loading;
 
   return (
-    <section aria-labelledby={postsId}>
+    <section aria-labelledby={t("post.posts_section_id")}>
       <header className={`page-container ${styles.sectionHeader}`}>
-        <h2 className="text-display-md" id={postsId}>
+        <h2 className="text-display-md" id={t("post.posts_section_id")}>
           {t("post.posts_header")}
         </h2>
       </header>

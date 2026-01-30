@@ -10,6 +10,7 @@ import { fetchPosts, fetchUpcomingEvents } from "@/sanity/lib/queries";
 import { TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
 import styles from "./page.module.css";
 import { CalendarEventCardGrid } from "@/components/cards/eventscards/CalendarEventCard";
+import { LinkButton } from "@/components/button/LinkButton";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -69,7 +70,13 @@ function Home({
       />
       <section className={`page-container ${styles.calenderSection}`}>
         <h2 className="text-display-lg">{t("post.upcoming_events")}</h2>
-        <CalendarEventCardGrid events={events} t={t} lang={lang} to={to} />
+        <CalendarEventCardGrid
+          events={events}
+          t={t}
+          lang={lang}
+          to={to}
+          color="blue"
+        />
       </section>
       <section
         className={`page-container ${styles.current}`}
@@ -84,11 +91,15 @@ function Home({
           {t("post.page_title")}
         </HeaderLink>
         <PostCards className="breakout" posts={posts} params={params} />
-        <button
-        //TODO
+
+        <LinkButton
+          color="teal"
+          href={`${to(paths.current)}#${t("post.posts_section_id")}`}
+          className={styles.seeMorePosts}
+          variant="outlined"
         >
-          Se tidigare inlägg
-        </button>
+          {t("post.see_more")}
+        </LinkButton>
       </section>
       <section className={`page-container ${styles.about}`}>
         <h2 className="text-display-xl">{t("about.title")}</h2>

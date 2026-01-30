@@ -27,11 +27,6 @@
   }
 
   &::before {
-    /* inset-block: 0;
-    left: 0;
-    width: 10rem;
-    max-width: 100%;
-    opacity: 0%; */
     opacity: 37%;
     inset: 0;
     background: var(--clr-card-bg, var(--clr-base-blue-700));
@@ -178,4 +173,52 @@
   grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
   gap: 2rem;
   justify-items: center;
+}
+
+.emptyState {
+  max-width: 36rem;
+  grid-column: 1 / -1;
+  background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+
+  border-color: light-dark(var(--clr-neutral-700), var(--clr-neutral-300));
+}
+
+.emptyState.blue {
+  border-color: light-dark(var(--clr-base-blue-700), var(--clr-base-blue-300));
+}
+
+.emptyState.teal {
+  border-color: light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300));
+}
+
+.emptyState.green {
+  border-color: light-dark(
+    var(--clr-base-green-700),
+    var(--clr-base-green-300)
+  );
+}
+
+.emptyState.orange {
+  border-color: light-dark(
+    var(--clr-base-orange-700),
+    var(--clr-base-orange-300)
+  );
+}
+
+.emptyState.red {
+  border-color: light-dark(var(--clr-base-red-700), var(--clr-base-red-300));
+}
+
+.emptyState h3 {
+  padding: 2rem;
+  border-bottom: 0.25rem solid
+    light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300));
+  margin-block-start: 0rem;
+  margin-block-end: 1rem;
+}
+
+.emptyState p {
+  margin: 0;
+  line-height: 1.6;
+  padding: 0rem 2rem 2rem;
 }
