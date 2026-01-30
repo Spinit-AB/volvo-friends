@@ -8,6 +8,8 @@ import { useState } from "react";
 import NavLink from "../link/NavLink";
 import { BurgerWrapper } from "./BurgerWrapper";
 import styles from "./Navbar.module.css";
+import { Select } from "../forms/Select";
+import { Lightmode } from "../lightmode/Lightmode";
 
 export const Navbar = ({
   params,
@@ -36,7 +38,12 @@ export const Navbar = ({
       <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t}>
         <ul>
           <li>
-            <NavLink href={to("/")} onClick={handleNavLinkClick} size="lg">
+            <NavLink
+              href={to("/")}
+              onClick={handleNavLinkClick}
+              size="lg"
+              activeClassName={styles.activeLink}
+            >
               {t("home.page_title")}
             </NavLink>
           </li>
@@ -46,6 +53,7 @@ export const Navbar = ({
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"
+              activeClassName={styles.activeLink}
             >
               {t("post.page_title")}
             </NavLink>
@@ -56,6 +64,7 @@ export const Navbar = ({
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"
+              activeClassName={styles.activeLink}
             >
               {t("about.page_title")}
             </NavLink>
@@ -66,6 +75,7 @@ export const Navbar = ({
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"
+              activeClassName={styles.activeLink}
             >
               {t("member.page_title")}
             </NavLink>
@@ -76,11 +86,17 @@ export const Navbar = ({
               onClick={handleNavLinkClick}
               matchSubpath
               size="lg"
+              activeClassName={styles.activeLink}
             >
               {t("contact.page_title")}
             </NavLink>
           </li>
         </ul>
+        <Lightmode
+          t={t}
+          selectClassName={styles.lightmode}
+          wrapperClassName={styles.lightmodeWrapper}
+        />
       </BurgerWrapper>
     </nav>
   );

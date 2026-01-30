@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { draftMode } from "next/headers";
+import { cookies, draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Params } from "next/dist/server/request/params";
 
@@ -32,8 +32,15 @@ export default async function RootLayout({
 }>) {
   const params = await props.params;
   const lang = params.lang ?? "sv";
+
+  // Read theme from cookie (default to 'system')
+  const theme = (await cookies()).get("lightmode")?.value || "system";
+  let htmlClass = "lightmode-native";
+  if (theme === "light") htmlClass = "lightmode-light";
+  if (theme === "dark") htmlClass = "lightmode-dark";
+
   return (
-    <html lang={lang as string}>
+    <html lang={lang as string} className={htmlClass}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         {(await draftMode()).isEnabled && <VisualEditing />}

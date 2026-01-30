@@ -49,5 +49,9 @@
   "contact.toast_success_message": "Vi har tagit emot ditt meddelande och återkommer så snart vi kan.",
   "contact.toast_error_title": "Något gick fel",
   "contact.toast_error_message": "Det gick inte att skicka meddelandet. Försök igen eller kontakta oss på annat sätt.",
-  "member.page_title": "Bli medlem"
+  "member.page_title": "Bli medlem",
+  "lightmode.native": "System",
+  "lightmode.light": "Ljust",
+  "lightmode.dark": "Mörkt",
+  "lightmode.component": "Tema"
 }

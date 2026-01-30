@@ -47,5 +47,6 @@
 
 .grill {
   color: var(--clr-footer-detail, var(--clr-base-green-700));
+  color: transparent;
   margin: 2rem auto 1rem;
 }

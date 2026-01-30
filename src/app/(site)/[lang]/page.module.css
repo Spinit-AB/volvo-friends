@@ -20,7 +20,7 @@
 }
 
 .about {
-  background: light-dark(var(--clr-base-green-100), var(--clr-base-green-700));
+  background: light-dark(var(--clr-base-green-300), var(--clr-base-green-900));
   padding: 6rem 0;
 
   & > h2 {

@@ -84,6 +84,11 @@ function Home({
           {t("post.page_title")}
         </HeaderLink>
         <PostCards className="breakout" posts={posts} params={params} />
+        <button
+        //TODO
+        >
+          Se tidigare inlägg
+        </button>
       </section>
       <section className={`page-container ${styles.about}`}>
         <h2 className="text-display-xl">{t("about.title")}</h2>

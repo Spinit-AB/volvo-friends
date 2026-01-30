@@ -5,6 +5,8 @@
   flex-direction: column;
   gap: 0.75rem;
   position: relative;
+  max-width: 28rem;
+  width: 100%;
 }
 
 .header {
@@ -16,33 +18,54 @@
   background-position: center;
   background-size: cover;
 
+  &::after,
   &::before {
     content: "";
-    inset: 0;
+
     position: absolute;
     z-index: -1;
-    opacity: 87%;
+  }
+
+  &::before {
+    /* inset-block: 0;
+    left: 0;
+    width: 10rem;
+    max-width: 100%;
+    opacity: 0%; */
+    opacity: 37%;
+    inset: 0;
+    background: var(--clr-card-bg, var(--clr-base-blue-700));
+  }
+
+  &::after {
+    inset: 0;
+    opacity: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--clr-card-bg, var(--clr-base-blue-700)) 33%,
+      transparent
+    );
   }
 }
 
-.header.blue::before {
-  background: var(--clr-card-bg, var(--clr-base-blue-700));
+.header.blue {
+  --clr-card-bg: var(--clr-base-blue-700);
 }
 
-.header.teal::before {
-  background: var(--clr-card-bg, var(--clr-base-teal-700));
+.header.teal {
+  --clr-card-bg: var(--clr-base-teal-700);
 }
 
-.header.green::before {
-  background: var(--clr-card-bg, var(--clr-base-green-700));
+.header.green {
+  --clr-card-bg: var(--clr-base-green-700);
 }
 
-.header.orange::before {
-  background: var(--clr-card-bg, var(--clr-base-orange-700));
+.header.orange {
+  --clr-card-bg: var(--clr-base-orange-700);
 }
 
-.header.red::before {
-  background: var(--clr-card-bg, var(--clr-base-red-700));
+.header.red {
+  --clr-card-bg: var(--clr-base-red-700);
 }
 
 .dateRow {
@@ -154,4 +177,5 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
   gap: 2rem;
+  justify-items: center;
 }

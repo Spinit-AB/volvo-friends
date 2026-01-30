@@ -23,6 +23,45 @@
   & li {
     display: contents;
   }
+
+  &:has(+ main > :global(.footer-theme-blue):first-child) {
+    --clr-nav-detail: light-dark(
+      var(--clr-accent-blue-dark),
+      var(--clr-accent-blue-light)
+    );
+  }
+
+  &:has(+ main > :global(.footer-theme-teal):first-child) {
+    --clr-nav-detail: light-dark(
+      var(--clr-accent-teal-dark),
+      var(--clr-accent-teal-light)
+    );
+  }
+
+  &:has(+ main > :global(.footer-theme-green):first-child) {
+    --clr-nav-detail: light-dark(
+      var(--clr-accent-green-dark),
+      var(--clr-accent-green-light)
+    );
+  }
+
+  &:has(+ main > :global(.footer-theme-orange):first-child) {
+    --clr-nav-detail: light-dark(
+      var(--clr-accent-orange-dark),
+      var(--clr-accent-orange-light)
+    );
+  }
+
+  &:has(+ main > :global(.footer-theme-red):first-child) {
+    --clr-nav-detail: light-dark(
+      var(--clr-accent-red-dark),
+      var(--clr-accent-red-light)
+    );
+  }
+}
+
+.activeLink {
+  color: var(--clr-nav-detail);
 }
 
 .logo {
@@ -116,18 +155,28 @@
   position: fixed;
   inset-block: 0;
   width: min(100dvw, 25rem);
-  padding-block-start: 2em;
+  padding-block: 4em;
   inset-inline-end: 0;
   border-inline-start: 2px solid var(--clr-base-green-100);
 
-  & ul {
-    margin-block-start: 4em;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2em;
+
+  & > * {
+    flex: 1;
     gap: 1.5em;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
+  }
+
+  .lightmodeWrapper {
+    margin-block-start: 2rem;
+    padding-inline-end: 2rem;
   }
 
   animation: appear var(--animation-speed, 600ms) forwards;
@@ -195,4 +244,15 @@
 
 .backdrop[hidden] {
   animation: fadeOut var(--animation-speed, 600ms) forwards;
+}
+
+.lightmode {
+  --clr-form-elem-brd: var(--clr-nav-detail);
+  border-radius: 0.125rem;
+}
+
+.lightmodeWrapper {
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5ch;
+  padding-inline-start: 2rem;
 }

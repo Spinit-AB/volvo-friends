@@ -6,18 +6,6 @@ import {
 } from "./FormElementWrapper";
 import { TColor } from "@/utils/types";
 
-type StringArrayProps = {
-  options?: string[];
-  labelKey?: never;
-  valueKey?: never;
-};
-
-type ObjectArrayProps<T extends Record<string, unknown>> = {
-  options?: T[];
-  labelKey: keyof T;
-  valueKey: keyof T;
-};
-
 export type SelectProps = FormElementWrapperBaseProps & {
   color?: TColor;
   forcePalette?: "light" | "dark";
@@ -27,12 +15,14 @@ export type SelectProps = FormElementWrapperBaseProps & {
   options: string[] | Array<Record<string, unknown>>;
   labelKey?: keyof Record<string, unknown>;
   valueKey?: keyof Record<string, unknown>;
+  wrapperClassName?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       className = "",
+      wrapperClassName,
       label,
       color,
       forcePalette,
@@ -75,7 +65,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         forcePalette={forcePalette}
         helpText={helpText}
         validationError={validationError}
-        className={className}
+        className={wrapperClassName}
         required={props.required}
       >
         <select

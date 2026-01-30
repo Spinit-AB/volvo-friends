@@ -117,8 +117,25 @@
   --clr-neutral-100: #ffffff;
 
   color-scheme: light;
-  /* //TODO: Dark mode */
+  /* Dark mode */
   color-scheme: light dark;
+}
+
+html {
+  background: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
+}
+
+html.lightmode-light {
+  color-scheme: light;
+  background: var(--clr-neutral-100);
+}
+html.lightmode-dark {
+  color-scheme: dark;
+  background: var(--clr-neutral-800);
+}
+html.lightmode-native {
+  color-scheme: light dark;
+  background: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
 }
 
 /* === MINIMAL MODERN CSS RESET === */

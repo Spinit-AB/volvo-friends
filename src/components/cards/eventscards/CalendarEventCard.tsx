@@ -96,7 +96,7 @@ export const CalendarEventCardGrid = ({
   color?: TColor;
 }) => {
   return (
-    <div className={`breakout ${styles.grid}`}>
+    <div className={`${events.length > 1 ? "breakout" : ""} ${styles.grid}`}>
       {events.map((event) => (
         <CalendarEventCard key={event._id} event={event} {...rest} />
       ))}

@@ -168,6 +168,7 @@ export default defineType({
         }),
       hidden: ({ document }) => !document?.isEvent,
     }),
+    //TODO: We need a boolean field to update the event if it has been fully booked / sign up list is full
     defineField({
       name: "eventInfo",
       type: "array",
