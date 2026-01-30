@@ -18,7 +18,7 @@ export const BurgerWrapper = ({
 }) => {
   const burgerId = useId();
   const menuId = useId();
-  const isMobile = useMediaQuery("(max-width: 1024px)");
+  const isMobile = useMediaQuery("(max-width: 1100px)");
   if (!isMobile) return children;
   return (
     <>

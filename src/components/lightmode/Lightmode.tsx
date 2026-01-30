@@ -19,6 +19,9 @@ export const Lightmode = ({
     { value: "dark", label: t("lightmode.dark") },
   ];
   const [selected, setSelected] = useState(() => {
+    if (typeof document === "undefined") {
+      return "system";
+    }
     const match = document.cookie.match(/(?:^|; )lightmode=([^;]*)/);
     if (match && ["system", "light", "dark"].includes(match[1])) {
       return match[1];
