@@ -110,13 +110,18 @@ export default defineConfig({
         initial:
           process.env.NODE_ENV === "development"
             ? "http://localhost:3000"
-            : "https://volvofriends.netlify.app", //TODO update this once we have the proper domain
+            : "https://volvofriends.netlify.app", //TODO test that this still works once we have the proper domain
         previewMode: {
           enable: "/api/draft-mode/enable",
           disable: "/api/draft-mode/disable",
         },
       },
-      allowOrigins: ["http://localhost:*", "https://volvofriends.netlify.app"],
+      allowOrigins: [
+        "http://localhost:*",
+        "https://volvofriends.netlify.app",
+        "https://volvofriends.com",
+        "https://www.volvofriends.com",
+      ],
     }),
   ],
   i18n: {

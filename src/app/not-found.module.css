@@ -24,16 +24,14 @@
 
 .header {
   margin-bottom: 2rem;
-}
 
-.subtitle {
-  margin: 1rem 0 0 0;
-  opacity: 0.95;
+  & h1 {
+    margin: 1rem;
+  }
 }
 
 .description {
   margin: 2rem 0;
-
   line-height: 1.6;
 }
 

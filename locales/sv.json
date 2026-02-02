@@ -67,5 +67,8 @@
   "not_found.subtitle": "Sidan kunde inte hittas",
   "not_found.description": "Vi beklagar, men vi kunde inte hitta sidan du letade efter. Vägen kan ha tagit en felaktig vänd.",
   "not_found.back_to_home": "Tillbaka till startsidan",
-  "not_found.contact_us": "Kontakta oss"
+  "not_found.contact_us": "Kontakta oss",
+  "error.subtitle": "Ett fel har inträffat",
+  "error.description": "Något gick fel när sidan skulle laddas. Försök igen eller gå tillbaka till startsidan.",
+  "error.try_again": "Försök igen"
 }

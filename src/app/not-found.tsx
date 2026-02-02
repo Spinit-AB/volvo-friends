@@ -4,7 +4,7 @@ import { LinkButton } from "@/components/button/LinkButton";
 import { useT } from "@/locales/utils/useT";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { locales } from "../../locales";
+import { locales } from "@/locales";
 import styles from "./not-found.module.css";
 
 export default function NotFound() {
@@ -39,10 +39,8 @@ export default function NotFound() {
           </LinkButton>
         </div>
       </div>
-      <div className={styles.background}>
-        <div className={styles.circle1}></div>
-        <div className={styles.circle2}></div>
-      </div>
+      <div className={styles.circle1}></div>
+      <div className={styles.circle2}></div>
     </div>
   );
 }

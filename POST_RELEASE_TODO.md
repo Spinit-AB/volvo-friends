@@ -20,11 +20,10 @@
 
 ## Optional Enhancements
 - [ ] Add analytics (Google Analytics, Plausible, etc.)
-- [ ] Add error monitoring (Sentry, etc.)
+- [-] Add error monitoring (Sentry, etc.) (deferred)
 - [x] Add proper 404 page with Volvo Friends branding
-- [ ] Add loading states for better UX
-- [ ] Add error boundaries
-- [ ] Consider adding a changelog
+- [x] Add loading states for better UX
+- [x] Add error boundaries
 
 ## Already Fixed
 - [x] Netlify Forms integration

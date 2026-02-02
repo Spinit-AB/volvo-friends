@@ -1,13 +1,13 @@
 import { Header } from "@/components/header/Header";
-import { useT } from "@/locales/utils/useT";
-import styles from "./About.module.css";
-import { getLang, useLang } from "@/locales/utils/useLang";
-import { getPathsByLang } from "@/locales/pageSlugUtils";
+import { PortableTextWrapper } from "@/components/PortableTextWrapper";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
-import { TColor } from "@/utils/types";
+import { getPathsByLang } from "@/locales/pageSlugUtils";
+import { getLang, useLang } from "@/locales/utils/useLang";
+import { useT } from "@/locales/utils/useT";
 import { fetchAboutPage } from "@/sanity/lib/queries";
 import { TAboutPage } from "@/sanity/models/TAboutBecomeMemberPage";
-import { PortableTextWrapper } from "@/components/PortableTextWrapper";
+import { TColor } from "@/utils/types";
+import styles from "./About.module.css";
 
 const AboutPage = async (props: { params: { lang?: string | string[] } }) => {
   const params = await props.params;
