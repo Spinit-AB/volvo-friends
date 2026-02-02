@@ -6,6 +6,8 @@ Allow: /
 # Disallow Sanity Studio from being indexed
 Disallow: /studio/
 
+# Disallow English version (not ready for public)
+Disallow: /en/
+
 # Sitemap location
-# TODO: Generate and add sitemap.xml
 Sitemap: https://volvofriends.com/sitemap.xml

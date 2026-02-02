@@ -84,12 +84,7 @@ export const PostArticle = ({
           <p className="text-base-italic">
             {t("common.created_at")}: {formatDate(lang, post._createdAt)}
           </p>
-          <p
-          //TODO: Should we even show summary on this page?
-          //TODO: Show the date the post was created
-          >
-            {post.summary}
-          </p>
+          <p>{post.summary}</p>
 
           {post.event?.startTime && (
             <EventSection t={t} event={post.event} lang={lang} />

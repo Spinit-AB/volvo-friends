@@ -8,7 +8,12 @@ import {
   type QueryParams,
 } from "next-sanity";
 import { draftMode } from "next/headers";
+import { i18n } from "../../../languages";
 import { apiVersion, dataset, projectId } from "../env";
+import {
+  TAboutPage,
+  TBecomeMemberPage,
+} from "../models/TAboutBecomeMemberPage";
 import { TFooter } from "../models/TFooter";
 import { TPost, TPostPreview, TUpcomingEvent } from "../models/TPost";
 
@@ -230,5 +235,38 @@ export async function fetchFooter() {
   return await sanityFetch<TFooter | null>({
     query: footerQuery,
     revalidate: 60,
+  });
+}
+
+// --- About Page (Om oss) ---
+export const aboutPageQuery = groq`*[_type == "aboutPage" && _id == $id][0]`;
+
+export async function fetchAboutPage({
+  language = "sv",
+} = {}): Promise<TAboutPage | null> {
+  const implementedLanguages = i18n.languages.map((l) => l.id);
+  if (!implementedLanguages.includes(language)) return null;
+
+  const id = `aboutPage_${language}`;
+  return await sanityFetch<TAboutPage | null>({
+    query: aboutPageQuery,
+    params: { id },
+  });
+}
+
+// --- Become Member Page (Bli medlem) ---
+export const becomeMemberPageQuery = groq`*[_type == "becomeMemberPage" && _id == $id][0]`;
+
+export async function fetchBecomeMemberPage({
+  language = "sv",
+} = {}): Promise<TBecomeMemberPage | null> {
+  const implementedLanguages = i18n.languages.map((l) => l.id);
+
+  if (!implementedLanguages.includes(language)) return null;
+  const id = `becomeMemberPage_${language}`;
+
+  return await sanityFetch<TBecomeMemberPage | null>({
+    query: becomeMemberPageQuery,
+    params: { id },
   });
 }

@@ -21,9 +21,15 @@ export default defineType({
       of: [
         defineArrayMember({
           type: "file",
-          title: "PDF-dokument",
+          title: "Dokument (PDF, Word, PowerPoint)",
           options: {
-            accept: "application/pdf",
+            accept: [
+              "application/pdf",
+              "application/msword",
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              "application/vnd.ms-powerpoint",
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            ].join(","),
           },
           fields: [
             {

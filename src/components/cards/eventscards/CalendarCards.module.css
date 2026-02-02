@@ -179,7 +179,7 @@
   max-width: 36rem;
   grid-column: 1 / -1;
   background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
-
+  border-inline: 0.25rem solid;
   border-color: light-dark(var(--clr-neutral-700), var(--clr-neutral-300));
 }
 
@@ -211,8 +211,6 @@
 
 .emptyState h3 {
   padding: 2rem;
-  border-bottom: 0.25rem solid
-    light-dark(var(--clr-base-teal-700), var(--clr-base-teal-300));
   margin-block-start: 0rem;
   margin-block-end: 1rem;
 }

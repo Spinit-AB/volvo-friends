@@ -53,5 +53,7 @@
   "lightmode.light": "Light",
   "lightmode.dark": "Dark",
   "lightmode.component": "Theme",
-  "posts.see_more": "See earlier posts"
+  "posts.see_more": "See earlier posts",
+  "about.board_title": "Board",
+  "member.adress_title": "Address"
 }

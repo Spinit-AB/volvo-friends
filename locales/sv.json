@@ -56,5 +56,7 @@
   "lightmode.dark": "Mörkt",
   "lightmode.component": "Tema",
   "post.see_more": "Se tidigare inlägg",
-  "post.posts_section_id": "inlägg"
+  "post.posts_section_id": "inlägg",
+  "about.board_title": "Styrelsen",
+  "member.adress_title": "Adress för medlemsansökan"
 }

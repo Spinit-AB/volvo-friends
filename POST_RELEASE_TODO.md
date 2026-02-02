@@ -1,7 +1,7 @@
 # Post-Release TODO List
 
 ## SEO & Social Media
-- [ ] Generate sitemap.xml (can use next-sitemap package or Next.js app router generateSitemaps)
+- [x] Generate sitemap.xml (can use next-sitemap package or Next.js app router generateSitemaps)
 - [ ] Create Open Graph images for social media sharing
   - Default OG image for the site
   - Dynamic OG images for blog posts
