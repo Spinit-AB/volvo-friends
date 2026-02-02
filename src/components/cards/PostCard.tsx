@@ -79,6 +79,7 @@ export const PostCards = ({
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCardsColor(index: number, colorOverrider?: TColor) {
   const i = index % 3;
 

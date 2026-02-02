@@ -2,7 +2,6 @@
 import { TTranslate } from "@/locales/utils/useT";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Select } from "../forms/Select";
-import styles from "./Lightmode.module.css";
 
 export const Lightmode = ({
   t,

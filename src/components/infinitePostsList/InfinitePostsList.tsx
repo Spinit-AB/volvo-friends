@@ -7,7 +7,7 @@ import { POSTS_PER_FETCH } from "@/utils/constants";
 import { formatDate } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import Image from "next/image";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HeaderLink } from "../link/HeaderLink";
 import styles from "./InfinitePostsList.module.css";
 

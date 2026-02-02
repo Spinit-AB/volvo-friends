@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   try {
     const data = await fetchPosts({ language, limit, offset });
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch posts" },
       { status: 500 }
