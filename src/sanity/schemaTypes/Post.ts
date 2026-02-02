@@ -168,7 +168,17 @@ export default defineType({
         }),
       hidden: ({ document }) => !document?.isEvent,
     }),
-    //TODO: We need a boolean field to update the event if it has been fully booked / sign up list is full
+
+    // Mark event as fully booked
+    defineField({
+      name: "fullyBooked",
+      type: "boolean",
+      title: "Evenemanget är fullbokat",
+      description:
+        "Markera detta om evenemanget är fullbokat eller om anmälningslistan är stängd.",
+      initialValue: false,
+      hidden: ({ document }) => !document?.isEvent,
+    }),
     defineField({
       name: "eventInfo",
       type: "array",

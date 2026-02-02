@@ -3,7 +3,7 @@ import { HeaderLink } from "@/components/link/HeaderLink";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
 import { TTranslate } from "@/locales/utils/useT";
 import { TUpcomingEvent } from "@/sanity/models/TPost";
-import { formatDateObject } from "@/utils/functions";
+import { formatDateHuman, formatDateObject } from "@/utils/functions";
 import { TColor } from "@/utils/types";
 import styles from "./CalendarCards.module.css";
 import { urlFor } from "@/sanity/lib/image";
@@ -24,18 +24,17 @@ export const CalendarEventCard = ({
 }) => {
   const date = formatDateObject(lang, event.date);
   const getSignupDeadline = () => {
+    if (event.fullyBooked) return t("post.event_fully_booked");
     if (event.signUpDeadline) {
       const deadlineDate = new Date(event.signUpDeadline);
       const now = new Date();
       if (deadlineDate >= now) {
-        // Format deadline date for display, e.g. "12:e februari"
-        const day = deadlineDate.getDate();
-        const month = deadlineDate.toLocaleString(lang, {
-          month: "long",
+        const formatted = formatDateHuman(lang, event.signUpDeadline, false);
+        return t("post.event_signup_deadline", {
+          date: formatted,
         });
-        return t("Sista anmälan {date}", { date: `${day}:e ${month}` });
       } else {
-        return t("Anmälningsdatum har passerat");
+        return t("post.event_signup_closed");
       }
     }
     return null;

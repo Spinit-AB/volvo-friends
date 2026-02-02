@@ -94,7 +94,8 @@ export const upcomingEventsQuery = groq`
       place,
       signUpEmail,
       signUpDeadline,
-      eventInfo
+      eventInfo,
+      fullyBooked
     }
 `;
 
@@ -144,7 +145,8 @@ function buildPostsQuery(filterOutEvents: boolean) {
             "place": place,
             "signUpEmail": signUpEmail,
             "signUpDeadline": signUpDeadline,
-            "eventInfo": eventInfo
+            "eventInfo": eventInfo,
+            "fullyBooked": fullyBooked
           },
           prioritized,
           color
@@ -202,7 +204,8 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
     "place": place,
     "signUpEmail": signUpEmail,
     "signUpDeadline": signUpDeadline,
-    "eventInfo": eventInfo
+    "eventInfo": eventInfo,
+    "fullyBooked": fullyBooked
   },
   prioritized,
   color

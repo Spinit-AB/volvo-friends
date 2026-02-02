@@ -111,44 +111,63 @@ const EventSection = ({
 }) => {
   const formatTime = useFormattedTime(lang);
   return (
-    <table className={styles.eventTable}>
-      <tbody>
-        <tr>
-          <th>{t("common.date")}</th>
-          <td>{formatDate(lang, event.date ?? "")}</td>
-        </tr>
-        <tr>
-          <th>{t("common.time")}</th>
-          <td> {formatTime(event.startTime, event.endTime)}</td>
-        </tr>
-        <tr>
-          <th>{t("common.place")}</th>
-          <td>{event.place}</td>
-        </tr>
-        {event.signUpEmail && (
+    <>
+      {event.fullyBooked && (
+        <p className="text-lg-bold">
+          <strong> {t("post.event_fully_booked")}</strong>
+        </p>
+      )}
+      <table className={styles.eventTable}>
+        <tbody>
           <tr>
-            <th>{t("post.sign_up_email")}</th>
-            <td>
-              <ExternalLink type="email" href={`@mailto:${event.signUpEmail}`}>
-                {event.signUpEmail}
-              </ExternalLink>
-            </td>
+            <th>{t("common.date")}</th>
+            <td>{formatDate(lang, event.date ?? "")}</td>
           </tr>
-        )}
-        {event.signUpDeadline && (
           <tr>
-            <th>{t("post.sign_up_deadline")}</th>
-            <td>{formatDate(lang, event.signUpDeadline ?? "")}</td>
+            <th>{t("common.time")}</th>
+            <td> {formatTime(event.startTime, event.endTime)}</td>
           </tr>
-        )}
-        {event.eventInfo?.map((row) => (
-          <tr key={row._key}>
-            <th>{row.key}</th>
-            <td>{row.value}</td>
+          <tr>
+            <th>{t("common.place")}</th>
+            <td>{event.place}</td>
           </tr>
-        ))}
-      </tbody>
-    </table>
+          {event.signUpEmail && (
+            <tr>
+              <th>{t("post.sign_up_email")}</th>
+              <td>
+                {event.fullyBooked ? (
+                  t("post.event_fully_booked_short")
+                ) : (
+                  <ExternalLink
+                    type="email"
+                    href={`@mailto:${event.signUpEmail}`}
+                  >
+                    {event.signUpEmail}
+                  </ExternalLink>
+                )}
+              </td>
+            </tr>
+          )}
+
+          {event.signUpDeadline && (
+            <tr>
+              <th>{t("post.sign_up_deadline")}</th>
+              <td>
+                {event.fullyBooked
+                  ? t("post.event_fully_booked_short")
+                  : formatDate(lang, event.signUpDeadline ?? "")}
+              </td>
+            </tr>
+          )}
+          {event.eventInfo?.map((row) => (
+            <tr key={row._key}>
+              <th>{row.key}</th>
+              <td>{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 

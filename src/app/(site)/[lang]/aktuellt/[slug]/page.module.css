@@ -59,5 +59,10 @@
   & th {
     width: fit-content;
     text-align: start;
+    padding-inline-end: 0.5rem;
+  }
+
+  & td {
+    padding-inline-start: 0.5rem;
   }
 }

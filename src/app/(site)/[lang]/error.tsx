@@ -1,22 +1,16 @@
 "use client";
 
-import styles from "./error.module.css";
 import { Button } from "@/components/button/Button";
 import { LinkButton } from "@/components/button/LinkButton";
 import { locales } from "@/locales";
 import { useT } from "@/locales/utils/useT";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import styles from "./error.module.css";
 
 export default function Error({ reset }: { reset: () => void }) {
   const pathname = usePathname();
   const lang = locales.find((l) => pathname.startsWith(`/${l.id}`))?.id || "sv";
   const t = useT({ lang });
-
-  useEffect(() => {
-    document.documentElement.classList.add("not-found-bg");
-    return () => document.documentElement.classList.remove("not-found-bg");
-  }, []);
 
   return (
     <>

@@ -20,6 +20,7 @@ export type TUpcomingEvent = {
     value: string;
     _key: string;
   }>;
+  fullyBooked?: boolean;
 };
 
 export type TPost = {
@@ -52,4 +53,5 @@ export type TEvent = {
     value: string;
     _key: string;
   }>;
+  fullyBooked?: boolean;
 };
