@@ -18,9 +18,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Volvo Friends",
   description: "FÖR OSS VOLVOENTUSIASTER",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+  openGraph: {
+    title: "Volvo Friends",
+    description: "FÖR OSS VOLVOENTUSIASTER",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Volvo Friends",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Volvo Friends",
+    description: "FÖR OSS VOLVOENTUSIASTER",
+    images: ["/og-image.png"],
+  },
   // TODO: Add language-specific metadata for English pages
-  // TODO: Add Open Graph images for social media sharing
-  // TODO: Add Twitter Card metadata
 };
 
 export default async function RootLayout({
@@ -41,6 +62,27 @@ export default async function RootLayout({
 
   return (
     <html lang={lang as string} className={htmlClass}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Volvo Friends",
+              description: "FÖR OSS VOLVOENTUSIASTER",
+              url: "https://www.volvofriends.com",
+              logo: "https://www.volvofriends.com/icon.png",
+              sameAs: [],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "Customer Service",
+                url: "https://www.volvofriends.com/contact",
+              },
+            }),
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         {(await draftMode()).isEnabled && <VisualEditing />}

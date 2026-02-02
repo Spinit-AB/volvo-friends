@@ -176,6 +176,11 @@
   --clr-btn-fg: var(--clr-neutral-100);
 }
 
+.neutral {
+  --clr-btn-bg: light-dark(var(--clr-neutral-900), var(--clr-neutral-100));
+  --clr-btn-fg: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
+}
+
 .base {
   font-size: 1.25rem;
 }

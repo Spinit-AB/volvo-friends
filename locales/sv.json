@@ -58,5 +58,14 @@
   "post.see_more": "Se tidigare inlägg",
   "post.posts_section_id": "inlägg",
   "about.board_title": "Styrelsen",
-  "member.adress_title": "Adress för medlemsansökan"
+  "member.adress_title": "Adress för medlemsansökan",
+  "notfound.page_not_found": "Sidan kunde inte hittas",
+  "notfound.description": "Vi beklagar, men vi kunde inte hitta sidan du letade efter. Vägen kan ha tagit en felaktig vänd.",
+  "notfound.back_to_home": "Tillbaka till startsidan",
+  "notfound.contact_us": "Kontakta oss",
+  "not_found.title": "404",
+  "not_found.subtitle": "Sidan kunde inte hittas",
+  "not_found.description": "Vi beklagar, men vi kunde inte hitta sidan du letade efter. Vägen kan ha tagit en felaktig vänd.",
+  "not_found.back_to_home": "Tillbaka till startsidan",
+  "not_found.contact_us": "Kontakta oss"
 }

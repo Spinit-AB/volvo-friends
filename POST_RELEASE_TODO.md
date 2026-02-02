@@ -2,46 +2,26 @@
 
 ## SEO & Social Media
 - [x] Generate sitemap.xml (can use next-sitemap package or Next.js app router generateSitemaps)
-- [ ] Create Open Graph images for social media sharing
-  - Default OG image for the site
-  - Dynamic OG images for blog posts
-- [ ] Add Twitter Card metadata to layout
-- [ ] Add app icons (icon.png, apple-touch-icon.png)
-- [ ] Consider adding JSON-LD structured data for better SEO
+- [x] Create Open Graph images for social media sharing
+  - [x] Default OG image for the site
+  - [x] Dynamic OG images for blog posts (deferred - using default OG image for now)
+- [x] Add Twitter Card metadata to layout
+- [x] Add app icons (icon.png, apple-touch-icon.png)
+- [x] Consider adding JSON-LD structured data for better SEO
 
 ## Next.js Configuration
-- [ ] Add image optimization config for Sanity CDN
+- [x] Add image optimization config for Sanity CDN
   - Configure remotePatterns for cdn.sanity.io
-  - Example:
-    ```typescript
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'cdn.sanity.io',
-        },
-      ],
-    }
-    ```
-- [ ] Review and optimize build settings
+- [x] Review and optimize build settings
 
 ## Documentation
-- [ ] Update README.md with:
-  - Project description
-  - Prerequisites
-  - Setup instructions
-  - Environment variables
-  - Sanity Studio setup
-  - Development workflow
-  - Deployment guide
-  - Project structure
-- [ ] Add CONTRIBUTING.md if open source
-- [ ] Consider adding architecture documentation
+- [x] Update README.md (points to Teams for detailed docs)
+- [x] Internal documentation maintained in Teams (not open source)
 
 ## Optional Enhancements
 - [ ] Add analytics (Google Analytics, Plausible, etc.)
 - [ ] Add error monitoring (Sentry, etc.)
-- [ ] Add proper 404 page with Volvo Friends branding
+- [x] Add proper 404 page with Volvo Friends branding
 - [ ] Add loading states for better UX
 - [ ] Add error boundaries
 - [ ] Consider adding a changelog

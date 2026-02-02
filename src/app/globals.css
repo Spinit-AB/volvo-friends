@@ -138,6 +138,17 @@ html.lightmode-native {
   background: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
 }
 
+html.not-found-bg,
+html.lightmode-native {
+  background: light-dark(var(--clr-base-blue-100), var(--clr-base-blue-900));
+}
+html.not-found-bg.lightmode-light {
+  background: var(--clr-base-blue-100);
+}
+html.not-found-bg.lightmode-dark {
+  background: var(--clr-base-blue-900);
+}
+
 /* === MINIMAL MODERN CSS RESET === */
 html {
   box-sizing: border-box;

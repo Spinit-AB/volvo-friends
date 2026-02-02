@@ -18,6 +18,7 @@ export type TButton = {
       color: "black";
       forcePalette?: "dark";
     }
+  | { color: "neutral"; forcePalette?: undefined }
 );
 
 export const Button = ({

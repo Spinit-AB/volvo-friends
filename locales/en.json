@@ -55,5 +55,9 @@
   "lightmode.component": "Theme",
   "posts.see_more": "See earlier posts",
   "about.board_title": "Board",
-  "member.adress_title": "Address"
+  "member.adress_title": "Address",
+  "notfound.page_not_found": "Page Not Found",
+  "notfound.description": "Sorry, we couldn't find the page you're looking for. The road might have taken a wrong turn.",
+  "notfound.back_to_home": "Back to Home",
+  "notfound.contact_us": "Contact Us"
 }
