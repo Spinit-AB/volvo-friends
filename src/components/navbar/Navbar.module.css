@@ -199,6 +199,12 @@
   animation: disappear var(--animation-speed, 600ms) forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    --animation-speed: 1ms;
+  }
+}
+
 @keyframes disappear {
   from {
     translate: 0 0;
