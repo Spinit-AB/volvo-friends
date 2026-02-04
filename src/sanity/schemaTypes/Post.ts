@@ -213,7 +213,6 @@ export default defineType({
       title: "Brödtext",
       type: "array",
       of: richText,
-      validation: (Rule) => Rule.required().min(1).error("Brödtext krävs."),
     }),
     defineField({
       name: "gallery",
