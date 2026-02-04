@@ -1,4 +1,5 @@
 import { defineField, defineArrayMember } from "sanity";
+import { richText } from "./richText";
 
 export const generalPageFields = [
   defineField({
@@ -44,8 +45,9 @@ export const generalPageFields = [
           }),
           defineField({
             name: "content",
-            type: "blockContent",
+            type: "array",
             title: "Blockinnehåll",
+            of: richText,
           }),
         ],
       }),

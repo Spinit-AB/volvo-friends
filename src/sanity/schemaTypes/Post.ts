@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { richText } from "./richText";
 
 export default defineType({
   name: "post",
@@ -211,20 +212,7 @@ export default defineType({
       name: "body",
       title: "Brödtext",
       type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "Citat", value: "blockquote" },
-          ],
-          lists: [
-            { title: "Punktlista", value: "bullet" },
-            { title: "Numrerad lista", value: "number" },
-          ],
-        },
-        { type: "customImage" },
-      ],
+      of: richText,
       validation: (Rule) => Rule.required().min(1).error("Brödtext krävs."),
     }),
     defineField({
