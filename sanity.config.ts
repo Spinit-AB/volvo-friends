@@ -121,6 +121,7 @@ export default defineConfig({
         "https://volvofriends.netlify.app",
         "https://volvofriends.com",
         "https://www.volvofriends.com",
+        "https://devserver-preview--volvofriends.netlify.app",
       ],
     }),
   ],
