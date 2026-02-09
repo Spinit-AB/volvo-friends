@@ -1,5 +1,5 @@
+import { sanityFetch } from "@/sanity/lib/queries";
 import { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
 
 const BASE_URL = "https://volvofriends.com";
 const LANG = "sv";
@@ -11,7 +11,7 @@ async function getPosts() {
   }`;
 
   try {
-    return await client.fetch(query, { lang: LANG });
+    return await sanityFetch({ query, params: { lang: LANG } });
   } catch (error) {
     console.error("Failed to fetch posts for sitemap:", error);
     return [];

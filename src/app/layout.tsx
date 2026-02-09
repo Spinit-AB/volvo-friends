@@ -4,6 +4,7 @@ import "./globals.css";
 import { cookies, draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Params } from "next/dist/server/request/params";
+import { DisableDraftMode } from "@/components/DisableDraftMode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,7 +87,12 @@ export default async function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
-        {(await draftMode()).isEnabled && <VisualEditing />}
+        {(await draftMode()).isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+          </>
+        )}
       </body>
     </html>
   );
