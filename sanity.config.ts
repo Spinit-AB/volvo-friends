@@ -107,10 +107,7 @@ export default defineConfig({
     }),
     presentationTool({
       previewUrl: {
-        initial:
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:3000"
-            : "https://volvofriends.netlify.app", //TODO test that this still works once we have the proper domain
+        initial: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
         previewMode: {
           enable: "/api/draft-mode/enable",
           disable: "/api/draft-mode/disable",
