@@ -1,4 +1,5 @@
 "server-only";
+export const dynamic = "force-dynamic";
 import { validatePreviewUrl } from "@sanity/preview-url-secret";
 import { draftMode } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
