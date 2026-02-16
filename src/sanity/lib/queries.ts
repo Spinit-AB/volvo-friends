@@ -15,6 +15,7 @@ import {
   TBecomeMemberPage,
 } from "../models/TAboutBecomeMemberPage";
 import { TFooter } from "../models/TFooter";
+import { TContactForm } from "../models/TContactFormConfig";
 import { TPost, TPostPreview, TUpcomingEvent } from "../models/TPost";
 
 const token = process.env.SANITY_API_READ_TOKEN;
@@ -81,12 +82,12 @@ export const upcomingEventsQuery = groq`
     && date >= $now
     && language == $language
   ]
-    | order(date asc, startTime asc) {
+    | order((defined(prioritisedUntil) && prioritisedUntil >= $now) desc, date asc, startTime asc) {
       _id,
       title,
       slug,
       heroImage,
-      prioritized,
+      prioritisedUntil,
       color,
       date,
       startTime,
@@ -128,7 +129,7 @@ function buildPostsQuery(filterOutEvents: boolean) {
         && language == $language
         ${eventFilter}
       ]
-        | order(coalesce(prioritized, false) desc, _createdAt desc)
+        | order((defined(prioritisedUntil) && prioritisedUntil >= $now) desc, _createdAt desc)
         [$offset...($offset + $limit)] {
           _id,
           _createdAt,
@@ -148,7 +149,7 @@ function buildPostsQuery(filterOutEvents: boolean) {
             "eventInfo": eventInfo,
             "fullyBooked": fullyBooked
           },
-          prioritized,
+          prioritisedUntil,
           color
         },
       "total": count(*[
@@ -172,6 +173,7 @@ export async function fetchPosts({
   filterOutEvents?: boolean;
 } = {}) {
   const query = buildPostsQuery(!!filterOutEvents);
+  const today = new Date().toISOString().split("T")[0]; // Get YYYY-MM-DD format
   return await sanityFetch<{
     posts: TPostPreview[];
     total: number;
@@ -181,6 +183,7 @@ export async function fetchPosts({
       language,
       limit,
       offset,
+      now: today,
     },
   });
 }
@@ -207,7 +210,7 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
     "eventInfo": eventInfo,
     "fullyBooked": fullyBooked
   },
-  prioritized,
+  prioritisedUntil,
   color
 }`;
 
@@ -272,4 +275,18 @@ export async function fetchBecomeMemberPage({
     query: becomeMemberPageQuery,
     params: { id },
   });
+}
+
+// --- Contact Form (singleton per language) ---
+export const contactFormQuery = groq`*[_type == "contactForm" && _id == $id][0]`;
+
+export async function fetchContactFormTopics(
+  language: string,
+): Promise<string[]> {
+  const id = `contactForm_${language}`;
+  const config = await sanityFetch<TContactForm | null>({
+    query: contactFormQuery,
+    params: { id },
+  });
+  return config?.topics || [];
 }

@@ -7,6 +7,7 @@ export const generalPageFields = [
     type: "string",
     title: "Språk",
     readOnly: true,
+    hidden: true,
     initialValue: (params) => {
       // Lock language based on document ID
       if (params?.document?._id?.endsWith("_sv")) return "sv";

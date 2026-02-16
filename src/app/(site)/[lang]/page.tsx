@@ -27,7 +27,7 @@ export default async function HomePreload(props: {
 
   const events = await fetchUpcomingEvents({
     language: lang,
-    now: new Date().toISOString(),
+    now: new Date().toISOString().split("T")[0],
   });
 
   return <Home params={params} posts={posts} events={events} />;

@@ -29,7 +29,7 @@ const Posts = async (props: {
 
   const events = await fetchUpcomingEvents({
     language: lang,
-    now: new Date().toISOString(),
+    now: new Date().toISOString().split("T")[0],
   });
 
   return (

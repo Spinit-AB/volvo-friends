@@ -3,6 +3,18 @@ import { TTranslate } from "@/locales/utils/useT";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Select } from "../forms/Select";
 
+function getCookieValue(name: string, defaultValue: string): string {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    const cookieValue = parts.pop()?.split(";").shift() || defaultValue;
+    return ["system", "light", "dark"].includes(cookieValue)
+      ? cookieValue
+      : defaultValue;
+  }
+  return defaultValue;
+}
+
 export const Lightmode = ({
   t,
   selectClassName,
@@ -17,16 +29,16 @@ export const Lightmode = ({
     { value: "light", label: t("lightmode.light") },
     { value: "dark", label: t("lightmode.dark") },
   ];
-  const [selected, setSelected] = useState(() => {
-    if (typeof document === "undefined") {
-      return "system";
-    }
-    const match = document.cookie.match(/(?:^|; )lightmode=([^;]*)/);
-    if (match && ["system", "light", "dark"].includes(match[1])) {
-      return match[1];
-    }
-    return "system";
-  });
+
+  const [selected, setSelected] = useState("system");
+
+  useEffect(() => {
+    // We intentionally call setState here to sync the initial value with the cookie,
+    // since document.cookie is only available in the browser. This is safe because
+    // it only runs on mount and avoids SSR issues. The warning is suppressed intentionally.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelected(getCookieValue("lightmode", "system"));
+  }, []);
 
   const applyMode = (mode: string) => {
     const root = document.documentElement;
@@ -49,25 +61,16 @@ export const Lightmode = ({
     }
   };
 
-  // Sync cookie value to state on mount
-  // We read from an external system (browser cookies) and sync to React state.
-  // This is a legitimate use case for setState in effects. The dependency array is empty
-  // to run only once on mount. The eslint rule is suppressed because this pattern is safe.
+  // Apply the mode on mount and whenever selected changes
   useEffect(() => {
-    const match = document.cookie.match(/(?:^|; )lightmode=([^;]*)/);
-    if (match && ["system", "light", "dark"].includes(match[1])) {
-      // eslint-disable-next-line
-      setSelected(match[1]);
-      applyMode(match[1]);
-    }
-  }, []);
+    applyMode(selected);
+  }, [selected]);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value =
       modeOptions.find((opt) => opt.label === event.currentTarget.value)
         ?.value || "system";
     setSelected(value);
-    applyMode(value);
     document.cookie = `lightmode=${value}; path=/; SameSite=Lax`;
   };
 

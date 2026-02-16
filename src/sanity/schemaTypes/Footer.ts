@@ -13,6 +13,27 @@ export default defineType({
       initialValue: "Sidfot",
     }),
     defineField({
+      name: "language",
+      type: "string",
+      title: "Språk",
+      description: "Språkkod för sidfoten, t.ex. 'sv' eller 'en'.",
+      initialValue: (params) => {
+        const id = params?.document?._id || "";
+        if (id === "footer" || id.endsWith("_sv")) return "sv";
+        if (id.endsWith("_en")) return "en";
+        return "sv";
+      },
+      validation: (Rule) =>
+        Rule.custom((lang, context) => {
+          const id = context?.document?._id || "";
+          if ((id === "footer" || id.endsWith("_sv")) && lang !== "sv")
+            return "Språk måste vara sv för denna sidfot";
+          if (id.endsWith("_en") && lang !== "en")
+            return "Språk måste vara en för denna sidfot";
+          return true;
+        }),
+    }),
+    defineField({
       name: "documents",
       title: "Dokument",
       description:
@@ -28,7 +49,7 @@ export default defineType({
               "application/msword",
               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
               "application/vnd.ms-powerpoint",
-              "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation",
             ].join(","),
           },
           fields: [

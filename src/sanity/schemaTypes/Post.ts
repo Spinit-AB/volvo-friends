@@ -26,14 +26,13 @@ export default defineType({
           .error("En slug krävs för att skapa en sida på webbplatsen"),
     }),
 
-    // Prioriterat inlägg (checkbox)
+    // Prioriterat inlägg (endast datum)
     defineField({
-      name: "prioritized",
-      type: "boolean",
-      title: "Prioriterat inlägg/evenemang",
+      name: "prioritisedUntil",
+      type: "date",
+      title: "Prioriterat till och med",
       description:
-        "Markera detta inlägg/evenemang som prioriterat för att visa det överst och med särskild stil.",
-      initialValue: false,
+        "Om du anger ett datum här kommer inlägget att visas överst i listor fram till och med detta datum. Lämna tomt för att inte prioritera.",
     }),
     defineField({
       name: "heroImage",

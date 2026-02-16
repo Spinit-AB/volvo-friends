@@ -89,7 +89,11 @@ export function ContactFormClient({
     }
   };
 
-  // Remove the useEffect that was checking sessionStorage
+  const fallbackSubjects = [
+    t("contact.subject_fallback_1"),
+    t("contact.subject_fallback_2"),
+    t("contact.subject_fallback_3"),
+  ];
 
   return (
     <section className={`page-container green ${styles.contact}`}>
@@ -119,7 +123,9 @@ export function ContactFormClient({
           name="subject"
           id="contact-subject"
           color={color}
-          options={subjects}
+          options={
+            subjects && subjects.length > 0 ? subjects : fallbackSubjects
+          }
         />
 
         <Input

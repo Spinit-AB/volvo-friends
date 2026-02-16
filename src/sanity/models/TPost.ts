@@ -7,7 +7,7 @@ export type TUpcomingEvent = {
   title: string;
   slug: { current: string };
   heroImage: TSanityImageWithAlt;
-  prioritized?: boolean;
+  prioritisedUntil?: string;
   color?: TColor;
   date: string;
   startTime: string;
@@ -35,7 +35,7 @@ export type TPost = {
   gallery?: TSanityImageWithAlt[];
   language?: string;
   event?: TEvent;
-  prioritized?: boolean;
+  prioritisedUntil?: string;
   color?: TColor;
 };
 

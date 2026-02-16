@@ -7,7 +7,44 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.listItem()
         .title("Sidfot")
-        .child(S.document().schemaType("footer").documentId("footer")),
+        .child(
+          S.list()
+            .title("Sidfot språk")
+            .items([
+              S.listItem()
+                .title("Svenska")
+                .child(S.document().schemaType("footer").documentId("footer")),
+              // S.listItem()
+              //   .title("English")
+              //   .child(
+              //     S.document()
+              //       .schemaType("footer")
+              //       .documentId("footer_en"),
+              //   ),
+            ]),
+        ),
+      S.listItem()
+        .title("Kontaktformulär")
+        .child(
+          S.list()
+            .title("Kontaktformulär språk")
+            .items([
+              S.listItem()
+                .title("Svenska")
+                .child(
+                  S.document()
+                    .schemaType("contactForm")
+                    .documentId("contactForm_sv"),
+                ),
+              // S.listItem()
+              //   .title("English")
+              //   .child(
+              //     S.document()
+              //       .schemaType("contactForm")
+              //       .documentId("contactForm_en"),
+              //   ),
+            ]),
+        ),
       S.listItem()
         .title("Om oss")
         .child(
@@ -52,9 +89,11 @@ export const structure: StructureResolver = (S) =>
               //   ),
             ]),
         ),
-      // Add all other document types except 'footer', 'aboutPage', 'becomeMemberPage'
+      // Add all other document types except 'footer', 'aboutPage', 'becomeMemberPage', 'contactForm', 'contactFormConfig'
       ...S.documentTypeListItems().filter(
         (item) =>
-          !["footer", "aboutPage", "becomeMemberPage"].includes(item.getId() || ""),
+          !["footer", "aboutPage", "becomeMemberPage", "contactForm"].includes(
+            item.getId() || "",
+          ),
       ),
     ]);
