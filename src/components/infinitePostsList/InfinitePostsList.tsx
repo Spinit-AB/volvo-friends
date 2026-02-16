@@ -89,7 +89,7 @@ export default function InfinitePostsList({
           key={post._id}
           className={`page-container ${styles.article} ${getBlockColour(
             i,
-            post.prioritized,
+            !!post.prioritisedUntil,
             post.color,
           )}`}
         >
