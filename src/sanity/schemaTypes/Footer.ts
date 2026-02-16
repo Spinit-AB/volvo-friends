@@ -17,6 +17,8 @@ export default defineType({
       type: "string",
       title: "Språk",
       description: "Språkkod för sidfoten, t.ex. 'sv' eller 'en'.",
+      hidden: true,
+      readOnly: true,
       initialValue: (params) => {
         const id = params?.document?._id || "";
         if (id === "footer" || id.endsWith("_sv")) return "sv";
