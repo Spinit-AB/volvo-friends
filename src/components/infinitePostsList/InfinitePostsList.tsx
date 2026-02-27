@@ -104,7 +104,7 @@ export default function InfinitePostsList({
             />
             <div className={styles.articleTextWrapper}>
               <HeaderLink
-                className="text-display-sm"
+                className="text-cardheader-novum-md"
                 href={to(`${postsPageSlug}/${post.slug.current}`)}
                 component={"h3"}
               >

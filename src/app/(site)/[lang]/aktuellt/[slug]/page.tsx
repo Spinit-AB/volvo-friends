@@ -80,7 +80,7 @@ export const PostArticle = ({
           />
         )}
         <div className={styles.inner}>
-          <h1 className="text-display-lg">{post.title}</h1>
+          <h1 className="text-cardheader-novum-lg">{post.title}</h1>
           <p className="text-base-italic">
             {t("common.created_at")}: {formatDate(lang, post._createdAt)}
           </p>
