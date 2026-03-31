@@ -129,10 +129,10 @@ function buildPostsQuery(filterOutEvents: boolean) {
         && language == $language
         ${eventFilter}
       ]
-        | order((defined(prioritisedUntil) && prioritisedUntil >= $now) desc, _createdAt desc)
+        | order((defined(prioritisedUntil) && prioritisedUntil >= $now) desc, coalesce(publishedAtOverride, _createdAt) desc)
         [$offset...($offset + $limit)] {
           _id,
-          _createdAt,
+          "_createdAt": coalesce(publishedAtOverride, _createdAt),
           _updatedAt,
           title,
           slug,
@@ -191,7 +191,7 @@ export async function fetchPosts({
 // Fetch a single post by slug
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0] {
   _id,
-  _createdAt,
+  "_createdAt": coalesce(publishedAtOverride, _createdAt),
   _updatedAt,
   title,
   slug,

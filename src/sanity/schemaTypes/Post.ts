@@ -54,6 +54,13 @@ export default defineType({
           .max(200)
           .error("Sammanfattning krävs och får vara max 200 tecken."),
     }),
+    defineField({
+      name: "publishedAtOverride",
+      type: "datetime",
+      title: "Publiceringsdatum (manuell överskrivning)",
+      description:
+        "Om du fyller i detta används datumet istället för automatiskt publiceringsdatum i listor och artikeln.",
+    }),
     // Event toggle (checkbox)
     defineField({
       name: "isEvent",
