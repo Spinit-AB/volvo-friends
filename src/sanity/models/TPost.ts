@@ -21,6 +21,7 @@ export type TUpcomingEvent = {
     _key: string;
   }>;
   fullyBooked?: boolean;
+  hideDateAndTime?: boolean;
 };
 
 export type TPost = {
@@ -54,4 +55,5 @@ export type TEvent = {
     _key: string;
   }>;
   fullyBooked?: boolean;
+  hideDateAndTime?: boolean;
 };

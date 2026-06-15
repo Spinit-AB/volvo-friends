@@ -6,7 +6,7 @@ Den har guiden ar gjord for redaktorer som vill skapa ett inlagg snabbt och utan
 
 - Ha rubrik och sammanfattning klara.
 - Ha en hero-bild redo.
-- Om det ar ett evenemang: ha datum, starttid och plats klara.
+- Om det ar ett event: ha datum, starttid och plats klara.
 
 ## 2. Skapa inlagget
 
@@ -23,9 +23,9 @@ Den har guiden ar gjord for redaktorer som vill skapa ett inlagg snabbt och utan
 - Bildgalleri
 - Farg pa inlagget
 
-## 3. Om inlagget ar ett evenemang
+## 3. Om inlagget ar ett event
 
-1. Markera Gor detta inlagg till ett evenemang.
+1. Markera Gor detta inlagg till ett event.
 2. Fyll i obligatoriskt:
 - Datum
 - Starttid (HH:mm)
@@ -34,7 +34,7 @@ Den har guiden ar gjord for redaktorer som vill skapa ett inlagg snabbt och utan
 - Sluttid
 - Anmalnings-e-post
 - Sista anmalningsdag
-- Extra information om evenemanget
+- Extra information om eventet
 - Fullbokat (om platserna ar slut)
 
 ## 4. Kvalitetskontroll innan publicering
@@ -45,7 +45,7 @@ Den har guiden ar gjord for redaktorer som vill skapa ett inlagg snabbt och utan
 - Herobilden finns och har ratt motiv.
 - Brodtexten ar genomlast.
 - Sprak ar korrekt.
-- Om evenemang: datum, tid och plats ar korrekt ifyllda.
+- Om event: datum, tid och plats ar korrekt ifyllda.
 
 ## 5. Publicera
 
@@ -67,7 +67,7 @@ Fyll i grundfalt
 (Rubrik, Slug, Sammanfattning, Herobild, Brodtext)
   |
   v
-Ar detta ett evenemang?
+Är detta ett event?
   |\
   | Ja -----------------------------> Fyll i eventfalt
   |                                  (Datum, Starttid, Plats + valfria falt)

@@ -65,22 +65,22 @@ export default defineType({
     defineField({
       name: "isEvent",
       type: "boolean",
-      title: "Gör detta inlägg till ett evenemang",
+      title: "Gör detta inlägg till ett event",
       description:
-        "Markera om detta inlägg handlar om ett evenemang. Då kan du lägga till datum, tid och plats.",
+        "Markera om detta inlägg handlar om ett event. Då kan du lägga till datum, tid och plats.",
       initialValue: false,
     }),
     defineField({
       name: "date",
       type: "date",
       title: "Datum",
-      description: "Datum för evenemanget",
+      description: "Datum för eventet",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const doc = context.document as Record<string, unknown>;
           if (!doc?.isEvent) return true;
           if (!value) {
-            return "Datum måste anges för evenemang.";
+            return "Datum måste anges för event.";
           }
           return true;
         }),
@@ -90,14 +90,14 @@ export default defineType({
       name: "startTime",
       type: "string",
       title: "Starttid",
-      description: "Starttid för evenemanget (HH:mm)",
+      description: "Starttid för eventet (HH:mm)",
       placeholder: "18:00",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const doc = context.document as Record<string, unknown>;
           if (!doc?.isEvent) return true;
           if (!value) {
-            return "Starttid måste anges för evenemang.";
+            return "Starttid måste anges för event.";
           }
           if (!/^([01]\d|2[0-3])[:.\s]?([0-5]\d)$/.test(value)) {
             return "Starttiden måste anges i formatet HH:mm, t.ex. 18:00.";
@@ -110,7 +110,7 @@ export default defineType({
       name: "endTime",
       type: "string",
       title: "Sluttid (valfritt)",
-      description: "Sluttid för evenemanget (HH:mm, valfritt)",
+      description: "Sluttid för eventet (HH:mm, valfritt)",
       placeholder: "20:00",
       validation: (Rule) =>
         Rule.custom((value, context) => {
@@ -125,16 +125,25 @@ export default defineType({
       hidden: ({ document }) => !document?.isEvent,
     }),
     defineField({
+      name: "hideDateAndTime",
+      type: "boolean",
+      title: "Dölj datum och starttid",
+      description:
+        "Markera om exakt datum och tid inte ska visas för besökare. T.ex. om datumet inte är fastställt eller om evenemanget pågår i flera dagar.",
+      initialValue: false,
+      hidden: ({ document }) => !document?.isEvent,
+    }),
+    defineField({
       name: "place",
       type: "string",
       title: "Plats",
-      description: "Plats för evenemanget",
+      description: "Plats för eventet",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const doc = context.document as Record<string, unknown>;
           if (!doc?.isEvent) return true;
           if (!value) {
-            return "Plats måste anges för evenemang.";
+            return "Plats måste anges för event.";
           }
           return true;
         }),
@@ -145,7 +154,7 @@ export default defineType({
       name: "signUpEmail",
       type: "string",
       title: "Anmälnings-e-post (valfritt)",
-      description: "E-postadress för anmälan till evenemanget (valfritt)",
+      description: "E-postadress för anmälan till eventet (valfritt)",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const doc = context.document as Record<string, unknown>;
@@ -164,7 +173,7 @@ export default defineType({
       name: "signUpDeadline",
       type: "date",
       title: "Sista anmälningsdag (valfritt)",
-      description: "Sista datum för anmälan till evenemanget (valfritt)",
+      description: "Sista datum för anmälan till eventet (valfritt)",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const doc = context.document as Record<string, unknown>;
@@ -180,18 +189,18 @@ export default defineType({
     defineField({
       name: "fullyBooked",
       type: "boolean",
-      title: "Evenemanget är fullbokat",
+      title: "Eventet är fullbokat",
       description:
-        "Markera detta om evenemanget är fullbokat eller om anmälningslistan är stängd.",
+        "Markera detta om eventet är fullbokat eller om anmälningslistan är stängd.",
       initialValue: false,
       hidden: ({ document }) => !document?.isEvent,
     }),
     defineField({
       name: "eventInfo",
       type: "array",
-      title: "Extra information om evenemanget",
+      title: "Extra information om eventet",
       description:
-        "Lägg till egna rader för att visa mer information om evenemanget.",
+        "Lägg till egna rader för att visa mer information om eventet.",
       of: [
         defineField({
           name: "infoItem",
@@ -201,13 +210,25 @@ export default defineType({
               name: "key",
               type: "string",
               title: "Rubrik (t.ex. Entré, Fika, Talare)",
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const doc = context.document as Record<string, unknown>;
+                  if (!doc?.isEvent) return true;
+                  if (!value) return "Rubrik måste anges.";
+                  return true;
+                }),
             }),
             defineField({
               name: "value",
               type: "string",
               title: "Beskrivning",
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const doc = context.document as Record<string, unknown>;
+                  if (!doc?.isEvent) return true;
+                  if (!value) return "Beskrivning måste anges.";
+                  return true;
+                }),
             }),
           ],
         }),

@@ -119,14 +119,18 @@ const EventSection = ({
       )}
       <table className={styles.eventTable}>
         <tbody>
-          <tr>
-            <th>{t("common.date")}</th>
-            <td>{formatDate(lang, event.date ?? "")}</td>
-          </tr>
-          <tr>
-            <th>{t("common.time")}</th>
-            <td> {formatTime(event.startTime, event.endTime)}</td>
-          </tr>
+          {event.hideDateAndTime ? null : (
+            <>
+              <tr>
+                <th>{t("common.date")}</th>
+                <td>{formatDate(lang, event.date ?? "")}</td>
+              </tr>
+              <tr>
+                <th>{t("common.time")}</th>
+                <td> {formatTime(event.startTime, event.endTime)}</td>
+              </tr>
+            </>
+          )}
           <tr>
             <th>{t("common.place")}</th>
             <td>{event.place}</td>

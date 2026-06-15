@@ -52,15 +52,25 @@ export const CalendarEventCard = ({
         }}
       >
         <time className={styles.dateRow} dateTime={event.date}>
-          <span className={`text-display-md ${styles.day}`}>{date.day}</span>
-          <span className={`text-base-bold ${styles.month}`}>
+          {!event.hideDateAndTime && (
+            <span className={`text-display-md ${styles.day}`}>{date.day}</span>
+          )}
+          <span
+            className={`${event.hideDateAndTime ? "text-display-md" : "text-base-bold"} ${styles.month}`}
+          >
             {date.monthShort}
           </span>
-          <span className={`text-base-bold  ${styles.year}`}>{date.year}</span>
-          <span className={`${styles.time}`}>
-            <Clock className={`${styles.clock}`} />
-            {event.startTime} {event.endTime && ` - ${event.endTime}`}
+          <span
+            className={`${event.hideDateAndTime ? styles.time : "text-base-bold"} ${styles.year}`}
+          >
+            {date.year}
           </span>
+          {!event.hideDateAndTime && (
+            <span className={`${styles.time}`}>
+              <Clock className={`${styles.clock}`} />
+              {event.startTime} {event.endTime && ` - ${event.endTime}`}
+            </span>
+          )}
         </time>
       </header>
       <section className={styles.content}>
