@@ -1,6 +1,7 @@
 import { Header } from "@/components/header/Header";
 import { useT } from "@/locales/utils/useT";
-import styles from "./BecomeMember.module.css";
+import styles from "@/components/content/ContentPage.module.css";
+import memberStyles from "./BecomeMember.module.css";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
 import { getLang, useLang } from "@/locales/utils/useLang";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
@@ -76,7 +77,7 @@ export const AwaitedBecomeMember = ({
             <h2 id="address-heading" className="text-cardheader-novum-sm">
               {data.addressTitle}
             </h2>
-            <address className={styles.address}>
+            <address className={memberStyles.address}>
               <PortableAddressWrapper value={data.address} />
             </address>
           </section>

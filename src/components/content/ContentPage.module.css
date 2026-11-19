@@ -1,4 +1,17 @@
 .root {
+  position: relative;
+  isolation: isolate;
+
+  /* Fill the same grid column as the content, independently of row heights. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    grid-column: gutter;
+    z-index: -1;
+    background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
+  }
+
   background-color: var(
     --clr-bg,
     light-dark(var(--clr-neutral-300), var(--clr-neutral-900))

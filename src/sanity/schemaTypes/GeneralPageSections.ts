@@ -1,7 +1,7 @@
-import { defineField, defineArrayMember } from "sanity";
+import { defineField, defineArrayMember, type FieldDefinition } from "sanity";
 import { richText } from "./richText";
 
-export const generalPageFields = [
+export const createGeneralPageFields = (extraSectionFields: FieldDefinition[] = []) => [
   defineField({
     name: "language",
     type: "string",
@@ -44,6 +44,7 @@ export const generalPageFields = [
             title: "Blockrubrik",
             validation: (Rule) => Rule.required(),
           }),
+          ...extraSectionFields,
           defineField({
             name: "content",
             type: "array",
@@ -55,3 +56,5 @@ export const generalPageFields = [
     ],
   }),
 ];
+
+export const generalPageFields = createGeneralPageFields();

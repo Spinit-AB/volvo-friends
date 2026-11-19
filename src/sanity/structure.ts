@@ -24,10 +24,10 @@ export const structure: StructureResolver = (S) =>
             ]),
         ),
       S.listItem()
-        .title("Kontaktformulär")
+        .title("Kontakt")
         .child(
           S.list()
-            .title("Kontaktformulär språk")
+            .title("Kontakt språk")
             .items([
               S.listItem()
                 .title("Svenska")
@@ -36,13 +36,13 @@ export const structure: StructureResolver = (S) =>
                     .schemaType("contactForm")
                     .documentId("contactForm_sv"),
                 ),
-              // S.listItem()
-              //   .title("English")
-              //   .child(
-              //     S.document()
-              //       .schemaType("contactForm")
-              //       .documentId("contactForm_en"),
-              //   ),
+              S.listItem()
+                .title("English")
+                .child(
+                  S.document()
+                    .schemaType("contactForm")
+                    .documentId("contactForm_en"),
+                ),
             ]),
         ),
       S.listItem()

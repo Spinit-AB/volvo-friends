@@ -1,0 +1,21 @@
+.links {
+  & a {
+    color: light-dark(var(--clr-base-green-700), var(--clr-accent-green-light));
+    font-weight: 600;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+
+    &:hover {
+      color: light-dark(var(--clr-base-green-900), var(--clr-base-green-100));
+      text-decoration-thickness: 0.14em;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+}
+

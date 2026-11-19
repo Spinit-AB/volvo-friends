@@ -138,6 +138,12 @@ html.lightmode-native {
   background: light-dark(var(--clr-neutral-100), var(--clr-neutral-800));
 }
 
+/* Studio's theme tokens are defined on :root. The public site's theme cookie
+   must not force those tokens into light mode while Studio uses dark mode. */
+html:has(#sanity) {
+  color-scheme: light dark;
+}
+
 html.not-found-bg,
 html.lightmode-native {
   background: light-dark(var(--clr-base-blue-100), var(--clr-base-blue-900));
@@ -198,6 +204,29 @@ body {
   background-color: var(--clr-bg);
 
   scroll-timeline: --main-timeline;
+}
+
+/* Keep the footer at the bottom without stretching individual page sections.
+   Scope this to the public site so Studio keeps its own layout. */
+body:has(> #site-nav) {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
+  & > #site-nav,
+  & > #site-footer {
+    flex-shrink: 0;
+  }
+
+  & > main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    & > :last-child {
+      flex-grow: 1;
+    }
+  }
 }
 
 @media screen and (width > 600px) {
@@ -390,6 +419,8 @@ body {
 
 /* === LAYOUT === */
 .page-container {
+  /* Extra page height belongs below the content, not between its grid rows. */
+  align-content: start;
   --padding-inline: var(--gutter);
   --content-max-width: 70ch;
   --breakout-max-width: 1200px;

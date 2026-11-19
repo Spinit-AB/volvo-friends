@@ -1,25 +1,3 @@
-.root {
-  background-color: var(
-    --clr-bg,
-    light-dark(var(--clr-neutral-300), var(--clr-neutral-900))
-  );
-
-  & > * {
-    background-color: light-dark(
-      var(--clr-neutral-100),
-      var(--clr-neutral-800)
-    );
-  }
-}
-
-.firstSection {
-  padding-block-start: 4rem;
-}
-
-.lastSection {
-  padding-block-end: 4rem;
-}
-
 .address {
   display: flex;
   flex-direction: column;

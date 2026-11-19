@@ -7,7 +7,7 @@ import { useT } from "@/locales/utils/useT";
 import { fetchAboutPage } from "@/sanity/lib/queries";
 import { TAboutPage } from "@/sanity/models/TAboutBecomeMemberPage";
 import { TColor } from "@/utils/types";
-import styles from "./About.module.css";
+import styles from "@/components/content/ContentPage.module.css";
 
 const AboutPage = async (props: { params: { lang?: string | string[] } }) => {
   const params = await props.params;

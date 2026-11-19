@@ -15,7 +15,7 @@ import {
   TBecomeMemberPage,
 } from "../models/TAboutBecomeMemberPage";
 import { TFooter } from "../models/TFooter";
-import { TContactForm } from "../models/TContactFormConfig";
+import { TContactPage } from "../models/TContactFormConfig";
 import { TPost, TPostPreview, TUpcomingEvent } from "../models/TPost";
 
 const token = process.env.SANITY_API_READ_TOKEN;
@@ -280,16 +280,15 @@ export async function fetchBecomeMemberPage({
   });
 }
 
-// --- Contact Form (singleton per language) ---
-export const contactFormQuery = groq`*[_type == "contactForm" && _id == $id][0]`;
+// Keep the existing singleton IDs so existing contact documents remain editable.
+export const contactPageQuery = groq`*[_type == "contactForm" && _id == $id][0]{title, preamble, sections}`;
 
-export async function fetchContactFormTopics(
+export async function fetchContactPage(
   language: string,
-): Promise<string[]> {
+): Promise<TContactPage | null> {
   const id = `contactForm_${language}`;
-  const config = await sanityFetch<TContactForm | null>({
-    query: contactFormQuery,
+  return sanityFetch<TContactPage | null>({
+    query: contactPageQuery,
     params: { id },
   });
-  return config?.topics || [];
 }
