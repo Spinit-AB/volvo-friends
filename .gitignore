@@ -20,6 +20,9 @@
 # production
 /build
 
+# generated Sanity Studio runtime
+/.sanity/
+
 # misc
 .DS_Store
 *.pem
