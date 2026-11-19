@@ -9,6 +9,7 @@ import {
   defineConfig,
   isKeyedObject,
   defineLocaleResourceBundle,
+  type InitialValueResolverContext,
 } from "sanity";
 import { structureTool } from "sanity/structure";
 import { documentInternationalization } from "@sanity/document-internationalization";
@@ -55,6 +56,34 @@ export default defineConfig({
 
       return [
         ...prevFiltered,
+        {
+          id: "story-with-category",
+          title: "Berättelse i kategorin",
+          schemaType: "story",
+          parameters: [{ name: "categoryId", type: "string" }],
+          value: async (
+            { categoryId }: { categoryId: string },
+            context: InitialValueResolverContext,
+          ) => {
+            const id = categoryId.replace(/^drafts\./, "");
+            const published = await context.getClient({ apiVersion })
+              .withConfig({ useCdn: false, perspective: "published" })
+              .getDocument(id);
+
+            return {
+              category: {
+                _type: "reference",
+                _ref: id,
+                // Draft categories have no published target yet. Match the
+                // reference input's behavior so stories can still autosave.
+                ...(!published ? {
+                  _weak: true,
+                  _strengthenOnPublish: { type: "storyCategory" },
+                } : {}),
+              },
+            };
+          },
+        },
         {
           id: "post",
           title: "Aktuellt",

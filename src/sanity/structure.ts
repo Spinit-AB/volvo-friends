@@ -6,6 +6,45 @@ export const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       S.listItem()
+        .title("Bilder & Berättelser")
+        .child(
+          S.list()
+            .title("Bilder & Berättelser")
+            .items([
+              S.listItem()
+                .title("Introduktion")
+                .child(S.document().schemaType("storiesPage").documentId("storiesPage_sv")),
+              S.documentTypeListItem("storyCategory")
+                .title("Kategorier")
+                .child(
+                  S.documentTypeList("storyCategory")
+                    .title("Kategorier")
+                    .child((id) => {
+                      const categoryId = id.replace(/^drafts\./, "");
+                      return S.list()
+                        .title("Kategori")
+                        .items([
+                          S.listItem()
+                            .title("Kategoriinställningar")
+                            .child(S.document().schemaType("storyCategory").documentId(categoryId)),
+                          S.listItem()
+                            .title("Berättelser")
+                            .child(
+                              S.documentTypeList("story")
+                                .title("Berättelser i kategorin")
+                                .filter('_type == "story" && category._ref == $categoryId')
+                                .params({ categoryId })
+                                .initialValueTemplates([
+                                  S.initialValueTemplateItem("story-with-category", { categoryId }),
+                                ]),
+                            ),
+                        ]);
+                    }),
+                ),
+              S.documentTypeListItem("story").title("Alla berättelser"),
+            ]),
+        ),
+      S.listItem()
         .title("Sidfot")
         .child(
           S.list()
@@ -92,7 +131,7 @@ export const structure: StructureResolver = (S) =>
       // Add all other document types except 'footer', 'aboutPage', 'becomeMemberPage', 'contactForm', 'contactFormConfig'
       ...S.documentTypeListItems().filter(
         (item) =>
-          !["footer", "aboutPage", "becomeMemberPage", "contactForm"].includes(
+          !["footer", "aboutPage", "becomeMemberPage", "contactForm", "storiesPage", "storyCategory", "story"].includes(
             item.getId() || "",
           ),
       ),
