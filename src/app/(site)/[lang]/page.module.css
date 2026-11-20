@@ -52,10 +52,21 @@
 
   & h2 {
     margin: 0 0 1rem;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 8rem;
+      height: 0.25rem;
+      margin: 0.75rem auto 0;
+      border-radius: 0.125rem;
+      background: var(--clr-accent-blue-light);
+    }
   }
 
   & p {
     margin: 0 0 1.5rem;
+    color: var(--clr-neutral-100);
   }
 
   & a {
@@ -90,6 +101,7 @@
   & h3 {
     margin: 0 0 0.75rem;
     font-size: 1.125rem;
+    color: var(--clr-neutral-100);
   }
 
   & ul {
@@ -105,9 +117,10 @@
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: light-dark(var(--clr-base-teal-100), var(--clr-base-teal-900));
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background: light-dark(var(--clr-neutral-100), var(--clr-base-teal-900));
   color: light-dark(var(--clr-base-teal-900), var(--clr-base-teal-100));
   border-radius: 0.25rem;
   text-decoration: none;
@@ -123,8 +136,25 @@
   }
 }
 
+.latestStory .latestStoryImage {
+  position: relative;
+  align-self: stretch;
+  height: auto;
+  min-height: 96px;
+  border-radius: 0;
+
+  & img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 .latestStoryText {
   min-width: 0;
+  padding: 1rem;
 
   & h4 {
     margin: 0 0 0.25rem;

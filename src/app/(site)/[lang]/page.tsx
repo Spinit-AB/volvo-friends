@@ -110,7 +110,7 @@ function Home({
           color="teal"
           href={`${to(paths.current)}#${t("post.posts_section_id")}`}
           className={styles.seeMorePosts}
-          variant="filled"
+          variant="outlined"
         >
           {t("post.see_more")}
         </LinkButton>
@@ -133,7 +133,7 @@ function Home({
                     <li key={`${story.category.slug}/${story.slug}`}>
                       <Link className={styles.latestStory}
                         href={`${to(paths.stories)}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}>
-                        <StoryImage image={story.listImage} />
+                        <StoryImage image={story.listImage} className={styles.latestStoryImage} />
                         <div className={styles.latestStoryText}>
                           <h4>{story.title}</h4>
                           <span>{story.category.title} · <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time></span>
