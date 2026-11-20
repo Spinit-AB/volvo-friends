@@ -12,7 +12,7 @@ export function StoryImage({ image }: {
         <Image src={urlFor(image).width(192).height(144).fit("crop").auto("format").url()}
           alt={image.alt || ""} width={96} height={72} />
       ) : (
-        <span aria-hidden="true">Volvo Friends</span>
+        <Image className={styles.fallback} src="/icon.svg" alt="" width={96} height={72} />
       )}
     </span>
   );

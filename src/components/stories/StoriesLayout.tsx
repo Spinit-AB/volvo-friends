@@ -18,9 +18,12 @@ export function StoriesHeader({ title, lang, query }: { title: string; lang: str
   );
 }
 
-export function StoriesContent({ children }: { children: ReactNode }) {
+export function StoriesContent({ children, surface = "panel" }: {
+  children: ReactNode;
+  surface?: "panel" | "plain";
+}) {
   return (
-    <div className={`page-container teal ${panel.root}`}>
+    <div className={`page-container teal ${surface === "panel" ? panel.root : styles.plain}`}>
       <div className={`breakout ${styles.content}`}>{children}</div>
     </div>
   );

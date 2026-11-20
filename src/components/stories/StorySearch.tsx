@@ -3,6 +3,7 @@
 import { t } from "@/locales/translate";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
 import styles from "./StoriesLayout.module.css";
+import { Button } from "@/components/button/Button";
 
 export function StorySearch({ lang, query = "" }: { lang: string; query?: string }) {
   const searchPath = lang === "sv" ? "sok" : "search";
@@ -18,7 +19,7 @@ export function StorySearch({ lang, query = "" }: { lang: string; query?: string
       <div>
         <input key={query} id="story-search" type="search" name="q" defaultValue={query}
           placeholder={t("stories.search_placeholder", lang)} required />
-        <button type="submit">{t("stories.search_button", lang)}</button>
+        <Button type="submit" color="teal" forcePalette="dark">{t("stories.search_button", lang)}</Button>
       </div>
     </form>
   );

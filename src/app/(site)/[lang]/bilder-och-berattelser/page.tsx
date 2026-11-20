@@ -21,14 +21,14 @@ export default async function StoriesOverview({ params }: {
     <>
       <LocalePageRedirects lang={lang} canonicalSlug={slug} segmentIndex={1} />
       <StoriesHeader title={page?.title || t("stories.page_title", lang)} lang={lang} />
-      <StoriesContent>
+      <StoriesContent surface="plain">
           {page?.introduction ? (
             <div role="region" aria-label={t("stories.introduction", lang)}>
               <p>{page.introduction}</p>
             </div>
           ) : null}
           {categories.length ? (
-            <ul className={styles.list} aria-label={t("stories.choose_category", lang)}>
+            <ul className={`${styles.list} ${styles.categories}`} aria-label={t("stories.choose_category", lang)}>
               {categories.map((category) => (
                 <li key={category._id}>
                   <Link className={styles.card}
@@ -37,7 +37,6 @@ export default async function StoriesOverview({ params }: {
                     <StoryImage image={category.image} />
                     <div className={styles.text}>
                       <h2 id={`category-${category._id}`}>{category.title}</h2>
-                      {category.description ? <p>{category.description}</p> : null}
                       {preview && !category.isActive ? <p>{t("stories.hidden_category", lang)}</p> : null}
                     </div>
                   </Link>
