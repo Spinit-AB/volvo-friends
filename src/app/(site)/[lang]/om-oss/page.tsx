@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { t } from "@/locales/translate";
 import { Header } from "@/components/header/Header";
 import { PortableTextWrapper } from "@/components/PortableTextWrapper";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
@@ -29,7 +31,7 @@ export const AwaitedAbout = ({
   const t = useT(params);
   const lang = useLang(params);
   const canonicalSlug = getPathsByLang(lang).about;
-  const color: TColor = "blue";
+  const color: TColor = "red";
   return (
     <>
       <div className={`footer-theme-${color}`} />
@@ -80,3 +82,10 @@ export const AwaitedAbout = ({
     </>
   );
 };
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[] }>;
+}): Promise<Metadata> {
+  const lang = getLang((await params).lang);
+  return { title: t("about.page_title", lang) };
+}

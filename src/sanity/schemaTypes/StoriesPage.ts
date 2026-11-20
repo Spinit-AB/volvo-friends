@@ -9,7 +9,6 @@ export default defineType({
       name: "title",
       title: "Rubrik",
       type: "string",
-      initialValue: "Bilder & Berättelser",
       validation: (Rule) => Rule.required(),
     }),
     defineField({

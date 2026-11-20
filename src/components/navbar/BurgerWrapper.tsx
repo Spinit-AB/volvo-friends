@@ -10,15 +10,17 @@ export const BurgerWrapper = ({
   isOpen,
   setIsOpen,
   t,
+  wideMenu = false,
 }: {
   children: React.ReactNode;
   isOpen: boolean;
   setIsOpen: (value: React.SetStateAction<boolean>) => void;
   t: TTranslate;
+  wideMenu?: boolean;
 }) => {
   const burgerId = useId();
   const menuId = useId();
-  const isMobile = useMediaQuery("(max-width: 1100px)");
+  const isMobile = useMediaQuery(`(max-width: ${wideMenu ? 1400 : 1100}px)`);
   if (!isMobile) return children;
   return (
     <>

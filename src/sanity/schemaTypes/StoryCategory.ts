@@ -7,6 +7,14 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "language",
+      title: "Språk",
+      type: "string",
+      readOnly: true,
+      initialValue: "sv",
+      description: "Språket väljs i menyn Bilder & Berättelser. Befintligt innehåll utan språk räknas som svenska.",
+    }),
+    defineField({
       name: "title",
       title: "Namn",
       type: "string",
@@ -16,8 +24,20 @@ export default defineType({
       name: "slug",
       title: "Sidans adress",
       type: "slug",
-      options: { source: "title" },
-      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        isUnique: async (slug, context) => {
+          const id = context.document?._id.replace(/^drafts\./, "");
+          return context.getClient({ apiVersion: "2025-12-15" }).fetch<boolean>(
+            '!defined(*[_type == $type && coalesce(language, "sv") == $language && slug.current == $slug && !(_id in [$id, $draftId])][0]._id)',
+            { type: context.document?._type, language: context.document?.language || "sv", slug, id, draftId: `drafts.${id}` },
+          );
+        },
+      },
+      validation: (Rule) => Rule.required().custom((value) =>
+        ["sok", "search"].includes(value?.current?.toLowerCase() || "")
+          ? "Den adressen används av söksidan. Välj en annan adress för kategorin."
+          : true),
     }),
     defineField({
       name: "description",

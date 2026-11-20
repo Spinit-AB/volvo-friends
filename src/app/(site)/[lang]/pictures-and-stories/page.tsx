@@ -1,1 +1,1 @@
-export { default } from "../bilder-och-berattelser/page";
+export { default, generateMetadata } from "../bilder-och-berattelser/page";

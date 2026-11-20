@@ -1,0 +1,70 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li {
+  width: 20rem;
+  max-width: 100%;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover :is(h2, h3) {
+  text-decoration: underline;
+}
+
+.card:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.thumbnail {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.thumbnail img {
+  display: block;
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+}
+
+.thumbnail span {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.text :is(h2, h3) {
+  margin: 0;
+  font: inherit;
+  font-weight: bold;
+}
+
+.text p {
+  margin: 0.5rem 0 0;
+}

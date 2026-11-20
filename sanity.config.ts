@@ -52,17 +52,34 @@ export default defineConfig({
   schema: {
     types: schema.types,
     templates: (prev) => {
-      const prevFiltered = prev.filter((template) => template.id !== "post");
+      const prevFiltered = prev.filter((template) => !["post", "story", "storyCategory", "storiesPage"].includes(template.id));
 
       return [
         ...prevFiltered,
         {
+          id: "story-category", title: "Kategori", schemaType: "storyCategory",
+          parameters: [{ name: "language", type: "string" }],
+          value: ({ language }: { language: string }) => ({ language }),
+        },
+        {
+          id: "story-language", title: "Berättelse", schemaType: "story",
+          parameters: [{ name: "language", type: "string" }],
+          value: ({ language }: { language: string }) => ({ language }),
+        },
+        {
+          id: "stories-page", title: "Introduktion", schemaType: "storiesPage",
+          parameters: [{ name: "language", type: "string" }],
+          value: ({ language }: { language: string }) => ({
+            title: language === "en" ? "Pictures & Stories" : "Bilder & Berättelser",
+          }),
+        },
+        {
           id: "story-with-category",
           title: "Berättelse i kategorin",
           schemaType: "story",
-          parameters: [{ name: "categoryId", type: "string" }],
+          parameters: [{ name: "categoryId", type: "string" }, { name: "language", type: "string" }],
           value: async (
-            { categoryId }: { categoryId: string },
+            { categoryId, language }: { categoryId: string; language: string },
             context: InitialValueResolverContext,
           ) => {
             const id = categoryId.replace(/^drafts\./, "");
@@ -71,6 +88,7 @@ export default defineConfig({
               .getDocument(id);
 
             return {
+              language,
               category: {
                 _type: "reference",
                 _ref: id,

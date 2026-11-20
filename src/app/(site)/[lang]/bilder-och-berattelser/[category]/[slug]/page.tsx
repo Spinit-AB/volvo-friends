@@ -1,3 +1,5 @@
+import { StoriesHeader, StoriesContent } from "@/components/stories/StoriesLayout";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { stegaClean } from "next-sanity";
@@ -15,7 +17,7 @@ export default async function StoryPage({ params }: {
 }) {
   const route = await params;
   const lang = getLang(route.lang);
-  const { story, preview } = await fetchStory(route.category, route.slug);
+  const { story, preview } = await fetchStory(route.category, route.slug, lang);
   if (!story) notFound();
   const slug = getPathsByLang(lang).stories;
   const overview = `/${lang}/${slug}`;
@@ -24,8 +26,8 @@ export default async function StoryPage({ params }: {
   return (
     <>
       <LocalePageRedirects lang={lang} canonicalSlug={slug} segmentIndex={1} />
-      <h1>{story.title}</h1>
-      <div>
+      <StoriesHeader title={story.title} lang={lang} />
+      <StoriesContent>
         <article>
           <StoryNavigation lang={lang} items={[
             { title: t("stories.page_title", lang), href: overview },
@@ -39,7 +41,16 @@ export default async function StoryPage({ params }: {
           </div>
           <Link href={categoryUrl}>← {t("stories.back_stories", lang)}</Link>
         </article>
-      </div>
+      </StoriesContent>
     </>
   );
+}
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[]; category: string; slug: string }>;
+}): Promise<Metadata> {
+  const route = await params;
+  const lang = getLang(route.lang);
+  const { story } = await fetchStory(route.category, route.slug, lang);
+  return { title: stegaClean(story?.title) || t("stories.page_title", lang) };
 }

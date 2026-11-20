@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 import { richText } from "./richText";
 import { validateWebImage, webImageOptions } from "./webImage";
 
@@ -7,6 +7,14 @@ export default defineType({
   title: "Berättelse",
   type: "document",
   fields: [
+    defineField({
+      name: "language",
+      title: "Språk",
+      type: "string",
+      readOnly: true,
+      initialValue: "sv",
+      description: "Språket väljs i menyn Bilder & Berättelser. Befintligt innehåll utan språk räknas som svenska.",
+    }),
     defineField({
       name: "title",
       title: "Rubrik",
@@ -17,7 +25,16 @@ export default defineType({
       name: "slug",
       title: "Sidans adress",
       type: "slug",
-      options: { source: "title" },
+      options: {
+        source: "title",
+        isUnique: async (slug, context) => {
+          const id = context.document?._id.replace(/^drafts\./, "");
+          return context.getClient({ apiVersion: "2025-12-15" }).fetch<boolean>(
+            '!defined(*[_type == $type && coalesce(language, "sv") == $language && slug.current == $slug && !(_id in [$id, $draftId])][0]._id)',
+            { type: context.document?._type, language: context.document?.language || "sv", slug, id, draftId: `drafts.${id}` },
+          );
+        },
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -25,8 +42,23 @@ export default defineType({
       title: "Kategori",
       type: "reference",
       to: [{ type: "storyCategory" }],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'coalesce(language, "sv") == $language',
+          params: { language: document.language || "sv" },
+        }),
+      },
       description: "Berättelsen visas under denna kategori. Även dolda kategorier kan användas för att förbereda innehåll.",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom(async (value, context) => {
+        if (!value?._ref) return true;
+        const id = value._ref.replace(/^drafts\./, "");
+        const language = await context.getClient({ apiVersion: "2025-12-15" }).fetch<string>(
+          'coalesce(*[_id in [$id, $draftId]] | order(_id desc)[0].language, "sv")',
+          { id, draftId: `drafts.${id}` },
+        );
+        return language === (context.document?.language || "sv")
+          ? true : "Välj en kategori på samma språk som berättelsen.";
+      }),
     }),
     defineField({
       name: "listImage",
@@ -42,6 +74,15 @@ export default defineType({
       type: "datetime",
       initialValue: () => new Date().toISOString(),
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "keywords",
+      title: "Sökord",
+      description: "Valfria ord, modellnamn och andra benämningar som hjälper besökaren att hitta berättelsen. Sökorden visas inte på webbplatsen.",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      options: { layout: "tags" },
+      validation: (Rule) => Rule.unique(),
     }),
     defineField({
       name: "content",

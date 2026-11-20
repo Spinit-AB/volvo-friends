@@ -29,9 +29,114 @@
   }
 }
 
+.stories {
+  position: relative;
+  isolation: isolate;
+  padding-block: 4rem;
+  background: var(--clr-base-teal-700);
+  color: var(--clr-base-teal-100);
+  text-align: center;
+
+  @media (width > 1200px) {
+    padding-block: 6rem;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("/images/pictures-and-stories.jpg") center 45% / cover no-repeat;
+    opacity: 0.12;
+  }
+
+  & h2 {
+    margin: 0 0 1rem;
+  }
+
+  & p {
+    margin: 0 0 1.5rem;
+  }
+
+  & a {
+    justify-self: center;
+  }
+}
+
 .aboutCards {
   display: grid;
   gap: var(--gutter);
+}
+
+.storiesCard {
+  display: grid;
+  align-items: center;
+  gap: 2rem;
+
+  @media (width > 1200px) {
+    &:has(.latestStories) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.latestStories {
+  min-width: 0;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  text-align: left;
+
+  & h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.125rem;
+  }
+
+  & ul {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.latestStory {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: light-dark(var(--clr-base-teal-100), var(--clr-base-teal-900));
+  color: light-dark(var(--clr-base-teal-900), var(--clr-base-teal-100));
+  border-radius: 0.25rem;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  &:hover h4 {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--clr-accent-teal-light);
+    outline-offset: 4px;
+  }
+}
+
+.latestStoryText {
+  min-width: 0;
+
+  & h4 {
+    margin: 0 0 0.25rem;
+    font: inherit;
+    font-weight: bold;
+    color: var(--clr-cta);
+  }
+
+  & > span {
+    display: block;
+    font-size: 0.875rem;
+  }
 }
 
 @media screen and (width > 1200px) {
@@ -40,7 +145,7 @@
   }
 }
 
-.seeMorePosts {
+.current .seeMorePosts {
   max-width: fit-content;
   margin-inline: auto;
   margin-top: 2rem;

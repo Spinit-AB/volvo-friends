@@ -1,3 +1,6 @@
+import { stegaClean } from "next-sanity";
+import { t } from "@/locales/translate";
+import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcumbs/Breadcrumbs";
 import Gallery from "@/components/gallery/Gallery";
 import { PortableTextWrapper } from "@/components/PortableTextWrapper";
@@ -191,4 +194,13 @@ function getBgColour(colorOverrider?: TColor) {
     default:
       return "red";
   }
+}
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[]; slug: string }>;
+}): Promise<Metadata> {
+  const route = await params;
+  const lang = getLang(route.lang);
+  const post = await fetchPostBySlug(route.slug);
+  return { title: stegaClean(post?.title) || t("post.page_title", lang) };
 }

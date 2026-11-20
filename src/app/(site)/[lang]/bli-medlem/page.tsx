@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { t } from "@/locales/translate";
 import { Header } from "@/components/header/Header";
 import { useT } from "@/locales/utils/useT";
 import styles from "@/components/content/ContentPage.module.css";
@@ -35,7 +37,7 @@ export const AwaitedBecomeMember = ({
   const lang = useLang(params);
   const canonicalSlug = getPathsByLang(lang).member;
 
-  const color: TColor = "red";
+  const color: TColor = "orange";
 
   // You can now use becomeMemberData in your component
   return (
@@ -86,3 +88,10 @@ export const AwaitedBecomeMember = ({
     </>
   );
 };
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[] }>;
+}): Promise<Metadata> {
+  const lang = getLang((await params).lang);
+  return { title: t("member.page_title", lang) };
+}

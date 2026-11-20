@@ -1,2 +1,1 @@
-import Join from "../bli-medlem/page";
-export default Join;
+export { default, generateMetadata } from "../bli-medlem/page";

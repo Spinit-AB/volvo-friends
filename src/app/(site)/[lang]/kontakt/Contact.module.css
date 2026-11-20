@@ -1,13 +1,12 @@
 .links {
   & a {
-    color: light-dark(var(--clr-base-green-700), var(--clr-accent-green-light));
+    color: var(--clr-cta);
     font-weight: 600;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.2em;
     overflow-wrap: anywhere;
 
     &:hover {
-      color: light-dark(var(--clr-base-green-900), var(--clr-base-green-100));
       text-decoration-thickness: 0.14em;
     }
 

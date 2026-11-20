@@ -22,3 +22,9 @@
   background: var(--clr-base-red-700);
   color: var(--clr-base-red-100);
 }
+
+.frame {
+  /* One 4.5rem title line plus its existing 0.67em heading margins. */
+  min-block-size: 9.86rem;
+  align-content: center;
+}

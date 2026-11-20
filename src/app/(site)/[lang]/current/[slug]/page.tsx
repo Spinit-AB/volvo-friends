@@ -1,2 +1,1 @@
-import Post from "../../aktuellt/[slug]/page";
-export default Post;
+export { default, generateMetadata } from "../../aktuellt/[slug]/page";

@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.volvofriends.com"),
-  title: "Volvo Friends",
+  title: { default: "Volvo Friends", template: "%s | Volvo Friends" },
   description: "FÖR OSS VOLVOENTUSIASTER",
   icons: {
     icon: "/icon.png",

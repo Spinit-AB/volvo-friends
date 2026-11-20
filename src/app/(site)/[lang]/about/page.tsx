@@ -1,2 +1,1 @@
-import About from "../om-oss/page";
-export default About;
+export { default, generateMetadata } from "../om-oss/page";

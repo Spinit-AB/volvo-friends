@@ -12,8 +12,10 @@ import styles from "./Navbar.module.css";
 
 export const Navbar = ({
   params,
+  showStories,
 }: {
   params: { lang?: string | string[] };
+  showStories: boolean;
 }) => {
   const t = useT(params);
   const to = useLinkWithLang(params);
@@ -34,7 +36,7 @@ export const Navbar = ({
       >
         Volvo Friends
       </Link>
-      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t}>
+      <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t} wideMenu={showStories}>
         <ul>
           <li>
             <NavLink
@@ -57,6 +59,14 @@ export const Navbar = ({
               {t("post.page_title")}
             </NavLink>
           </li>
+          {showStories ? (
+            <li>
+              <NavLink href={to(paths.stories)} onClick={handleNavLinkClick}
+                matchSubpath size="lg" activeClassName={styles.activeLink}>
+                {t("stories.page_title")}
+              </NavLink>
+            </li>
+          ) : null}
           <li>
             <NavLink
               href={to(paths.about)}

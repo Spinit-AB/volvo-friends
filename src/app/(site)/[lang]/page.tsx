@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { t } from "@/locales/translate";
 import { PostCards } from "@/components/cards/PostCard";
 import { StaticCard } from "@/components/cards/StaticCard";
 import { Hero } from "@/components/hero/Hero";
@@ -11,6 +13,11 @@ import { TPostPreview, TUpcomingEvent } from "@/sanity/models/TPost";
 import styles from "./page.module.css";
 import { CalendarEventCardGrid } from "@/components/cards/eventscards/CalendarEventCard";
 import { LinkButton } from "@/components/button/LinkButton";
+import { fetchLatestStories, fetchStoriesVisibility, type LatestStory } from "@/sanity/lib/stories";
+import Link from "next/link";
+import { stegaClean } from "next-sanity";
+import { formatDate } from "@/utils/functions";
+import { StoryImage } from "@/components/stories/StoryImage";
 
 export default async function HomePreload(props: {
   params: { lang?: string | string[]; postsPage?: string };
@@ -30,18 +37,24 @@ export default async function HomePreload(props: {
     now: new Date().toISOString().split("T")[0],
   });
 
-  return <Home params={params} posts={posts} events={events} />;
+  const showStories = await fetchStoriesVisibility(lang);
+  const latestStories = showStories ? await fetchLatestStories(lang) : [];
+  return <Home params={params} posts={posts} events={events} showStories={showStories} latestStories={latestStories} />;
 }
 
 function Home({
   params,
   posts,
   events,
+  showStories,
+  latestStories,
 }: {
   params: { lang?: string | string[] };
   posts: TPostPreview[];
 
   events: TUpcomingEvent[];
+  showStories: boolean;
+  latestStories: LatestStory[];
 }) {
   const t = useT(params);
   const to = useLinkWithLang(params);
@@ -60,8 +73,9 @@ function Home({
             forcePalette: "light",
           },
           {
-            href: to(paths.about),
-            text: t("about.page_title"),
+            href: to(showStories ? paths.stories : paths.about),
+            text: t(showStories ? "stories.page_title" : "about.page_title"),
+            color: "red",
             variant: "ghost",
             forcePalette: "light",
           },
@@ -96,11 +110,43 @@ function Home({
           color="teal"
           href={`${to(paths.current)}#${t("post.posts_section_id")}`}
           className={styles.seeMorePosts}
-          variant="outlined"
+          variant="filled"
         >
           {t("post.see_more")}
         </LinkButton>
       </section>
+      {showStories ? (
+        <section className={`page-container teal ${styles.stories}`} aria-labelledby="stories-title">
+          <div className={`breakout ${styles.storiesCard}`}>
+            <div>
+              <h2 id="stories-title" className="text-display-lg">{t("stories.page_title")}</h2>
+              <p>{t("stories.home_description")}</p>
+              <LinkButton href={to(paths.stories)} color="teal" forcePalette="light">
+                {t("stories.explore")}
+              </LinkButton>
+            </div>
+            {latestStories.length ? (
+              <section className={styles.latestStories} aria-labelledby="latest-stories-title">
+                <h3 id="latest-stories-title">{t("stories.latest_stories")}</h3>
+                <ul>
+                  {latestStories.map((story) => (
+                    <li key={`${story.category.slug}/${story.slug}`}>
+                      <Link className={styles.latestStory}
+                        href={`${to(paths.stories)}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}>
+                        <StoryImage image={story.listImage} />
+                        <div className={styles.latestStoryText}>
+                          <h4>{story.title}</h4>
+                          <span>{story.category.title} · <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time></span>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
       <section className={`page-container ${styles.about}`}>
         <h2 className="text-display-xl">{t("about.title")}</h2>
         <div className={`breakout-lg ${styles.aboutCards}`}>
@@ -140,4 +186,11 @@ function Home({
       </section>
     </>
   );
+}
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[] }>;
+}): Promise<Metadata> {
+  const lang = getLang((await params).lang);
+  return { title: t("home.page_title", lang) };
 }

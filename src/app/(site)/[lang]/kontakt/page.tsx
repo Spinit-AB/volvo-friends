@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/header/Header";
 import { PortableTextWrapper } from "@/components/PortableTextWrapper";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
@@ -49,3 +50,10 @@ const ContactPage = async (props: {
 };
 
 export default ContactPage;
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[] }>;
+}): Promise<Metadata> {
+  const lang = getLang((await params).lang);
+  return { title: t("contact.page_title", lang) };
+}

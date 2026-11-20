@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { t } from "@/locales/translate";
 import { CalendarEventCardGrid } from "@/components/cards/eventscards/CalendarEventCard";
 import { Header } from "@/components/header/Header";
 import InfinitePostsList from "@/components/infinitePostsList/InfinitePostsList";
@@ -34,7 +36,7 @@ const Posts = async (props: {
 
   return (
     <>
-      <div className="footer-theme-teal" />
+      <div className="footer-theme-blue" />
       <LocalePageRedirects lang={lang} canonicalSlug={canonicalSlug} />
       <HeaderAndLoadedEvents params={params} events={events ?? []} />
       <InfinitePostsList
@@ -61,7 +63,7 @@ const HeaderAndLoadedEvents = ({
   const to = useLinkWithLang(params);
   return (
     <>
-      <Header title={t("post.page_title")} color={"teal"} />
+      <Header title={t("post.page_title")} color={"blue"} />
       <section className={`page-container ${styles.calenderSection}`}>
         <h2 className="text-display-md">{t("post.upcoming_events")}</h2>
         <CalendarEventCardGrid
@@ -69,9 +71,16 @@ const HeaderAndLoadedEvents = ({
           t={t}
           lang={lang}
           to={to}
-          color="teal"
+          color="blue"
         />
       </section>
     </>
   );
 };
+
+export async function generateMetadata({ params }: {
+  params: Promise<{ lang?: string | string[] }>;
+}): Promise<Metadata> {
+  const lang = getLang((await params).lang);
+  return { title: t("post.page_title", lang) };
+}

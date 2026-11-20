@@ -87,5 +87,17 @@
   "stories.no_stories": "Det finns inga publicerade berättelser i den här kategorin ännu.",
   "stories.back_categories": "Alla kategorier",
   "stories.back_stories": "Tillbaka till berättelserna",
-  "stories.no_content": "Berättelsen har inget innehåll ännu."
+  "stories.no_content": "Berättelsen har inget innehåll ännu.",
+  "stories.search_label": "Sök bland bilder och berättelser",
+  "stories.search_placeholder": "Sök efter en berättelse…",
+  "stories.search_button": "Sök",
+  "stories.search_title": "Sökresultat",
+  "stories.search_results": "Sökresultat för ”{query}”",
+  "stories.search_empty": "Inga berättelser matchar din sökning. Prova ett annat sökord.",
+  "stories.search_prompt": "Skriv ett sökord för att hitta berättelser.",
+  "stories.search_count": "Antal träffar: {count}",
+  "stories.home_description": "Upptäck bilder och berättelser om Volvos fordon och historia.",
+  "stories.explore": "Utforska bilder och berättelser",
+  "stories.latest_stories": "Senaste berättelserna",
+  "stories.image_alt": "En kvinna och en man vid två klassiska Volvobilar i en park."
 }

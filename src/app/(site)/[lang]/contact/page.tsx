@@ -1,2 +1,1 @@
-import Contact from "../kontakt/page";
-export default Contact;
+export { default, generateMetadata } from "../kontakt/page";
