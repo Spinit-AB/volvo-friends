@@ -85,12 +85,28 @@ export default defineType({
       validation: (Rule) => Rule.unique(),
     }),
     defineField({
-      name: "content",
+      name: "contentBlocks",
       title: "Innehåll",
-      description: "Lägg till text och bilder i önskad ordning. Berättelsen kan innehålla enbart text, enbart bilder eller båda.",
+      description: "Lägg till Text, Bild eller YouTube-video. Dra blocken för att ändra ordning. Bilder och text läggs till som separata block.",
+      type: "array",
+      of: [
+        defineArrayMember({ type: "storyText" }),
+        defineArrayMember({ type: "storyImage" }),
+        defineArrayMember({ type: "storyYoutube" }),
+      ],
+      validation: (Rule) => Rule.custom((value, context) => {
+        if (value === undefined && Array.isArray(context.document?.content) && context.document.content.length) return true;
+        return Array.isArray(value) && value.length > 0 || "Lägg till minst ett innehållsblock.";
+      }),
+    }),
+    defineField({
+      name: "content",
+      title: "Tidigare innehåll",
+      description: "Äldre innehåll bevaras tills berättelsen har konverterats till separata block.",
       type: "array",
       of: richText,
-      validation: (Rule) => Rule.required().min(1),
+      readOnly: true,
+      hidden: ({ document }) => document?.contentBlocks !== undefined || !Array.isArray(document?.content),
     }),
   ],
   orderings: [

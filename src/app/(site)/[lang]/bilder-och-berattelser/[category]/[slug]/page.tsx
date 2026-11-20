@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { stegaClean } from "next-sanity";
-import { PortableTextWrapper } from "@/components/PortableTextWrapper";
+import { StoryContent } from "@/components/stories/StoryContent";
 import styles from "@/components/stories/StoryList.module.css";
 import { StoryNavigation } from "@/components/stories/StoryNavigation";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
@@ -38,7 +38,9 @@ export default async function StoryPage({ params }: {
           {preview && !story.category.isActive ? <p>{t("stories.hidden_category", lang)}</p> : null}
           <p><time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time></p>
           <div>
-            {story.content?.length ? <PortableTextWrapper lang={lang} value={story.content} /> : <p>{t("stories.no_content", lang)}</p>}
+            {(story.contentBlocks ?? story.content)?.length
+              ? <StoryContent lang={lang} blocks={story.contentBlocks} legacyContent={story.content} />
+              : <p>{t("stories.no_content", lang)}</p>}
           </div>
           <Link className={styles.returnLink} href={categoryUrl}>{t("stories.back_stories", lang, { category: story.category.title })}</Link>
         </article>

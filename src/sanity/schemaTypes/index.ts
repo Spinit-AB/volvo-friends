@@ -10,7 +10,8 @@ import blockContent from "./blockContent";
 import storyCategory from "./StoryCategory";
 import storiesPage from "./StoriesPage";
 import story from "./Story";
+import { storyText, storyImage, storyYoutube } from "./StoryBlocks";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [post, customImage, footer, contactForm, blockContent, aboutPage, becomeMemberPage, storyCategory, storiesPage, story],
+  types: [post, customImage, footer, contactForm, blockContent, aboutPage, becomeMemberPage, storyCategory, storiesPage, story, storyText, storyImage, storyYoutube],
 };

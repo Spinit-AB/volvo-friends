@@ -52,18 +52,23 @@ export const storyCategoryQuery = defineQuery(`
 export const storyQuery = defineQuery(`
   *[_type == "story" && coalesce(language, "sv") == $language && slug.current == $slug && category->slug.current == $categorySlug
     && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)][0]{
-    _id, title, "slug": slug.current, "publishedAt": coalesce(publishedAt, _createdAt), listImage, content,
+    _id, title, "slug": slug.current, "publishedAt": coalesce(publishedAt, _createdAt), listImage, content, contentBlocks,
     "category": category->{_id, title, "slug": slug.current, description, image, isActive}
   }
 `);
 
+// Keep legacy content searchable until converted, then search the current blocks only.
+const storySearchText = `title + " " + coalesce(
+  array::join(contentBlocks[_type == "storyText"]{"plainText": pt::text(text)}.plainText, " "),
+  pt::text(content), "") + " " + array::join(coalesce(keywords, []), " ")`;
+
 export const storySearchQuery = defineQuery(`{
   "storyCount": count(*[_type == "story" && coalesce(language, "sv") == $language && defined(slug.current) && defined(category->slug.current)
     && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)
-    && (title + " " + coalesce(pt::text(content), "") + " " + array::join(coalesce(keywords, []), " ")) match $terms]),
+    && (${storySearchText}) match $terms]),
   "stories": *[_type == "story" && coalesce(language, "sv") == $language && defined(slug.current) && defined(category->slug.current)
     && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)
-    && (title + " " + coalesce(pt::text(content), "") + " " + array::join(coalesce(keywords, []), " ")) match $terms]
+    && (${storySearchText}) match $terms]
     | order(coalesce(publishedAt, _createdAt) desc, title asc, _id asc)[$offset...$end] {
       _id, title, "slug": slug.current, listImage,
       "publishedAt": coalesce(publishedAt, _createdAt),
