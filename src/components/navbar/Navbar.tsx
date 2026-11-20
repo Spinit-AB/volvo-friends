@@ -29,13 +29,16 @@ export const Navbar = ({
   const paths = getPathsByLang(lang);
   return (
     <nav className={styles.root} id="site-nav">
-      <Link
-        lang="en"
-        href={to("")}
-        className={`text-display-md ${styles.logo}`}
-      >
-        Volvo Friends
-      </Link>
+      <div className={styles.logoSlot}>
+        <a className={styles.skipLink} href="#main-content">{t("common.skip_to_content")}</a>
+        <Link
+          lang="en"
+          href={to("")}
+          className={`text-display-md ${styles.logo}`}
+        >
+          Volvo Friends
+        </Link>
+      </div>
       <BurgerWrapper isOpen={menuOpen} setIsOpen={setMenuOpen} t={t} wideMenu={showStories}>
         <ul>
           <li>

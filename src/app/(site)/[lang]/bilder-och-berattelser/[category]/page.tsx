@@ -54,13 +54,14 @@ export default async function CategoryPage({ params, searchParams }: {
             <ul className={styles.storyRows} aria-label={t("stories.stories", lang)}>
               {category.stories.map((story) => (
                 <li key={story._id}>
-                  <StoryImage image={story.listImage} />
-                  <h2>
-                    <Link href={`${categoryUrl}/${encodeURIComponent(stegaClean(story.slug))}`}>
+                  <Link className={styles.storyRow} aria-labelledby={`story-${story._id}`}
+                    href={`${categoryUrl}/${encodeURIComponent(stegaClean(story.slug))}`}>
+                    <StoryImage image={story.listImage} />
+                    <h2 id={`story-${story._id}`}>
                       {story.title}
-                    </Link>
-                  </h2>
-                  <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time>
+                    </h2>
+                    <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time>
+                  </Link>
                 </li>
               ))}
             </ul>

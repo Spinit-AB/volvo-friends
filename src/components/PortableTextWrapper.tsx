@@ -3,8 +3,9 @@ import { TSanityImageWithAlt } from "@/sanity/models/SanityImageWithAlt";
 import { PortableText, PortableTextMarkComponentProps } from "next-sanity";
 import Image from "next/image";
 import { TypedObject } from "sanity";
+import { NewTabIndicator } from "./link/NewTabIndicator";
 
-const components = {
+const getComponents = (lang: string) => ({
   types: {
     customImage: ({ value }: { value: TSanityImageWithAlt }) => (
       <Image
@@ -57,23 +58,23 @@ const components = {
 
       return (
         <a href={href} target="_blank" rel="noopener noreferrer">
-          {children}
+          {children}<NewTabIndicator lang={lang} />
         </a>
       );
     },
   },
-};
+});
 
-export function PortableTextWrapper({ value }: { value: TypedObject[] }) {
-  return <PortableText value={value} components={components} />;
+export function PortableTextWrapper({ value, lang = "sv" }: { value: TypedObject[]; lang?: string }) {
+  return <PortableText value={value} components={getComponents(lang)} />;
 }
 
-const adressComponents = {
+const getAddressComponents = (lang: string) => ({
   marks: {
-    ...components.marks,
+    ...getComponents(lang).marks,
   },
   types: {
-    ...components.types,
+    ...getComponents(lang).types,
   },
   block: (props: { children?: React.ReactNode }) => (
     <span>
@@ -81,8 +82,8 @@ const adressComponents = {
       <br />
     </span>
   ),
-};
+});
 
-export function PortableAddressWrapper({ value }: { value: TypedObject[] }) {
-  return <PortableText value={value} components={adressComponents} />;
+export function PortableAddressWrapper({ value, lang = "sv" }: { value: TypedObject[]; lang?: string }) {
+  return <PortableText value={value} components={getAddressComponents(lang)} />;
 }

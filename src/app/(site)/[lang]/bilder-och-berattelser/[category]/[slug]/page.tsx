@@ -38,7 +38,7 @@ export default async function StoryPage({ params }: {
           {preview && !story.category.isActive ? <p>{t("stories.hidden_category", lang)}</p> : null}
           <p><time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time></p>
           <div>
-            {story.content?.length ? <PortableTextWrapper value={story.content} /> : <p>{t("stories.no_content", lang)}</p>}
+            {story.content?.length ? <PortableTextWrapper lang={lang} value={story.content} /> : <p>{t("stories.no_content", lang)}</p>}
           </div>
           <Link className={styles.returnLink} href={categoryUrl}>{t("stories.back_stories", lang, { category: story.category.title })}</Link>
         </article>

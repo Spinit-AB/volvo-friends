@@ -1,4 +1,7 @@
 {
+  "common.close_menu": "Stäng meny",
+  "common.skip_to_content": "Hoppa till innehållet",
+  "common.opens_new_tab": "öppnas i en ny flik",
   "home.page_title": "Hem",
   "post.no_posts_found": "Inga inlägg hittades",
   "post.not_found": "Inlägget hittades inte.",
@@ -103,6 +106,7 @@
   "stories.end_of_search": "Du har nått slutet av sökresultaten.",
   "stories.end_of_list": "Du har nått slutet av berättelserna i den här kategorin.",
   "stories.explore_another_category": "Utforska en annan kategori",
+  "stories.explore_categories": "Utforska kategorier",
   "stories.pagination": "Sidindelning för berättelser",
   "stories.previous": "Föregående",
   "stories.next": "Nästa",

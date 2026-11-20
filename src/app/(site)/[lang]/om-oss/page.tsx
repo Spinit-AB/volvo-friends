@@ -57,7 +57,7 @@ export const AwaitedAbout = ({
               {section.title}
             </h2>
             {section.content ? (
-              <PortableTextWrapper value={section.content} />
+              <PortableTextWrapper lang={lang} value={section.content} />
             ) : null}
           </section>
         ))}

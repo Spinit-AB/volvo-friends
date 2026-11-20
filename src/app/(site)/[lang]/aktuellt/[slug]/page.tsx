@@ -92,7 +92,7 @@ export const PostArticle = ({
           {post.event?.startTime && (
             <EventSection t={t} event={post.event} lang={lang} />
           )}
-          {post.body && <PortableTextWrapper value={post.body} />}
+          {post.body && <PortableTextWrapper lang={lang} value={post.body} />}
 
           {post.gallery && post.gallery.length > 0 && (
             <Gallery images={post.gallery} postTitle={post.title} lang={lang} />

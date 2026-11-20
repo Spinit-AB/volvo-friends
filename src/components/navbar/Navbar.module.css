@@ -64,6 +64,20 @@
   color: var(--clr-nav-detail);
 }
 
+.logoSlot {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-inline-end: auto;
+  align-items: center;
+}
+
+.logoSlot:has(.skipLink:focus) .logo {
+  visibility: hidden;
+}
+
 .logo {
   color: inherit;
   text-decoration: none;
@@ -82,10 +96,10 @@
 }
 
 .burger {
-  --pl: calc(1em + 0.5ch);
-  position: absolute;
+  position: relative;
+  flex-shrink: 0;
+  margin-inline-start: auto;
   z-index: 1;
-  inset-inline-end: var(--gutter);
   cursor: pointer;
 
   display: inline-flex;
@@ -95,7 +109,7 @@
   border: transparent;
   background: transparent;
 
-  padding-inline-start: 1em;
+  padding-inline-start: 1.5em;
 
   & > span {
     text-box-trim: trim-both;
@@ -109,7 +123,9 @@
   width: 1em;
   background: currentColor;
   position: absolute;
-  translate: calc(var(--pl) * -1) 0;
+  inset-inline-start: 0.125em;
+  top: 50%;
+  translate: 0 -50%;
   transition: all var(--animation-speed, 600ms) ease;
 
   &::before,
@@ -135,8 +151,6 @@
 }
 
 [aria-expanded="true"] > .burgerIcon {
-  transform: translateY(0.33em);
-  translate: 0 -0.33em;
   rotate: 45deg;
 
   &::before {
@@ -151,52 +165,94 @@
   }
 }
 
+.root:has(.burger) {
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+@media (width <= 600px) {
+  .logo {
+    font-size: clamp(1.5rem, 6vw, 3rem);
+    line-height: 1.2;
+  }
+}
+
 .mobileMenu {
   position: fixed;
-  inset-block: 0;
-  width: min(100dvw, 25rem);
-  padding-block: 4em;
-  inset-inline-end: 0;
+  inset: 0;
+  margin: 0 0 0 auto;
+  width: min(100%, 25rem);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: calc(var(--menu-toggle-top, 0px) + var(--menu-toggle-height, 3rem) + 1rem) 1rem 1rem;
+  border: 0;
   border-inline-start: 2px solid var(--clr-base-green-100);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 2em;
-
-  & > * {
-    flex: 1;
-    gap: 1.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-  }
-
-  .lightmodeWrapper {
-    margin-block-start: 2rem;
-    padding-inline-end: 2rem;
-  }
-
-  animation: appear var(--animation-speed, 600ms) forwards;
-
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: inherit;
   background-color: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
 }
 
-@keyframes appear {
-  from {
-    translate: 100% 0;
-    opacity: 0;
-  }
-  to {
-    translate: 0 0;
-    opacity: 1;
-  }
+.mobileMenu[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.mobileMenu[hidden] {
-  animation: disappear var(--animation-speed, 600ms) forwards;
+.mobileMenu::backdrop {
+  background-color: hsl(0 0 0 / 0.25);
+}
+
+.mobileMenu > ul {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.mobileMenu a {
+  display: block;
+  padding: 0.5rem;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
+.menuClose {
+  position: fixed;
+  top: var(--menu-toggle-top);
+  left: var(--menu-toggle-left);
+  width: var(--menu-toggle-width);
+  height: var(--menu-toggle-height);
+  margin: 0;
+  z-index: 1;
+  color: inherit;
+  background-color: inherit;
+}
+
+@starting-style {
+  .mobileMenu[open] .burgerIcon {
+    transform: none;
+    translate: 0 -50%;
+    rotate: 0deg;
+  }
+
+  .mobileMenu[open] .burgerIcon::before {
+    translate: none;
+    rotate: 0deg;
+  }
+
+  .mobileMenu[open] .burgerIcon::after {
+    scale: 1;
+    translate: none;
+    rotate: 0deg;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -205,51 +261,61 @@
   }
 }
 
-@keyframes disappear {
-  from {
-    translate: 0 0;
-    display: block;
-    opacity: 1;
-  }
-  to {
-    translate: 100% 0;
-    display: none;
-    opacity: 0;
-  }
+.mobileMenu > div {
+  flex-shrink: 0;
+  max-width: 100%;
+  margin-block: 1rem;
 }
 
-@keyframes fadeIn {
-  from {
-    display: none;
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-    display: block;
-  }
+.mobileMenu .lightmodeWrapper {
+  padding: 0;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    display: block;
-  }
-  to {
-    display: none;
-    opacity: 0;
-  }
+.burger:focus-visible,
+.menuClose:focus-visible,
+.mobileMenu a:focus-visible,
+.mobileMenu select:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
-.backdrop {
-  position: fixed;
-  background-color: hsl(0 0 0 / 0.1);
+.skipLink {
+  position: absolute;
   inset: 0;
-  z-index: -1;
-  animation: fadeIn var(--animation-speed, 600ms) forwards;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-inline-size: 100%;
+  padding: 0.125rem 0.25rem;
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  background: light-dark(var(--clr-neutral-100), var(--clr-neutral-900));
 }
 
-.backdrop[hidden] {
-  animation: fadeOut var(--animation-speed, 600ms) forwards;
+.skipLink:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.skipLink:focus {
+  outline: 2px solid var(--clr-nav-detail, light-dark(var(--clr-accent-teal-dark), var(--clr-accent-teal-light)));
+  outline-offset: 3px;
 }
 
 .lightmode {

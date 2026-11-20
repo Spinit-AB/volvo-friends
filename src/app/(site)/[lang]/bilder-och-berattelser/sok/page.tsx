@@ -60,23 +60,24 @@ export default async function StorySearchPage({ params, searchParams }: Props) {
             <ul className={styles.storyRows} aria-label={t("stories.search_title", lang)}>
               {stories.map((story) => (
                 <li key={story._id}>
+                  <Link className={styles.storyRow} aria-labelledby={`story-${story._id}`}
+                    href={`${overview}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}>
                   <StoryImage image={story.listImage} />
                   <div className={styles.resultText}>
-                    <h3>
-                      <Link href={`${overview}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}>
+                    <h3 id={`story-${story._id}`}>
                         {story.title}
-                      </Link>
                     </h3>
                     <p>{story.category.title}</p>
                   </div>
                   <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time>
+                  </Link>
                 </li>
               ))}
             </ul>
             {page === totalPages ? (
               <div className={styles.listEnd}>
                 <p>{t("stories.end_of_search", lang)}</p>
-                <Link href={overview}>{t("stories.explore_another_category", lang)}</Link>
+                <Link href={overview}>{t("stories.explore_categories", lang)}</Link>
               </div>
             ) : null}
             <StoryPagination lang={lang} page={page} pageSize={pageSize} totalPages={totalPages} categoryUrl={resultsUrl} />
@@ -84,7 +85,7 @@ export default async function StorySearchPage({ params, searchParams }: Props) {
         ) : (
           <div className={styles.listEnd}>
             <p>{t("stories.search_empty", lang)}</p>
-            <Link href={overview}>{t("stories.explore_another_category", lang)}</Link>
+            <Link href={overview}>{t("stories.explore_categories", lang)}</Link>
           </div>
         )}
       </StoriesContent>

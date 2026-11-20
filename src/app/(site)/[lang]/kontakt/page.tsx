@@ -41,7 +41,7 @@ const ContactPage = async (props: {
                 <>: <a href={section.link.href}>{section.link.label}</a></>
               ) : null}
             </h2>
-            {section.content ? <PortableTextWrapper value={section.content} /> : null}
+            {section.content ? <PortableTextWrapper lang={lang} value={section.content} /> : null}
           </section>
         ))}
       </div>

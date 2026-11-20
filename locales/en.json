@@ -1,4 +1,7 @@
 {
+  "common.close_menu": "Close menu",
+  "common.skip_to_content": "Skip to content",
+  "common.opens_new_tab": "opens in a new tab",
   "home.page_title": "Home",
   "post.no_posts_found": "No posts could be found.",
   "post.not_found": "Post could not be found.",
@@ -86,6 +89,7 @@
   "stories.end_of_search": "You’ve reached the end of the search results.",
   "stories.end_of_list": "You’ve reached the end of the stories in this category.",
   "stories.explore_another_category": "Explore another category",
+  "stories.explore_categories": "Explore categories",
   "stories.pagination": "Story pagination",
   "stories.previous": "Previous",
   "stories.next": "Next",

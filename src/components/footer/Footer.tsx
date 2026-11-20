@@ -4,6 +4,7 @@ import { fetchFooter } from "@/sanity/lib/queries";
 import { useT } from "@/locales/utils/useT";
 import { TFooter } from "@/sanity/models/TFooter";
 import { Grill } from "../graphics/Grill";
+import { getLang } from "@/locales/utils/useLang";
 import { ExternalLink } from "../link/ExternalLink";
 
 export const Footer = async (props: {
@@ -71,6 +72,7 @@ const FetchedFooter = ({
                   href={link.url}
                   className="text-base-bold"
                   target="_blank"
+                  language={getLang(params.lang)}
                 >
                   {link.title}
                 </ExternalLink>

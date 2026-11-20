@@ -66,7 +66,7 @@ export const AwaitedBecomeMember = ({
               {section.title ?? t("member.adress_title")}
             </h2>
             {section.content ? (
-              <PortableTextWrapper value={section.content} />
+              <PortableTextWrapper lang={lang} value={section.content} />
             ) : null}
           </section>
         ))}
@@ -80,7 +80,7 @@ export const AwaitedBecomeMember = ({
               {data.addressTitle}
             </h2>
             <address className={memberStyles.address}>
-              <PortableAddressWrapper value={data.address} />
+              <PortableAddressWrapper lang={lang} value={data.address} />
             </address>
           </section>
         ) : null}
