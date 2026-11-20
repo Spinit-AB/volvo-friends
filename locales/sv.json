@@ -77,5 +77,15 @@
   "not_found.contact_us": "Kontakta oss",
   "error.subtitle": "Ett fel har inträffat",
   "error.description": "Något gick fel när sidan skulle laddas. Försök igen eller gå tillbaka till startsidan.",
-  "error.try_again": "Försök igen"
+  "error.try_again": "Försök igen",
+  "stories.page_title": "Bilder & Berättelser",
+  "stories.introduction": "Introduktion",
+  "stories.choose_category": "Välj kategori",
+  "stories.stories": "Berättelser",
+  "stories.hidden_category": "Förhandsgranskning: kategorin är dold på webbplatsen.",
+  "stories.no_categories": "Här kommer du snart att kunna ta del av bilder och berättelser.",
+  "stories.no_stories": "Det finns inga publicerade berättelser i den här kategorin ännu.",
+  "stories.back_categories": "Alla kategorier",
+  "stories.back_stories": "Tillbaka till berättelserna",
+  "stories.no_content": "Berättelsen har inget innehåll ännu."
 }

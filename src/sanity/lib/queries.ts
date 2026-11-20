@@ -64,6 +64,7 @@ export async function sanityFetch<QueryResponse>({
       ({
         token: token,
         perspective: "drafts",
+        useCdn: false,
         stega: true,
       } satisfies QueryOptions)),
     next: {
