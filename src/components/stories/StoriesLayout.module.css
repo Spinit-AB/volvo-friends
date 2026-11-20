@@ -30,6 +30,38 @@
   }
 }
 
+.categoryImage::before {
+  content: none;
+}
+
+.categoryPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.12;
+  filter: grayscale(1);
+  overflow: hidden;
+}
+
+.categoryPhoto img {
+  object-fit: cover;
+}
+
+.categoryPhoto .headerThumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width > 800px) {
+  .categoryPhoto {
+    width: min(100%, 1800px);
+    margin-inline: auto;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+}
+
 .headerInner {
   display: flex;
   align-items: center;

@@ -41,8 +41,9 @@ export const storiesOverviewQuery = defineQuery(`{
 export const storyCategoryQuery = defineQuery(`
   *[_type == "storyCategory" && coalesce(language, "sv") == $language && slug.current == $slug && ($preview || isActive == true)][0]{
     _id, title, "slug": slug.current, description, image, isActive,
+    "storyCount": count(*[_type == "story" && coalesce(language, "sv") == $language && category._ref == ^._id && defined(slug.current)]),
     "stories": *[_type == "story" && coalesce(language, "sv") == $language && category._ref == ^._id && defined(slug.current)]
-      | order(coalesce(publishedAt, _createdAt) desc, title asc) {
+      | order(coalesce(publishedAt, _createdAt) desc, title asc, _id asc)[$offset...$end] {
         _id, title, "slug": slug.current, listImage, "publishedAt": coalesce(publishedAt, _createdAt)
       }
   }
@@ -51,28 +52,35 @@ export const storyCategoryQuery = defineQuery(`
 export const storyQuery = defineQuery(`
   *[_type == "story" && coalesce(language, "sv") == $language && slug.current == $slug && category->slug.current == $categorySlug
     && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)][0]{
-    _id, title, "slug": slug.current, "publishedAt": coalesce(publishedAt, _createdAt), content,
+    _id, title, "slug": slug.current, "publishedAt": coalesce(publishedAt, _createdAt), listImage, content,
     "category": category->{_id, title, "slug": slug.current, description, image, isActive}
   }
 `);
 
-export const storySearchQuery = defineQuery(`
-  *[_type == "story" && coalesce(language, "sv") == $language && defined(slug.current) && defined(category->slug.current)
+export const storySearchQuery = defineQuery(`{
+  "storyCount": count(*[_type == "story" && coalesce(language, "sv") == $language && defined(slug.current) && defined(category->slug.current)
+    && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)
+    && (title + " " + coalesce(pt::text(content), "") + " " + array::join(coalesce(keywords, []), " ")) match $terms]),
+  "stories": *[_type == "story" && coalesce(language, "sv") == $language && defined(slug.current) && defined(category->slug.current)
     && coalesce(category->language, "sv") == $language && ($preview || category->isActive == true)
     && (title + " " + coalesce(pt::text(content), "") + " " + array::join(coalesce(keywords, []), " ")) match $terms]
-    | order(coalesce(publishedAt, _createdAt) desc, title asc) {
+    | order(coalesce(publishedAt, _createdAt) desc, title asc, _id asc)[$offset...$end] {
       _id, title, "slug": slug.current, listImage,
       "publishedAt": coalesce(publishedAt, _createdAt),
       "category": category->{title, "slug": slug.current}
     }
-`);
+}`);
 
-export async function searchStories(query: string, language: string) {
+export async function searchStories(query: string, language: string, page = 1, pageSize = 20) {
   const terms = query.match(/[\p{L}\p{N}]+/gu)?.map((term) => `${term}*`) ?? [];
-  if (!terms.length) return [];
+  if (!terms.length) return { stories: [], storyCount: 0 };
   const preview = (await draftMode()).isEnabled;
-  return sanityFetch<(TStoryPreview & { category: { title: string; slug: string } })[]>({
-    query: storySearchQuery, params: { terms, preview, language },
+  const offset = (page - 1) * pageSize;
+  return sanityFetch<{
+    stories: (TStoryPreview & { category: { title: string; slug: string } })[];
+    storyCount: number;
+  }>({
+    query: storySearchQuery, params: { terms, preview, language, offset, end: offset + pageSize },
   });
 }
 
@@ -85,10 +93,11 @@ export async function fetchStoriesOverview(language: string) {
   return { ...data, preview };
 }
 
-export async function fetchStoryCategory(slug: string, language: string) {
+export async function fetchStoryCategory(slug: string, language: string, page = 1, pageSize = 20) {
   const preview = (await draftMode()).isEnabled;
-  const category = await sanityFetch<(TStoryCategory & { stories: TStoryPreview[] }) | null>({
-    query: storyCategoryQuery, params: { slug, preview, language },
+  const offset = (page - 1) * pageSize;
+  const category = await sanityFetch<(TStoryCategory & { stories: TStoryPreview[]; storyCount: number }) | null>({
+    query: storyCategoryQuery, params: { slug, preview, language, offset, end: offset + pageSize },
   });
   return { category, preview };
 }

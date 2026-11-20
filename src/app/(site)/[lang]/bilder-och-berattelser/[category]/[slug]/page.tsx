@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { stegaClean } from "next-sanity";
 import { PortableTextWrapper } from "@/components/PortableTextWrapper";
+import styles from "@/components/stories/StoryList.module.css";
 import { StoryNavigation } from "@/components/stories/StoryNavigation";
 import { LocalePageRedirects } from "@/locales/LocalePageRedirects";
 import { getPathsByLang } from "@/locales/pageSlugUtils";
@@ -26,7 +27,7 @@ export default async function StoryPage({ params }: {
   return (
     <>
       <LocalePageRedirects lang={lang} canonicalSlug={slug} segmentIndex={1} />
-      <StoriesHeader title={story.title} lang={lang} />
+      <StoriesHeader title={story.title} lang={lang} showSearch={false} image={story.listImage} />
       <StoriesContent>
         <article>
           <StoryNavigation lang={lang} items={[
@@ -39,7 +40,7 @@ export default async function StoryPage({ params }: {
           <div>
             {story.content?.length ? <PortableTextWrapper value={story.content} /> : <p>{t("stories.no_content", lang)}</p>}
           </div>
-          <Link href={categoryUrl}>← {t("stories.back_stories", lang)}</Link>
+          <Link className={styles.returnLink} href={categoryUrl}>{t("stories.back_stories", lang, { category: story.category.title })}</Link>
         </article>
       </StoriesContent>
     </>

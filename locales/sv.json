@@ -86,7 +86,7 @@
   "stories.no_categories": "Här kommer du snart att kunna ta del av bilder och berättelser.",
   "stories.no_stories": "Det finns inga publicerade berättelser i den här kategorin ännu.",
   "stories.back_categories": "Alla kategorier",
-  "stories.back_stories": "Tillbaka till berättelserna",
+  "stories.back_stories": "Tillbaka till kategorin ”{category}”",
   "stories.no_content": "Berättelsen har inget innehåll ännu.",
   "stories.search_label": "Sök bland bilder och berättelser",
   "stories.search_placeholder": "Sök efter en berättelse…",
@@ -99,5 +99,14 @@
   "stories.home_description": "Upptäck bilder och berättelser om Volvos fordon och historia.",
   "stories.explore": "Utforska bilder och berättelser",
   "stories.latest_stories": "Senaste berättelserna",
+  "stories.per_page": "Berättelser per sida",
+  "stories.end_of_search": "Du har nått slutet av sökresultaten.",
+  "stories.end_of_list": "Du har nått slutet av berättelserna i den här kategorin.",
+  "stories.explore_another_category": "Utforska en annan kategori",
+  "stories.pagination": "Sidindelning för berättelser",
+  "stories.previous": "Föregående",
+  "stories.next": "Nästa",
+  "stories.page_number": "Sida {page}",
+  "stories.showing_range": "Visar {start}–{end} av {total} berättelser",
   "stories.image_alt": "En kvinna och en man vid två klassiska Volvobilar i en park."
 }

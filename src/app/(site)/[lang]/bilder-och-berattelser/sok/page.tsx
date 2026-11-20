@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { StoryPageSize } from "@/components/stories/StoryPageSize";
+import { StoryPagination, storyPageUrl } from "@/components/stories/StoryPagination";
+import { getStoryPageSize } from "@/utils/storyPagination";
+import { formatDate } from "@/utils/functions";
 import { stegaClean } from "next-sanity";
 import { StoriesHeader, StoriesContent } from "@/components/stories/StoriesLayout";
 import { StoryImage } from "@/components/stories/StoryImage";
@@ -12,7 +17,7 @@ import { searchStories } from "@/sanity/lib/stories";
 
 type Props = {
   params: Promise<{ lang?: string | string[] }>;
-  searchParams: Promise<{ q?: string | string[] }>;
+  searchParams: Promise<{ q?: string | string[]; page?: string | string[]; pageSize?: string | string[] }>;
 };
 
 function searchTerm(value?: string | string[]) {
@@ -21,9 +26,17 @@ function searchTerm(value?: string | string[]) {
 
 export default async function StorySearchPage({ params, searchParams }: Props) {
   const lang = getLang((await params).lang);
-  const query = searchTerm((await searchParams).q);
-  const stories = query ? await searchStories(query, lang) : [];
+  const filters = await searchParams;
+  const query = searchTerm(filters.q);
+  const requestedPage = Number(filters.page);
+  const page = Number.isSafeInteger(requestedPage) && requestedPage > 0 && requestedPage <= 1_000_000 ? requestedPage : 1;
+  const pageSize = getStoryPageSize(filters.pageSize);
+  const { stories, storyCount } = query ? await searchStories(query, lang, page, pageSize) : { stories: [], storyCount: 0 };
   const overview = `/${lang}/${getPathsByLang(lang).stories}`;
+  const searchUrl = `${overview}/${lang === "sv" ? "sok" : "search"}`;
+  const resultsUrl = `${searchUrl}?${new URLSearchParams({ q: query })}`;
+  const totalPages = Math.max(1, Math.ceil(storyCount / pageSize));
+  if (query && page > totalPages) redirect(storyPageUrl(resultsUrl, totalPages, pageSize));
 
   return (
     <>
@@ -34,27 +47,46 @@ export default async function StorySearchPage({ params, searchParams }: Props) {
           { title: t("stories.search_title", lang) },
         ]} />
         <h2>{query ? t("stories.search_results", lang, { query }) : t("stories.search_title", lang)}</h2>
-        {!query ? <p>{t("stories.search_prompt", lang)}</p> : stories.length ? (
+        {!query ? <p>{t("stories.search_prompt", lang)}</p> : storyCount ? (
           <>
-            <p>{t("stories.search_count", lang, { count: stories.length })}</p>
-            <ul className={styles.list}>
+            <div id="stories-list" className={styles.listToolbar}>
+              <p>{t("stories.showing_range", lang, {
+                start: (page - 1) * pageSize + 1,
+                end: Math.min(page * pageSize, storyCount),
+                total: storyCount,
+              })}</p>
+              <StoryPageSize lang={lang} pageSize={pageSize} categoryUrl={searchUrl} />
+            </div>
+            <ul className={styles.storyRows} aria-label={t("stories.search_title", lang)}>
               {stories.map((story) => (
                 <li key={story._id}>
-                  <Link className={styles.card}
-                    href={`${overview}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}
-                    aria-labelledby={`result-${story._id}`}>
-                    <StoryImage image={story.listImage} />
-                    <div className={styles.text}>
-                      <h3 id={`result-${story._id}`}>{story.title}</h3>
-                      <p>{story.category.title}</p>
-                    </div>
-                  </Link>
+                  <StoryImage image={story.listImage} />
+                  <div className={styles.resultText}>
+                    <h3>
+                      <Link href={`${overview}/${encodeURIComponent(stegaClean(story.category.slug))}/${encodeURIComponent(stegaClean(story.slug))}`}>
+                        {story.title}
+                      </Link>
+                    </h3>
+                    <p>{story.category.title}</p>
+                  </div>
+                  <time dateTime={stegaClean(story.publishedAt)}>{formatDate(lang, stegaClean(story.publishedAt))}</time>
                 </li>
               ))}
             </ul>
+            {page === totalPages ? (
+              <div className={styles.listEnd}>
+                <p>{t("stories.end_of_search", lang)}</p>
+                <Link href={overview}>{t("stories.explore_another_category", lang)}</Link>
+              </div>
+            ) : null}
+            <StoryPagination lang={lang} page={page} pageSize={pageSize} totalPages={totalPages} categoryUrl={resultsUrl} />
           </>
-        ) : <p>{t("stories.search_empty", lang)}</p>}
-        <Link href={overview}>← {t("stories.back_categories", lang)}</Link>
+        ) : (
+          <div className={styles.listEnd}>
+            <p>{t("stories.search_empty", lang)}</p>
+            <Link href={overview}>{t("stories.explore_another_category", lang)}</Link>
+          </div>
+        )}
       </StoriesContent>
     </>
   );

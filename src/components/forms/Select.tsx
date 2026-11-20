@@ -68,14 +68,16 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         className={wrapperClassName}
         required={props.required}
       >
-        <select
+        <span className={styles.selectControl}>
+          <select
           ref={ref}
           className={`${styles.select} ${className}`}
           id={id ?? genId}
           {...props}
         >
           {renderOptions()}
-        </select>
+          </select>
+        </span>
       </FormElementWrapper>
     );
   },
