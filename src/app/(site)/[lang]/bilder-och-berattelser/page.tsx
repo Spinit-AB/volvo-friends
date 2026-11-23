@@ -9,6 +9,7 @@ import { t } from "@/locales/translate";
 import { getLang } from "@/locales/utils/useLang";
 import { fetchStoriesOverview } from "@/sanity/lib/stories";
 import { stegaClean } from "next-sanity";
+import { PortableTextWrapper } from "@/components/PortableTextWrapper";
 
 export default async function StoriesOverview({ params }: {
   params: Promise<{ lang?: string | string[] }>;
@@ -23,8 +24,10 @@ export default async function StoriesOverview({ params }: {
       <StoriesHeader title={page?.title || t("stories.page_title", lang)} lang={lang} />
       <StoriesContent surface="plain">
           {page?.introduction ? (
-            <div role="region" aria-label={t("stories.introduction", lang)}>
-              <p>{page.introduction}</p>
+            <div className={styles.introduction} role="region" aria-label={t("stories.introduction", lang)}>
+              {typeof page.introduction === "string"
+                ? <p>{page.introduction}</p>
+                : <PortableTextWrapper value={page.introduction} lang={lang} />}
             </div>
           ) : null}
           {categories.length ? (

@@ -3,6 +3,7 @@ import { draftMode } from "next/headers";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "./queries";
 import { cache } from "react";
+import type { TypedObject } from "sanity";
 import type { TStory, TStoryCategory, TStoryPreview } from "../models/TStory";
 
 export const storiesVisibilityQuery = defineQuery(`
@@ -92,7 +93,7 @@ export async function searchStories(query: string, language: string, page = 1, p
 export async function fetchStoriesOverview(language: string) {
   const preview = (await draftMode()).isEnabled;
   const data = await sanityFetch<{
-    page: { title?: string; introduction?: string } | null;
+    page: { title?: string; introduction?: TypedObject[] | string } | null;
     categories: TStoryCategory[];
   }>({ query: storiesOverviewQuery, params: { pageId: `storiesPage_${language}`, preview, language } });
   return { ...data, preview };
